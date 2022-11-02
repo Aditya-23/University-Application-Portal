@@ -37,6 +37,6 @@ Note: Italicized requirements are not for MVP
 
 
 ## 📦 Domain Model 
-
+ ![Domain Diagram](Domain.png)
 
 ## 🖇️ Links to boards
