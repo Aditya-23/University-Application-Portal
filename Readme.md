@@ -1,5 +1,7 @@
 # INFO6150 - Final Project 🚀
 
+**Team Byte Me **
+
 ## 👓 Team Members
 1. Aditya 
 2. Avaneesh 
@@ -7,8 +9,6 @@
 4. Swapnil 
 
 ## 🔊 Problem Statement 
-
-
 
 An University application portal that allows **Students** to plan, apply & track applications & **Universities** to look at students applications.
 
