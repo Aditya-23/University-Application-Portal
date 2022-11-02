@@ -14,7 +14,7 @@ An University application portal that allows **Students** to plan, apply & track
 
 ## 📜 User Requirements 
 
-Note: Italicized requirements are for later stage
+Note: Italicized requirements are not for MVP
 
 **As a Student I should be able to:**
 1. Sign up to the portal
@@ -23,7 +23,7 @@ Note: Italicized requirements are for later stage
 4. Fill & Update in my basic details that could ease application process
 5. Shortlist Various Universities
 6. Apply to different universities on the portal
-7. *Add Application documents & progress for universities I'm applying outside the portal *
+7. *Add Application documents & progress for universities I'm applying outside the portal*
 8. View Dashboard to track progress
 9. Get reminders for applications
 
