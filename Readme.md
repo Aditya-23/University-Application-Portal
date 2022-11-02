@@ -36,6 +36,22 @@ Note: Italicized requirements are not for MVP
 6. Able to move application through various stages Eg: In Review, Approved
 
 
+## MVP
+
+**Student**
+1. SignUp & Login
+2. Profile Information Forms - Post Signup
+3. View Programs
+4. Create, Update, Delete, Submit Application
+5. Application Dashboard
+6. Application Notifications
+
+**University User**
+1. SignUp & Login
+2. Create, Update, Delete Program
+3. Review, Accept, Reject Applications
+
+
 ## 📦 Domain Model 
  ![Domain Diagram](Domain.png)
 
