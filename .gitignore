@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build
+npm-debug.log
+.nyc
+.env
+.DS_Store
+.nyc_output/
+coverage/
+jspm_packages/
+.vscode
+logs
+*.log
