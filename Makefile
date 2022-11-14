@@ -1,6 +1,6 @@
 start_backend:
 	@echo "Starting backend..."
-	@npm start server --prefix backend
+	@npm run server --prefix backend
 
 
 # lint-backend:
