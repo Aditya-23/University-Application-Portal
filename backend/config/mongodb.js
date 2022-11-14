@@ -12,4 +12,7 @@ const MongoConnect = async () => {
     } 
 }
 
-export default MongoConnect;
+
+export {
+    MongoConnect
+}

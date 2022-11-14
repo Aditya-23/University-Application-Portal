@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import MongoConnect from "./config/mongodb.js";
+import {MongoConnect} from "./config/mongodb.js";
 import routes from "./routes/index.js";
 import config from "config";
 
