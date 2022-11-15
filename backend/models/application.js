@@ -23,7 +23,7 @@ const applicationSchema = new mongoose.Schema({
   },
   specialization: {
     type: String,
-    required: true,
+    required: false,
   },
   lor1: {
     type: String,
@@ -35,7 +35,7 @@ const applicationSchema = new mongoose.Schema({
   },
   lor3: {
     type: String,
-    required: true,
+    required: false,
   },
   sop: {
     type: String,
@@ -47,15 +47,15 @@ const applicationSchema = new mongoose.Schema({
   },
   education: {
     type: Array,
-    required: true,
+    required: false,
   },
   greScore: {
     type: Number,
-    required: true,
+    required: false,
   },
   toeflScore: {
     type: Number,
-    required: true,
+    required: false,
   },
   governmentId: {
     type: String,
