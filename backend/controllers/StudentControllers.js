@@ -1,20 +1,19 @@
 import Student from "../models/student.js";
 import { deleteStudentById, getStudentById, saveStudent, updateStudentById, loginService } from "../services/StudentServices.js";
+import { setResponse, setRequestError, setServerError} from "./utils.js";
 
 const registerStudent = async (req, res) => {
     try {
         var studentObj = req.body;
         const isStudentPresent = await Student.exists({email: studentObj.email});
         if(isStudentPresent){
-            return res.status(500).json({msg: "Student already exists!"});
+            return setRequestError({msg: "Student already exists!"}, res);
         }
-        console.log(studentObj);
         const savedStudent = await saveStudent(studentObj);
-        console.log(savedStudent);
-        return res.status(200).json(savedStudent);
+        return setResponse(savedStudent, res);
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg: "Internal server error"});
+        return setServerError({msg: "Internal server error"}, res);
     }
 }
 
@@ -22,12 +21,12 @@ const getStudent = async (req, res) => {
     try {
         const studentObj = await getStudentById(req.params.id);
         if(studentObj){
-            return res.status(200).json(studentObj);
+            return setResponse(studentObj, res);
         }
-        return res.status(500).json({msg: "Student does not exist!"});
+        return setRequestError({msg: "Student does not exist!"}, res); 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg: "Internal server error"});
+        return setRequestError({msg: "Internal server error"}, res); 
     }
 }
 
@@ -36,16 +35,16 @@ const updateStudent = async (req, res) => {
         const currentStudent = req.body;
         const isStudentPresent = await Student.exists({_id: req.params.id});
         if(!isStudentPresent){
-            return res.status(500).json({msg: "Student does not exist!"});
+            return setRequestError({msg: "Student does not exist!"}, res); 
         }
         const updatedStudent = await updateStudentById(req.params.id, currentStudent);
         if(updatedStudent){
-            return res.status(200).json(updatedStudent);
+            return setResponse(updatedStudent, res);
         }
-        return res.status(500).json({msg: "Could not update the student!"});
+        return setRequestError({msg: "Could not update the student!"}, res); 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg: "Internal server error"});
+        return setRequestError({msg: "Internal server error"}, res); 
     }
 }
 
@@ -53,13 +52,13 @@ const deleteStudent = async (req, res) => {
     try {
         const isStudentPresent = await Student.exists({_id: req.params.id});
         if(!isStudentPresent){
-            return res.status(500).json({msg: "Student does not exist!"});
+            return setRequestError({msg: "Student does not exist!"}, res); 
         }
         const deletedOj = await deleteStudentById(req.params.id);
-        return res.status(200).json(deletedOj);
+        return setResponse(deletedOj, res);
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg: "Internal server error"});
+        return setRequestError({msg: "Internal server error"}, res); 
     }
 }
 
@@ -68,13 +67,13 @@ const loginStudent = async (req, res) => {
         const {email, password} = req.body;
         const studentObj = await loginService(email, password);
         if(!studentObj){
-            return res.status(400).json({msg: "Incorrect credentials!"});
+            return setRequestError({msg: "Incorrect credentials!"}, res); 
         }
-        return res.status(200).json(studentObj)
+        return setResponse(studentObj, res);
 
     } catch (error) {
         console.log(error);
-        return res.status(500).json({msg: "Internal server error!"});
+        return setRequestError({msg: "Internal server error"}, res); 
     }
 }
 

@@ -16,4 +16,4 @@ const setRequestError = (error, response) => {
   return response;
 };
 
-export default { setResponse, setRequestError, setServerError };
+export { setResponse, setRequestError, setServerError };
