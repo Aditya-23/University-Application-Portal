@@ -8,3 +8,12 @@ export const saveStudent = (studentObj) => {
         console.log(error);
     }
 }
+
+export const getStudentById = (id) => {
+    try {
+        const studentObj = Student.findById(id);
+        return studentObj;
+    } catch (error) {
+        console.log(error);
+    }
+}

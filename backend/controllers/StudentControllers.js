@@ -1,5 +1,5 @@
 import Student from "../models/student.js";
-import { saveStudent } from "../services/StudentServices.js";
+import { getStudentById, saveStudent } from "../services/StudentServices.js";
 
 const post = async (req, res) => {
     try {
@@ -15,6 +15,20 @@ const post = async (req, res) => {
     }
 }
 
+const getStudent = async (req, res) => {
+    try {
+        console.log(req.params.id);
+        const studentObj = await getStudentById(req.params.id);
+        if(studentObj){
+            return res.status(200).json(studentObj);
+        }
+        return res.status(500).json({msg: "Student does not exist!"});
+    } catch (error) {
+        return res.status(500).json({msg: "Internal server error"});
+    }
+}
+
 export {
     post,
+    getStudent,
 }
