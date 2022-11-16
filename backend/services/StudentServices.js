@@ -26,3 +26,12 @@ export const updateStudentById = (id, studentObj) => {
         console.log(error);
     }
 }
+ 
+export const deleteStudentById = (id) => {
+    try {
+        const deletedOj = Student.findByIdAndDelete(id);
+        return deletedOj;
+    } catch (error) {
+        console.log(error);
+    }
+}

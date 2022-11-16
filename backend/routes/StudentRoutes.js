@@ -9,4 +9,6 @@ StudentRoutes.get("/:id", StudentControllers.getStudent);
 
 StudentRoutes.put("/:id", StudentControllers.updateStudent);
 
+StudentRoutes.delete("/:id", StudentControllers.deleteStudent);
+
 export default StudentRoutes;
