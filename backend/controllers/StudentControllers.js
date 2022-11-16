@@ -1,7 +1,7 @@
 import Student from "../models/student.js";
-import { deleteStudentById, getStudentById, saveStudent, updateStudentById } from "../services/StudentServices.js";
+import { deleteStudentById, getStudentById, saveStudent, updateStudentById, loginService } from "../services/StudentServices.js";
 
-const post = async (req, res) => {
+const registerStudent = async (req, res) => {
     try {
         var studentObj = req.body;
         const isStudentPresent = await Student.exists({email: studentObj.email});
@@ -62,9 +62,26 @@ const deleteStudent = async (req, res) => {
         return res.status(500).json({msg: "Internal server error"});
     }
 }
+
+const loginStudent = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const studentObj = await loginService(email, password);
+        if(!studentObj){
+            return res.status(400).json({msg: "Incorrect credentials!"});
+        }
+        return res.status(200).json(studentObj)
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({msg: "Internal server error!"});
+    }
+}
+
 export {
-    post,
+    registerStudent,
     getStudent,
     updateStudent,
     deleteStudent,
+    loginStudent,
 }

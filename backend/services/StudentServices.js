@@ -35,6 +35,34 @@ export const saveStudent = async (studentObjToCreate) => {
     }
 }
 
+export const loginService = async (email, password) => {
+    const student = await Student.findOne({email});
+    if (!student){
+        return null;
+    }
+    const verify = await bcryptjs.compare(password, student.password);
+    if(!verify){
+        return null;
+    }
+    const payload = {
+        userId: student.id
+    }
+    const studentObj = {
+        token: jsonwebtoken.sign(payload, config.get("jwtSecret"), {expiresIn: 1800}),
+        userId: student.id,
+        name: student.name,
+        email: student.email,
+        phone: student.phone,
+        education: student.education,
+        experience: student.experience,
+        greScore: student.greScore,
+        toeflScore: student.toeflScore,
+        ieltsScore: student.ieltsScore,
+        governmentId: student.governmentId,
+    }
+    return studentObj;
+}
+
 export const getStudentById = (id) => {
     try {
         const studentObj = Student.findById(id);
