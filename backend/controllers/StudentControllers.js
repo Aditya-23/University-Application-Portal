@@ -1,5 +1,5 @@
 import Student from "../models/student.js";
-import { getStudentById, saveStudent } from "../services/StudentServices.js";
+import { getStudentById, saveStudent, updateStudentById } from "../services/StudentServices.js";
 
 const post = async (req, res) => {
     try {
@@ -17,7 +17,6 @@ const post = async (req, res) => {
 
 const getStudent = async (req, res) => {
     try {
-        console.log(req.params.id);
         const studentObj = await getStudentById(req.params.id);
         if(studentObj){
             return res.status(200).json(studentObj);
@@ -28,7 +27,26 @@ const getStudent = async (req, res) => {
     }
 }
 
+const updateStudent = async (req, res) => {
+    try {
+        const currentStudent = req.body;
+        const isStudentPresent = await Student.exists({_id: req.params.id});
+        if(!isStudentPresent){
+            return res.status(500).json({msg: "Student does not exist!"});
+        }
+        const updatedStudent = await updateStudentById(req.params.id, currentStudent);
+        if(updatedStudent){
+            return res.status(200).json(updatedStudent);
+        }
+        return res.status(500).json({msg: "Could not update the student!"});
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({msg: "Internal server error"});
+    }
+}
+
 export {
     post,
     getStudent,
+    updateStudent,
 }

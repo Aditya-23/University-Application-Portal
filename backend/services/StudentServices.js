@@ -17,3 +17,12 @@ export const getStudentById = (id) => {
         console.log(error);
     }
 }
+
+export const updateStudentById = (id, studentObj) => {
+    try {
+        const newStudentObj = Student.findByIdAndUpdate(id, studentObj, {new: true});
+        return newStudentObj;
+    } catch (error) {
+        console.log(error);
+    }
+}

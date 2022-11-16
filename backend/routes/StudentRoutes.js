@@ -7,4 +7,6 @@ StudentRoutes.post("/", StudentControllers.post);
 
 StudentRoutes.get("/:id", StudentControllers.getStudent);
 
+StudentRoutes.put("/:id", StudentControllers.updateStudent);
+
 export default StudentRoutes;
