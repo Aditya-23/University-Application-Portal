@@ -1,10 +1,12 @@
 import jsonwebtoken from "jsonwebtoken";
+import { setResponse, setRequestError, setServerError} from "../controllers/utils.js";
+import config from "config";
 
 const authJwt = async (req, res, next) => {
     const token = req.header('x-auth-token');
 
     if(!token){
-        return res.status(401).json({ msg : "Cannot authenticate!" });
+        return setRequestError({ msg : "Cannot authenticate!" }, res);
     }
 
     try {
@@ -15,7 +17,7 @@ const authJwt = async (req, res, next) => {
 
     } catch (error) {
         console.log(error)
-        res.status(401).json({msg : "Token Invalid"});
+        return setRequestError({ msg : "Token Invalid" }, res);
     }
 }
 

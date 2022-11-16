@@ -33,7 +33,11 @@ const getStudent = async (req, res) => {
 const updateStudent = async (req, res) => {
     try {
         const currentStudent = req.body;
-        const isStudentPresent = await Student.exists({_id: req.params.id});
+        const isStudentPresent = await Student.findById(req.params.id).select("_id");
+        if(isStudentPresent._id.toString() != req.userId){ // added this to make sure that students can only update thier own profile
+            return setRequestError({msg: "Not authorized"}, res);  
+        }
+        console.log(isStudentPresent);
         if(!isStudentPresent){
             return setRequestError({msg: "Student does not exist!"}, res); 
         }
@@ -50,9 +54,9 @@ const updateStudent = async (req, res) => {
 
 const deleteStudent = async (req, res) => {
     try {
-        const isStudentPresent = await Student.exists({_id: req.params.id});
-        if(!isStudentPresent){
-            return setRequestError({msg: "Student does not exist!"}, res); 
+        const isStudentPresent = await Student.findById(req.params.id).select("_id");
+        if(isStudentPresent._id.toString() != req.userId){ // added this to make sure that students can only delete thier own profile
+            return setRequestError({msg: "Not authorized"}, res);  
         }
         const deletedOj = await deleteStudentById(req.params.id);
         return setResponse(deletedOj, res);

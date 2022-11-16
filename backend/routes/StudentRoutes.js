@@ -8,10 +8,10 @@ StudentRoutes.post("/signup", StudentControllers.registerStudent);
 
 StudentRoutes.post("/login", StudentControllers.loginStudent);
 
-StudentRoutes.get("/:id", StudentControllers.getStudent);
+StudentRoutes.get("/:id", authJwt, StudentControllers.getStudent);
 
-StudentRoutes.put("/:id", StudentControllers.updateStudent);
+StudentRoutes.put("/:id", authJwt, StudentControllers.updateStudent);
 
-StudentRoutes.delete("/:id", StudentControllers.deleteStudent);
+StudentRoutes.delete("/:id", authJwt, StudentControllers.deleteStudent);
 
 export default StudentRoutes;
