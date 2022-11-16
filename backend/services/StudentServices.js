@@ -1,9 +1,35 @@
-import { Student } from "../models/index.js";
+import {Student} from "../models/index.js";
+import bcryptjs from "bcryptjs";
+import jsonwebtoken from "jsonwebtoken";
+import config from "config";
 
-export const saveStudent = (studentObj) => {
+export const saveStudent = async (studentObjToCreate) => {
     try {
-        const savedStudent = Student(studentObj);
-        return savedStudent.save();
+        const saltForHash = await bcryptjs.genSalt(10);
+        const hashedPassword = await bcryptjs.hash(studentObjToCreate.password, saltForHash);
+        const newStudent = Student(studentObjToCreate);
+        newStudent.password = hashedPassword;
+        await newStudent.save();
+        const payload = {
+            userId: newStudent.id
+        }
+        const token = jsonwebtoken.sign(payload, config.get("jwtSecret"), {expiresIn: 1800});//creating jwt
+        const studentObjCreated = {
+            name: newStudent.name,
+            email: newStudent.email,
+            phone: newStudent.phone,
+            education: newStudent.education,
+            experience: newStudent.experience,
+            greScore: newStudent.greScore,
+            toeflScore: newStudent.toeflScore,
+            ieltsScore: newStudent.ieltsScore,
+            governmentId: newStudent.governmentId,
+        }
+        const savedStudentObj = {
+            token,
+            ...studentObjCreated
+        };
+        return savedStudentObj;
     } catch (error) {
         console.log(error);
     }
@@ -26,7 +52,7 @@ export const updateStudentById = (id, studentObj) => {
         console.log(error);
     }
 }
- 
+
 export const deleteStudentById = (id) => {
     try {
         const deletedOj = Student.findByIdAndDelete(id);

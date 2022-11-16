@@ -3,12 +3,14 @@ import { deleteStudentById, getStudentById, saveStudent, updateStudentById } fro
 
 const post = async (req, res) => {
     try {
-        const student = req.body;
-        const isStudentPresent = await Student.exists({email: student.email});
+        var studentObj = req.body;
+        const isStudentPresent = await Student.exists({email: studentObj.email});
         if(isStudentPresent){
             return res.status(500).json({msg: "Student already exists!"});
         }
-        const savedStudent = await saveStudent(student);
+        console.log(studentObj);
+        const savedStudent = await saveStudent(studentObj);
+        console.log(savedStudent);
         return res.status(200).json(savedStudent);
     } catch (error) {
         console.log(error)

@@ -1,4 +1,6 @@
 {
     "port": 8000,
-    "MongoURI": "mongodb+srv://webproject901:bytemeproject@web-project.kjmnpeg.mongodb.net/?retryWrites=true&w=majority"
+    "MongoURI": "mongodb+srv://webproject901:bytemeproject@web-project.kjmnpeg.mongodb.net/?retryWrites=true&w=majority",
+    "jwtSecret": "webkillers"
+
 }
