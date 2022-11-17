@@ -1,6 +1,6 @@
 import {setResponse, setRequestError, setServerError} from "./utils.js";
 import University from "../models/university.js";
-import {getAllUniversitiesService, getUniversityByIdService, saveUniversityService, updateUniversityByIdService} from "../services/UniversityServices.js";
+import {deleteUniversityByIdService, getAllUniversitiesService, getUniversityByIdService, saveUniversityService, updateUniversityByIdService} from "../services/UniversityServices.js";
 
 export const registerUniversity = async(req, res) => {
     try {
@@ -23,7 +23,6 @@ export const registerUniversity = async(req, res) => {
 export const getAllUniversities = async(req, res) => {
     try {
         const allUniversities = await getAllUniversitiesService();
-        console.log(allUniversities);
         if (allUniversities.length == 0) {
             return setRequestError({
                 msg: "No university found"
@@ -68,6 +67,31 @@ export const updateUniversityById = async(req, res) => {
         }
         const updatedUniversity = await updateUniversityByIdService(req.params.id, currentUniversity);
         return setResponse(updatedUniversity, res);
+    } catch (error) {
+        console.log(error);
+        return setServerError({
+            msg: "Internal server error"
+        }, res);
+    }
+}
+
+export const deleteUniversityById = async(req, res) => {
+    try {
+        const isUniversityPresent = await University
+            .findById(req.params.id)
+            .select("_id");
+        if (!isUniversityPresent) {
+            return setRequestError({
+                msg: "University does not exist"
+            }, res);
+        }
+        const deletedUniversity = await deleteUniversityByIdService(req.params.id);
+        if (!deletedUniversity) {
+            return setRequestError({
+                msg: "Could not delete the university"
+            }, res);
+        }
+        return setResponse(deletedUniversity, res);
     } catch (error) {
         console.log(error);
         return setServerError({

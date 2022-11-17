@@ -41,4 +41,14 @@ const updateUniversityByIdService = async(id, updateUniversity) => {
     }
 }
 
-export {saveUniversityService, getAllUniversitiesService, getUniversityByIdService, updateUniversityByIdService}
+const deleteUniversityByIdService = async(id) => {
+    try {
+        const deletedUniversity = University.findByIdAndDelete(id);
+        return deletedUniversity;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+export {saveUniversityService, getAllUniversitiesService, getUniversityByIdService, updateUniversityByIdService, deleteUniversityByIdService}
