@@ -10,4 +10,6 @@ UniversityRoutes.get("/", authJwt, UniversityControllers.getAllUniversities);
 
 UniversityRoutes.get("/:id", authJwt, UniversityControllers.getUniversityById);
 
+UniversityRoutes.put("/:id", authJwt, UniversityControllers.updateUniversityById);
+
 export default UniversityRoutes;

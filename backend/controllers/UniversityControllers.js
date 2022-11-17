@@ -1,6 +1,6 @@
 import {setResponse, setRequestError, setServerError} from "./utils.js";
 import University from "../models/university.js";
-import {getAllUniversitiesService, getUniversityByIdService, saveUniversityService} from "../services/UniversityServices.js";
+import {getAllUniversitiesService, getUniversityByIdService, saveUniversityService, updateUniversityByIdService} from "../services/UniversityServices.js";
 
 export const registerUniversity = async(req, res) => {
     try {
@@ -47,6 +47,27 @@ export const getUniversityById = async(req, res) => {
             }, res);
         }
         return setResponse(university, res);
+    } catch (error) {
+        console.log(error);
+        return setServerError({
+            msg: "Internal server error"
+        }, res);
+    }
+}
+
+export const updateUniversityById = async(req, res) => {
+    try {
+        const currentUniversity = req.body;
+        const isUniversityPresent = await University
+            .findById(req.params.id)
+            .select("_id");
+        if (!isUniversityPresent) {
+            return setRequestError({
+                msg: "University does not exist"
+            }, res);
+        }
+        const updatedUniversity = await updateUniversityByIdService(req.params.id, currentUniversity);
+        return setResponse(updatedUniversity, res);
     } catch (error) {
         console.log(error);
         return setServerError({
