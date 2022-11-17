@@ -8,5 +8,6 @@ UniversityRoutes.post("/", authJwt, UniversityControllers.registerUniversity);
 
 UniversityRoutes.get("/", authJwt, UniversityControllers.getAllUniversities);
 
+UniversityRoutes.get("/:id", authJwt, UniversityControllers.getUniversityById);
 
 export default UniversityRoutes;
