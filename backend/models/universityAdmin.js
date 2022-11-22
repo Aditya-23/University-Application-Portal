@@ -19,7 +19,7 @@ const universityAdminSchema = new mongoose.Schema(
     },
     verified: {
       type: Boolean,
-      default: true, // change this to false if you decide to implement email verification
+      default: false, // change this to false if you decide to implement email verification
     },
   },
   {
