@@ -1,4 +1,4 @@
-import * as UniversityAdminControllers from "../controllers/UniversityAdmin.controllers.js";
+import * as UniversityAdminControllers from "../controllers/UniversityAdmin.controller.js";
 import express from "express";
 import authJwt from "../middlewares/index.js";
 
