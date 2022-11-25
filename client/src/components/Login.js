@@ -39,7 +39,19 @@ function Login(props) {
     }
     return ( 
         <>
-            
+            <div>
+                <form onSubmit={(e) => onSubmit(e)}>
+                    <label>Email Address</label>
+                    <input type="text" name='email' value={loginForm.email} placeholder="Enter email" onChange={(e) => onChangeHandler(e)}/>
+                    <br></br>
+                    <label>Password</label>
+                    <input text="password" name='password' value={loginForm.password} placeholder="Enter password" onChange={(e) => onChangeHandler(e)}/>
+                    <br></br>
+                    <button type='submit'>
+                        Submit
+                    </button>
+                </form>
+            </div>
         </>
   );
 }

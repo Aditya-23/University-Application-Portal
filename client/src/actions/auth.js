@@ -23,7 +23,7 @@ const loadUser = () => async dispatch => {
         dispatch({
             type:LOADING_STARTED
         })
-        const response = await axios.get("api/auth/");
+        const response = await axios.get("students/auth/");
         if(response.status == 200){
             dispatch({
                 type: USER_AUTHENTICATED,
@@ -59,7 +59,8 @@ const loginUser = (userObj) => async dispatch => {
     };
 
     try {
-        const response = await axios.post("api/auth", userObj, config);
+        const response = await axios.post("students/login", userObj, config);
+        console.log(response);
         if(response.status == 200){
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -102,7 +103,7 @@ const registerUser = (userObj) => async dispatch => {
     };
 
     try {
-        const response = await axios.post("api/user/register", userObj, config);
+        const response = await axios.post("students/signup", userObj, config);
         if(response.status == 200){
             dispatch({
                 type: REGISTER_SUCCESS,
