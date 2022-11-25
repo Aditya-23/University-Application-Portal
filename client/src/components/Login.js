@@ -29,7 +29,7 @@ function Login(props) {
     if (props.auth.loading) {
         return (
             <Fragment>
-                <Spinner/>
+                <h1>Loading</h1>
             </Fragment>
         )
     }
@@ -37,7 +37,10 @@ function Login(props) {
     if (props.auth.isAuthenticated) {
         return (<Navigate to="/dashboard"/>)
     }
-    return ( <> <h1>Login</h1> </>
+    return ( 
+        <>
+            
+        </>
   );
 }
 
