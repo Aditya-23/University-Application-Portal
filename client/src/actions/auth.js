@@ -23,11 +23,12 @@ const loadUser = () => async dispatch => {
         dispatch({
             type:LOADING_STARTED
         })
-        const response = await axios.get("students/auth/");
+        const response = await axios.get("students/");
+        console.log(response);
         if(response.status == 200){
             dispatch({
                 type: USER_AUTHENTICATED,
-                payload: response.data.user
+                payload: response.data
             });
         } else {
             
