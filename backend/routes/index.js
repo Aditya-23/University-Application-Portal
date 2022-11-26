@@ -3,6 +3,7 @@ import StudentRoutes from "./StudentRoutes.js";
 import UniversityAdminRoutes from "./UniversityAdmin.route.js";
 import UniversityRoutes from "./UniversityRoutes.js";
 import ProgramRoutes from "./program.route.js";
+import ExperienceRoutes from "./experience.route.js";
 
 const mainRouter = (app) => {
   //write all your imported routes here
@@ -10,5 +11,6 @@ const mainRouter = (app) => {
   app.use("/universityAdmins", UniversityAdminRoutes);
   app.use("/universities", UniversityRoutes);
   app.use("/programs", ProgramRoutes);
+  app.use("/experiences", ExperienceRoutes);
 };
 export default mainRouter;
