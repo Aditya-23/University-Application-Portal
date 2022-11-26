@@ -5,10 +5,16 @@ function Navbar(props) {
 
     return (
         <div class="topnav">
-            <a class="active" href="#home">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+            {props.auth.isAuthenticated
+                ? <>
+                <form>
+                  <input type="text" placeholder='Search University' />
+                </form>
+                <a>Logout</a>
+                </>
+                : <> <a href='/login'>Login</a> < a href='/register'> SignUp </a>
+            </ >
+}
         </div>
     )
 }
