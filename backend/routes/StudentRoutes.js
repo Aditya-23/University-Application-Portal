@@ -8,7 +8,7 @@ StudentRoutes.post("/signup", StudentControllers.registerStudent);
 
 StudentRoutes.post("/login", StudentControllers.loginStudent);
 
-StudentRoutes.get("/:id", authJwt, StudentControllers.getStudent);
+StudentRoutes.get("/", authJwt, StudentControllers.getStudent);
 
 StudentRoutes.put("/:id", authJwt, StudentControllers.updateStudent);
 

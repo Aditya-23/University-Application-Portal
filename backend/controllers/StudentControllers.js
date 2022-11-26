@@ -19,7 +19,7 @@ const registerStudent = async (req, res) => {
 
 const getStudent = async (req, res) => {
     try {
-        const studentObj = await getStudentById(req.params.id);
+        const studentObj = await getStudentById(req.userId);
         if(studentObj){
             return setResponse(studentObj, res);
         }
