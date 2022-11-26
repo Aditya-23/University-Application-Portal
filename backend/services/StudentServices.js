@@ -65,7 +65,7 @@ export const loginService = async (email, password) => {
 
 export const getStudentById = (id) => {
     try {
-        const studentObj = Student.findById(id);
+        const studentObj = Student.findById(id).select("-password");
         return studentObj;
     } catch (error) {
         console.log(error);

@@ -72,7 +72,7 @@ const loginUser = (userObj) => async dispatch => {
                 payload: response.data
             });
         }
-    } catch (AxiosError) {
+    } catch (error) {
         dispatch({
             type: LOGIN_FAIL,
             payload: null
@@ -80,8 +80,7 @@ const loginUser = (userObj) => async dispatch => {
         dispatch({
             type: SET_ALERT,
             payload: {
-                msg: "Incorrect email or password!",
-                alertType: "danger"
+                msg: error.response.data.msg
             }
         })
     }
@@ -105,6 +104,7 @@ const registerUser = (userObj) => async dispatch => {
 
     try {
         const response = await axios.post("students/signup", userObj, config);
+        console.log(response);
         if(response.status == 200){
             dispatch({
                 type: REGISTER_SUCCESS,
@@ -122,9 +122,16 @@ const registerUser = (userObj) => async dispatch => {
         }
         
     } catch (error) {
+        console.log(error)
         dispatch({
             type: REGISTER_FAIL,
             payload: null
+        });
+        dispatch({
+            type: SET_ALERT,
+            payload: {
+                msg: error.response.data.msg
+            }
         })
     }
 }
