@@ -5,6 +5,7 @@ import Education from "./education.js";
 import Application from "./application.js";
 import University from "./university.js";
 import Program from "./program.js";
+import Experience from "./experience.js";
 // Create a file for each model and export the created model from them
 
 export {
@@ -14,4 +15,5 @@ export {
   Application,
   University,
   Program,
+  Experience,
 };
