@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {loginUser} from "../actions/auth";
 import {Fragment, Spinner} from "react";
 import {Navigate} from "react-router-dom";
+import { removeAlert } from '../actions/alert';
 
 function Login(props) {
 
@@ -21,7 +22,6 @@ function Login(props) {
     }
 
     const onSubmit = async(e) => {
-        console.log("Invoked")
         e.preventDefault();
         await props.loginUser(loginForm);
     }
@@ -37,13 +37,36 @@ function Login(props) {
     if (props.auth.isAuthenticated) {
         return (<Navigate to="/dashboard"/>)
     }
+
+    const closeAlert = async() => {
+        await props.removeAlert();
+    }
+
     return (
         <div className="login-wrap">
+            {props.alert.msg != null
+                ? <div class="alert">
+                        <span class="closebtn" onClick={() => closeAlert()}>&times;</span>
+                        {props.alert.msg}
+                    </div>
+                : null}
             <h2>Welcome, Sign In here</h2>
 
             <form className="form" onSubmit={e => onSubmit(e)}>
-                <input type="text" placeholder="Email" onChange={e => onChangeHandler(e)} name="email" value={loginForm.email}/>
-                <input type="password" placeholder="Password" onChange={e => onChangeHandler(e)} name="password" value={loginForm.password}/>
+                <input
+                    type="text"
+                    required
+                    placeholder="Email"
+                    onChange={e => onChangeHandler(e)}
+                    name="email"
+                    value={loginForm.email}/>
+                <input
+                    type="password"
+                    required
+                    placeholder="Password"
+                    onChange={e => onChangeHandler(e)}
+                    name="password"
+                    value={loginForm.password}/>
                 <input type="submit" value="Login"/>
             </form>
         </div>
@@ -51,11 +74,12 @@ function Login(props) {
 }
 
 const mapStateToProps = state => {
-    return {auth: state.authReducer}
+    return {auth: state.authReducer, alert: state.alertReducer}
 }
 
 const mapDispatchToProps = {
-    loginUser
+    loginUser,
+    removeAlert,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
