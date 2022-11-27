@@ -26,6 +26,7 @@ function App() {
     return (
         <Provider store={store}>
             <Navbar/>
+            <br></br>
             <BrowserRouter>
                 <Routes>
                     <Route exact path='/' element={< Landing />}/>
