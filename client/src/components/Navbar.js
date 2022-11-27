@@ -3,18 +3,25 @@ import {connect} from 'react-redux';
 
 function Navbar(props) {
 
+  const onLogout = () => {
+
+  }
+
     return (
         <div class="topnav">
             {props.auth.isAuthenticated
-                ? <>
-                <form>
-                  <input type="text" placeholder='Search University' />
-                </form>
-                <a>Logout</a>
+                ? <> <div onClick={() => onLogout()}>
+                      <h1>Logout</h1>
+                    </div> 
+                <form className = 'search_bar_wrap' > <input
+                    className='search_bar'
+                    type="text"
+                    placeholder='Search University'
+                    size="40"/> < input className = 'search_bar' type = "submit" value = "Search" /> </form> < a > Logout </a>
                 </>
-                : <> <a href='/login'>Login</a> < a href='/register'> SignUp </a>
+                : <> <a href='/login'>Login</a> < a href = '/register' > SignUp </a>
             </ >
-}
+            }
         </div>
     )
 }
