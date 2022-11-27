@@ -21,9 +21,17 @@ function Navbar(props) {
                     () => onLogout()
                 } > Logout </a>
                 </div>
-                : <div className='log_out_nav'> <a href='/login' className='login_style'>Login</a> < a href = '/register' className='sign_up_style'> SignUp </a>
-            </div>
-}
+                : <div className='topnav'>
+                  <div className='logo_styles'>
+                    <img src={require("../static/logo.ico")} className="img_style" />
+                    <p className="name_style">University Application</p>
+                  </div>
+                    <div className='log_out_nav'> 
+                      <a href='/login' className='login_style'>Login</a> 
+                      < a href = '/register' className='sign_up_style'> SignUp </a>
+                    </div>
+                  </div>
+              }
 </>
     )
 }
