@@ -4,6 +4,23 @@
     justify-content: space-between;
     background-color: #333;
 
+    .logo_styles{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .name_style{
+        color: white;
+        padding: 14px;
+        font-size: large;
+    }
+
+    .img_style {
+        width:54px;
+        height:54px 
+    }
+
     a {
         float: right;
         color: #f2f2f2;
@@ -29,6 +46,29 @@
             padding: 3px;
         }
 
+    }
+
+
+}
+
+.log_out_nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: #333;
+
+    a {
+        float: right;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 25px;
+        text-decoration: none;
+        font-size: 17px;
+        cursor: pointer;
+        &:hover {
+            background-color: #ddd;
+            color: black;
+        }
     }
 }
 
