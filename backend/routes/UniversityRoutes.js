@@ -14,4 +14,6 @@ UniversityRoutes.put("/:id", authJwt, UniversityControllers.updateUniversityById
 
 UniversityRoutes.delete("/:id", authJwt, UniversityControllers.deleteUniversityById);
 
+UniversityRoutes.get("/university-image/:universityName", authJwt, UniversityControllers.getUniversityImage);
+
 export default UniversityRoutes;

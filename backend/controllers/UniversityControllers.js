@@ -1,6 +1,13 @@
 import {setResponse, setRequestError, setServerError} from "./utils.js";
 import University from "../models/university.js";
-import {deleteUniversityByIdService, getAllUniversitiesService, getUniversityByIdService, saveUniversityService, updateUniversityByIdService} from "../services/UniversityServices.js";
+import {
+    deleteUniversityByIdService,
+    getAllUniversitiesService,
+    getUniversityByIdService,
+    getUniversityImageService,
+    saveUniversityService,
+    updateUniversityByIdService
+} from "../services/UniversityServices.js";
 
 export const registerUniversity = async(req, res) => {
     try {
@@ -67,6 +74,18 @@ export const updateUniversityById = async(req, res) => {
         }
         const updatedUniversity = await updateUniversityByIdService(req.params.id, currentUniversity);
         return setResponse(updatedUniversity, res);
+    } catch (error) {
+        console.log(error);
+        return setServerError({
+            msg: "Internal server error"
+        }, res);
+    }
+}
+
+export const getUniversityImage = async(req, res) => {
+    try {
+        const fileLocation = getUniversityImageService(req.params.universityName);
+        return res.sendFile(fileLocation);
     } catch (error) {
         console.log(error);
         return setServerError({

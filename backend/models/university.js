@@ -17,6 +17,9 @@ const universitySchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  image: {
+    type: String
+  }
 });
 
 const University = mongoose.model("University", universitySchema);

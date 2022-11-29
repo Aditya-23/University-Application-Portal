@@ -1,5 +1,7 @@
 import {University} from "../models/index.js";
 import config from "config";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const saveUniversityService = async(universityObj) => {
     try {
@@ -51,4 +53,23 @@ const deleteUniversityByIdService = async(id) => {
     }
 }
 
-export {saveUniversityService, getAllUniversitiesService, getUniversityByIdService, updateUniversityByIdService, deleteUniversityByIdService}
+const getUniversityImageService = (name) => {
+    try {
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(path.dirname(__filename));
+        const fileLocation = __dirname + "/uploads/UniversityImages/" + name;
+        return fileLocation;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+export {
+    saveUniversityService,
+    getAllUniversitiesService,
+    getUniversityByIdService,
+    updateUniversityByIdService,
+    deleteUniversityByIdService,
+    getUniversityImageService
+}
