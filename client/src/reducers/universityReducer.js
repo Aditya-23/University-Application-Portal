@@ -2,7 +2,9 @@ import * as types from "../actions/types";
 
 const initialState = {
     university:{},
-    imgURL: null,
+    imgURL1: null,
+    imgURL2: null,
+    imgURL3: null,
     id: null
 }
 
@@ -26,11 +28,23 @@ const universityReducer = (state = initialState, action) => {
                 ...state,
                 university: null
             }
-        case types.IMG_RECEIVED:
+        case types.IMG1_RECEIVED:
             return{
                 ...state,
-                imgURL: payload
+                imgURL1: payload
             }
+        case types.IMG2_RECEIVED:
+            return{
+                ...state,
+                imgURL2: payload
+            }
+        
+        case types.IMG3_RECEIVED:
+            return{
+                ...state,
+                imgURL3: payload
+            }
+        
         case types.IMG_RECEIVED_FAILED:
             return {
                 ...state,

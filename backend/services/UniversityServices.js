@@ -53,12 +53,10 @@ const deleteUniversityByIdService = async(id) => {
     }
 }
 
-const getUniversityImageService = (name) => {
+const getUniversityImageService = async (id) => {
     try {
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(path.dirname(__filename));
-        const fileLocation = __dirname + "/uploads/UniversityImages/" + name;
-        return fileLocation;
+        const university = University.findById(id);
+        return university;
     } catch (error) {
         console.log(error);
         return null;

@@ -15,7 +15,7 @@ function Dashboard(props) {
         )
     }
     const onClickHandler = async() => {
-        await props.startUniversityLoad("63866072a0edb9867a606043");
+        await props.startUniversityLoad("63869b3066f1b3a566d37e03");
         navigate("/university")
     }
 

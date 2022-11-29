@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAuthToken } from '../utils';
-import { IMG_RECEIVED, UNIVERSITY_LOADED, UNIVERSITY_LOADED_FAILED, UNIVERSITY_LOAD_START } from "./types";
+import { IMG1_RECEIVED, IMG2_RECEIVED, IMG3_RECEIVED, UNIVERSITY_LOADED, UNIVERSITY_LOADED_FAILED, UNIVERSITY_LOAD_START } from "./types";
 
 
 export const getUniversityById = (id) => async dispatch => {
@@ -15,11 +15,23 @@ export const getUniversityById = (id) => async dispatch => {
             type: UNIVERSITY_LOADED,
             payload: response.data
         })
-        const imgResponse = await axios.get("/universities/university-image/" + response.data.image, {responseType: "blob"});
-        var imageUrl = URL.createObjectURL(imgResponse.data);
+        const imgResponse1 = await axios.get("/universities/university-images/" + id + "/0", {responseType: "blob"});
+        var imageUrl1 = URL.createObjectURL(imgResponse1.data);
         dispatch({
-            type: IMG_RECEIVED,
-            payload: imageUrl
+            type: IMG1_RECEIVED,
+            payload: imageUrl1
+        })
+        const imgResponse2 = await axios.get("/universities/university-images/" + id + "/1", {responseType: "blob"});
+        var imageUrl2 = URL.createObjectURL(imgResponse2.data);
+        dispatch({
+            type: IMG2_RECEIVED,
+            payload: imageUrl2
+        })
+        const imgResponse3 = await axios.get("/universities/university-images/" + id + "/2", {responseType: "blob"});
+        var imageUrl3 = URL.createObjectURL(imgResponse3.data);
+        dispatch({
+            type: IMG3_RECEIVED,
+            payload: imageUrl3
         })
     } catch (error) {
         console.log(error);

@@ -1,5 +1,7 @@
 import {setResponse, setRequestError, setServerError} from "./utils.js";
 import University from "../models/university.js";
+import path from "path";
+import { fileURLToPath } from "url";
 import {
     deleteUniversityByIdService,
     getAllUniversitiesService,
@@ -84,7 +86,12 @@ export const updateUniversityById = async(req, res) => {
 
 export const getUniversityImage = async(req, res) => {
     try {
-        const fileLocation = getUniversityImageService(req.params.universityName);
+        const universityObj = await getUniversityImageService(req.params.universityId);
+        const name = universityObj.images[parseInt(req.params.num)];
+        console.log(name);
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(path.dirname(__filename));
+        const fileLocation = __dirname + "/uploads/UniversityImages/" + universityObj.name + "/" + name;
         return res.sendFile(fileLocation);
     } catch (error) {
         console.log(error);
