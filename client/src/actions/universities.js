@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAuthToken } from '../utils';
-import { IMG_RECEIVED, UNIVERSITY_LOADED, UNIVERSITY_LOADED_FAILED } from "./types";
+import { IMG_RECEIVED, UNIVERSITY_LOADED, UNIVERSITY_LOADED_FAILED, UNIVERSITY_LOAD_START } from "./types";
 
 
 export const getUniversityById = (id) => async dispatch => {
@@ -28,4 +28,11 @@ export const getUniversityById = (id) => async dispatch => {
             payload: null
         })
     }
+}
+
+export const startUniversityLoad = (id) => async dispatch => {
+    dispatch({
+        type: UNIVERSITY_LOAD_START,
+        payload: id
+    })
 }

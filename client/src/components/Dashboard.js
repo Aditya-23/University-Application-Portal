@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { startUniversityLoad } from '../actions/universities';
+import store from '../store';
+
 
 
 function Dashboard(props) {
@@ -11,8 +14,13 @@ function Dashboard(props) {
             <h1>Loading</h1>
         )
     }
+    const onClickHandler = async() => {
+        await props.startUniversityLoad("63866072a0edb9867a606043");
+        navigate("/university")
+    }
+
     return ( <> <h1>Dashboard</h1>
-    <button onClick={() => navigate("/university")} >Click here</button> </>
+    <button onClick={() => onClickHandler()} >Click here</button> </>
   );
 }
 
@@ -23,4 +31,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, null) (Dashboard);
+export default connect(mapStateToProps, {startUniversityLoad}) (Dashboard);

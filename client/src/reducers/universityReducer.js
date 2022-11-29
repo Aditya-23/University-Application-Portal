@@ -2,13 +2,19 @@ import * as types from "../actions/types";
 
 const initialState = {
     university:{},
-    imgURL: null
+    imgURL: null,
+    id: null
 }
 
 const universityReducer = (state = initialState, action) => {
     const {type, payload} = action;
 
     switch (type) {
+        case types.UNIVERSITY_LOAD_START:
+            return {
+                ...state,
+                id: payload
+            }
         case types.UNIVERSITY_LOADED:
             return{
                 ...state,
