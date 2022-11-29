@@ -1,14 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+
 
 function Dashboard(props) {
+    const navigate = useNavigate();
     if(props.auth.loading){
         return (
             <h1>Loading</h1>
         )
     }
-    return ( <> <h1>Dashboard</h1> </>
+    return ( <> <h1>Dashboard</h1>
+    <button onClick={() => navigate("/university")} >Click here</button> </>
   );
 }
 
