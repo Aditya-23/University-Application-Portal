@@ -69,6 +69,7 @@ function University(props) {
 
                 </Col>
             </Row>
+            <br/>
             <Row>
                 <Col
                     md={{
@@ -78,11 +79,28 @@ function University(props) {
                     <p>{props.university.university.description}</p>
                 </Col>
             </Row>
+            <br/>
+            <Row>
+                <Col
+                    md={{
+                    span: 10,
+                    offset: 1
+                }}>
+                    Our Programs:
+                    <br></br>
+                    <ol>
+                        {props
+                            .university
+                            .university
+                            .programs
+                            .map(item => <li>{item}</li>)}
+                    </ol>
+                </Col>
+            </Row>
         </Container>
 
     );
 }
-
 const mapStateToProps = state => {
     return {auth: state.authReducer, university: state.universityReducer}
 }
