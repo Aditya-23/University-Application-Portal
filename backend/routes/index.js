@@ -13,6 +13,6 @@ const mainRouter = (app) => {
   app.use("/universities", UniversityRoutes);
   app.use("/programs", ProgramRoutes);
   app.use("/experiences", ExperienceRoutes);
-  app.use("/applications/", ApplicationRoutes);
+  app.use("/applications", ApplicationRoutes);
 };
 export default mainRouter;

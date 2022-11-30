@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(path.dirname(__filename));
-        const uploadFolder = __dirname + "/uploads/applications/" + req.applicationId;
+        const uploadFolder = __dirname + "/uploads/applications/" + req.userId;
         let folderExists = fs.existsSync(uploadFolder);
         if(folderExists){
             console.log("exists");
@@ -34,6 +34,6 @@ const ApplicationRoutes = express.Router();
 
 ApplicationRoutes.get("/:id", authJwt, ApplicationControllers.getApplicationById);
 
-ApplicationRoutes.post("/", authJwt, ApplicationControllers.registerApplication, upload.array("files"));
+ApplicationRoutes.post("/", authJwt, upload.array("files"), ApplicationControllers.registerApplication);
 
 export default ApplicationRoutes;

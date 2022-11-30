@@ -1,4 +1,4 @@
-import { Application } from "../models/index.js";
+import Application from "../models/application.js";
 import { getApplicationByIdService, registerApplicationService } from "../services/Application.service.js";
 import { setRequestError, setResponse, setServerError } from "./utils.js";
 
