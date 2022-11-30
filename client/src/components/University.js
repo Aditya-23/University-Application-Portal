@@ -5,6 +5,7 @@ import {getUniversityById} from '../actions/universities';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import {Carousel, Col, Container, Row} from "react-bootstrap";
+import ProgramList from './ProgramList';
 
 function University(props) {
 
@@ -13,7 +14,7 @@ function University(props) {
     // DONT put a function inside useEffect, directly write statements that you want
     // to invoke after rendering
     useEffect(() => {
-        props.getUniversityById(props.university.id);
+         props.getUniversityById(props.university.id);
     }, []);
 
     return (
@@ -33,8 +34,12 @@ function University(props) {
                                 width="80px"
                                 height="600px"/>
                             <Carousel.Caption>
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                <h3>{props.university.name != undefined
+                                        ? props.university.name
+                                        : null}</h3>
+                                <p>{props.university.location != undefined
+                                        ? props.university.location
+                                        : null}</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
@@ -46,8 +51,12 @@ function University(props) {
                                 height="600px"/>
 
                             <Carousel.Caption>
-                                <h3>Second slide label</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <h3>{props.university.name != undefined
+                                        ? props.university.name
+                                        : null}</h3>
+                                <p>{props.university.location != undefined
+                                        ? props.university.location
+                                        : null}</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
@@ -59,9 +68,13 @@ function University(props) {
                                 height="600px"/>
 
                             <Carousel.Caption>
-                                <h3>Third slide label</h3>
+                                <h3>{props.university.name != undefined
+                                        ? props.university.name 
+                                        : null}</h3>
                                 <p>
-                                    Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                                    {props.university.location != undefined
+                                        ? props.university.location
+                                        : null}
                                 </p>
                             </Carousel.Caption>
                         </Carousel.Item>
@@ -76,7 +89,9 @@ function University(props) {
                     span: 10,
                     offset: 1
                 }}>
-                    <p>{props.university.university.description}</p>
+                    <p>{props.university.description != undefined
+                            ? props.university.description
+                            : null}</p>
                 </Col>
             </Row>
             <br/>
@@ -88,13 +103,16 @@ function University(props) {
                 }}>
                     Our Programs:
                     <br></br>
-                    <ol>
-                        {props
-                            .university
-                            .university
-                            .programs
-                            .map(item => <li>{item}</li>)}
-                    </ol>
+                    {props.university.programs != undefined
+                        ? <ProgramList programs={props.university.programs}/>
+                        : null}
+                </Col>
+            </Row>
+            <br></br>
+            <Row>
+                {/* TODO : OnClick handler here to navigate to application form comaponent */}
+                <Col className='apply-button'>
+                    <Button variant="primary">Apply Now</Button>
                 </Col>
             </Row>
         </Container>
