@@ -1,22 +1,130 @@
-import React from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Navigate, useNavigate} from 'react-router-dom';
+import {getUniversityById} from '../actions/universities';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import {Carousel, Col, Container, Row} from "react-bootstrap";
+import ProgramList from './ProgramList';
 
-const token = localStorage.getItem("token");
 function University(props) {
 
     const navigate = useNavigate();
 
+    // DONT put a function inside useEffect, directly write statements that you want
+    // to invoke after rendering
+    useEffect(() => {
+         props.getUniversityById(props.university.id);
+    }, []);
 
-    return ( <> <h1>University</h1> 
-    <button onClick={() => navigate("/application")}>Click</button></>
-  );
+    return (
+        <Container fluid>
+            <Row >
+                <Col
+                    md={{
+                    span: 10,
+                    offset: 1
+                }}>
+                    <Carousel >
+                        <Carousel.Item >
+                            <img
+                                className="d-block w-100"
+                                src={props.university.imgURL1}
+                                alt="First slide"
+                                width="80px"
+                                height="600px"/>
+                            <Carousel.Caption>
+                                <h3>{props.university.name != undefined
+                                        ? props.university.name
+                                        : null}</h3>
+                                <p>{props.university.location != undefined
+                                        ? props.university.location
+                                        : null}</p>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src={props.university.imgURL2}
+                                alt="Second slide"
+                                width="80px"
+                                height="600px"/>
+
+                            <Carousel.Caption>
+                                <h3>{props.university.name != undefined
+                                        ? props.university.name
+                                        : null}</h3>
+                                <p>{props.university.location != undefined
+                                        ? props.university.location
+                                        : null}</p>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img
+                                className="d-block w-100"
+                                src={props.university.imgURL3}
+                                alt="Third slide"
+                                width="80px"
+                                height="600px"/>
+
+                            <Carousel.Caption>
+                                <h3>{props.university.name != undefined
+                                        ? props.university.name 
+                                        : null}</h3>
+                                <p>
+                                    {props.university.location != undefined
+                                        ? props.university.location
+                                        : null}
+                                </p>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                    </Carousel>
+
+                </Col>
+            </Row>
+            <br/>
+            <Row>
+                <Col
+                    md={{
+                    span: 10,
+                    offset: 1
+                }}>
+                    <p>{props.university.description != undefined
+                            ? props.university.description
+                            : null}</p>
+                </Col>
+            </Row>
+            <br/>
+            <Row>
+                <Col
+                    md={{
+                    span: 10,
+                    offset: 1
+                }}>
+                    Our Programs:
+                    <br></br>
+                    {props.university.programs != undefined
+                        ? <ProgramList programs={props.university.programs}/>
+                        : null}
+                </Col>
+            </Row>
+            <br></br>
+            <Row>
+                {/* TODO : OnClick handler here to navigate to application form comaponent */}
+                <Col className='apply-button'>
+                    <Button variant="primary">Apply Now</Button>
+                </Col>
+            </Row>
+        </Container>
+
+    );
 }
-
 const mapStateToProps = state => {
-    return {
-        auth: state.authReducer
-    }
+    return {auth: state.authReducer, university: state.universityReducer}
 }
 
-export default connect(mapStateToProps, null)(University);
+const mapDispatchToProps = {
+    getUniversityById
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(University);
