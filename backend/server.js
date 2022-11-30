@@ -3,6 +3,7 @@ import express from "express";
 import {MongoConnect} from "./config/mongodb.js";
 import routes from "./routes/index.js";
 import config from "config";
+import bodyParser from "body-parser";
 
 const app = express();
 const PORT = config.get("port");
