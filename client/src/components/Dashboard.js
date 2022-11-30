@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import ApplicationSection from "./ApplicationSection.js";
 import UniversitySection from "./TopUniversitySection.js";
 
@@ -14,6 +14,7 @@ function Dashboard(props) {
       <h1>Dashboard</h1>
       <UniversitySection />
       <ApplicationSection />
+      <button onClick={() => Navigate("/university")}>Click here</button>{" "}
     </>
   );
 }

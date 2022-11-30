@@ -4,11 +4,12 @@ import {useState} from 'react';
 import {connect} from 'react-redux';
 import {loginUser} from "../actions/auth";
 import {Fragment, Spinner} from "react";
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import { removeAlert } from '../actions/alert';
 
 function Login(props) {
 
+    const navigate = useNavigate();
     const [loginForm,
         setloginForm] = useState({email: "", password: ""})
 
@@ -34,8 +35,8 @@ function Login(props) {
         )
     }
 
-    if (props.auth.isAuthenticated) {
-        return (<Navigate to="/dashboard"/>)
+    if(props.auth.isAuthenticated){
+        navigate("/dashboard");
     }
 
     const closeAlert = async() => {
