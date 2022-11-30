@@ -1,0 +1,11 @@
+.cardsList {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  overflow: hidden;
+
+  .card {
+    padding: 10px;
+    margin: 10px;
+  }
+}
