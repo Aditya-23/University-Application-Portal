@@ -6,4 +6,6 @@ const ApplicationRoutes = express.Router();
 
 ApplicationRoutes.get("/:id", authJwt, ApplicationControllers.getApplicationById);
 
+ApplicationRoutes.post("/", authJwt, ApplicationControllers.registerApplication);
+
 export default ApplicationRoutes;
