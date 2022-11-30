@@ -25,31 +25,24 @@ const applicationSchema = new mongoose.Schema({
   },
   semIntake: {
     type: String,
-    required: true,
   },
   specialization: {
     type: String,
-    required: false,
   },
   lor1: {
     type: String,
-    required: true,
   },
   lor2: {
     type: String,
-    required: true,
   },
   lor3: {
     type: String,
-    required: false,
   },
   sop: {
     type: String,
-    required: true,
   },
   resume: {
     type: String,
-    required: true,
   },
   education: {
     type: Array,
@@ -65,7 +58,6 @@ const applicationSchema = new mongoose.Schema({
   },
   governmentId: {
     type: String,
-    required: true,
   },
 });
 
