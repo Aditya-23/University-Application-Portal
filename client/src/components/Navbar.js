@@ -4,8 +4,8 @@ import {logoutUser} from '../actions/auth';
 
 function Navbar(props) {
 
-    const onLogout = async() => {
-        await props.logoutUser();
+    const onLogout = () => {
+        props.logoutUser();
     }
     return (
       <>

@@ -1,5 +1,7 @@
 import {University} from "../models/index.js";
 import config from "config";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const saveUniversityService = async(universityObj) => {
     try {
@@ -51,4 +53,21 @@ const deleteUniversityByIdService = async(id) => {
     }
 }
 
-export {saveUniversityService, getAllUniversitiesService, getUniversityByIdService, updateUniversityByIdService, deleteUniversityByIdService}
+const getUniversityImageService = async (id) => {
+    try {
+        const university = University.findById(id);
+        return university;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+export {
+    saveUniversityService,
+    getAllUniversitiesService,
+    getUniversityByIdService,
+    updateUniversityByIdService,
+    deleteUniversityByIdService,
+    getUniversityImageService
+}

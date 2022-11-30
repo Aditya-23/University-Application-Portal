@@ -10,7 +10,8 @@ import {
     LOGOUT_USER,
     SET_ALERT,
     REGISTER_FAIL,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    CLEAR_UNIVERSITY
 } from "./types";
 
 const loadUser = () => async dispatch => {
@@ -89,6 +90,9 @@ const loginUser = (userObj) => async dispatch => {
 const logoutUser = () => async dispatch => {
     dispatch({
         type: LOGOUT_USER
+    });
+    dispatch({
+        type: CLEAR_UNIVERSITY
     })
 }
 

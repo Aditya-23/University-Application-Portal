@@ -1,6 +1,15 @@
 import {setResponse, setRequestError, setServerError} from "./utils.js";
 import University from "../models/university.js";
-import {deleteUniversityByIdService, getAllUniversitiesService, getUniversityByIdService, saveUniversityService, updateUniversityByIdService} from "../services/UniversityServices.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import {
+    deleteUniversityByIdService,
+    getAllUniversitiesService,
+    getUniversityByIdService,
+    getUniversityImageService,
+    saveUniversityService,
+    updateUniversityByIdService
+} from "../services/UniversityServices.js";
 
 export const registerUniversity = async(req, res) => {
     try {
@@ -67,6 +76,22 @@ export const updateUniversityById = async(req, res) => {
         }
         const updatedUniversity = await updateUniversityByIdService(req.params.id, currentUniversity);
         return setResponse(updatedUniversity, res);
+    } catch (error) {
+        console.log(error);
+        return setServerError({
+            msg: "Internal server error"
+        }, res);
+    }
+}
+
+export const getUniversityImage = async(req, res) => {
+    try {
+        const universityObj = await getUniversityImageService(req.params.universityId);
+        const name = universityObj.images[parseInt(req.params.num)];
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(path.dirname(__filename));
+        const fileLocation = __dirname + "/uploads/UniversityImages/" + universityObj.name + "/" + name;
+        return res.sendFile(fileLocation);
     } catch (error) {
         console.log(error);
         return setServerError({

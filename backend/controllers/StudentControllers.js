@@ -2,6 +2,9 @@ import Student from "../models/student.js";
 import { deleteStudentById, getStudentById, saveStudent, updateStudentById, loginService } from "../services/StudentServices.js";
 import { setResponse, setRequestError, setServerError} from "./utils.js";
 
+
+
+
 const registerStudent = async (req, res) => {
     try {
         var studentObj = req.body;
@@ -37,7 +40,6 @@ const updateStudent = async (req, res) => {
         if(isStudentPresent._id.toString() != req.userId){ // added this to make sure that students can only update thier own profile
             return setRequestError({msg: "Not authorized"}, res);  
         }
-        console.log(isStudentPresent);
         if(!isStudentPresent){
             return setRequestError({msg: "Student does not exist!"}, res); 
         }
