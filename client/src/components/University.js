@@ -17,6 +17,10 @@ function University(props) {
          props.getUniversityById(props.university.id);
     }, []);
 
+    const navigateToApplicationForm = () => {
+        navigate("/application");
+    }
+
     return (
         <Container fluid>
             <Row >
@@ -112,7 +116,7 @@ function University(props) {
             <Row>
                 {/* TODO : OnClick handler here to navigate to application form comaponent */}
                 <Col className='apply-button'>
-                    <Button variant="primary">Apply Now</Button>
+                    <Button variant="primary" onClick={() => navigateToApplicationForm()}>Apply Now</Button>
                 </Col>
             </Row>
         </Container>
