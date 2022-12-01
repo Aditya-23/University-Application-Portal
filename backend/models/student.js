@@ -1,5 +1,55 @@
 import mongoose from "mongoose";
 
+const educationSchema = new mongoose.Schema({
+  transcript: {
+    type: String,
+    required: true,
+  },
+  degreeCertificate: {
+    type: String,
+    required: true,
+  },
+  Gpa: {
+    type: Number,
+    required: true,
+  },
+  degree: {
+    type: String,
+    required: true,
+  },
+  specialization: {
+    type: String,
+    required: false,
+  },
+});
+
+const experienceSchema = new mongoose.Schema({
+  jobTitle: {
+    type: String,
+    required: true,
+  },
+  companyName: {
+    type: String,
+    required: true,
+  },
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: false,
+  },
+  currentWorkFlag: {
+    type: Boolean,
+    default: false,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+});
+
 const studentSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -21,13 +71,24 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // education is an array of ids referring to the education model
   education: {
-    type: Array,
+    type: [educationSchema],
     required: false,
+    default: [],
   },
+  // experience is an array of ids referring to the experience model
   experience: {
-    type: Array,
+    type: [experienceSchema],
     required: false,
+    default: [],
+  },
+  // array of shortlisted universities, links to university model
+  shortlistedUniversities: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "University",
+    required: false,
+    default: [],
   },
   greScore: {
     type: Number,

@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const applicationSchema = new mongoose.Schema({
+  studentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Student",
+    required: true,
+  },
   createdBy: {
     type: String,
     required: true,
