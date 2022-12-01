@@ -1,6 +1,6 @@
 import { renameSync } from "fs";
 import Application from "../models/application.js";
-import { getApplicationByIdService, registerApplicationService } from "../services/Application.service.js";
+import { getApplicationByIdService, registerApplicationService, updateApplicationService } from "../services/Application.service.js";
 import { setRequestError, setResponse, setServerError } from "./utils.js";
 import fs from "fs";
 import path from "path";
@@ -21,7 +21,6 @@ export const getApplicationById = async (req, res) => {
 
 export const registerApplication = async(req, res, next) => {
     try {
-        console.log(req.files);
         const savedApplicationObj = await registerApplicationService(req.body);
         if(!savedApplicationObj){
             return setRequestError({msg: "Could not register the applicaton"}, res);
@@ -31,6 +30,11 @@ export const registerApplication = async(req, res, next) => {
         const oldUploadFolder = __dirname + "/uploads/applications/temporary";
         const newUploadFolder = __dirname + "/uploads/applications/" + savedApplicationObj.id;
         renameSync(oldUploadFolder, newUploadFolder);
+        savedApplicationObj.lor1 = newUploadFolder + "/lor1";
+        savedApplicationObj.lor2 = newUploadFolder + "/lor2";
+        savedApplicationObj.lor3 = newUploadFolder + "/lor3";
+        savedApplicationObj.sop = newUploadFolder + "/sop";
+        await savedApplicationObj.save();
         return setResponse(savedApplicationObj, res);
     } catch (error) {
         console.log(error);
@@ -40,12 +44,14 @@ export const registerApplication = async(req, res, next) => {
 
 export const updateApplication = async(req, res) => {
     try {
-        const currentStudent = req.body;
-        const isApplicationPresent = await Application.findById(req.params.id).select("_id");
+        const isApplicationPresent = await Application.findById(req.params.id).select("_id,applicationStatus");
         if(!isApplicationPresent){
             return setRequestError({msg: "Application does not exist!"}, res); 
         }
+        const newApplicationObj = await updateApplicationService(req.params.id, req.body);
+        return setResponse(newApplicationObj, res);
     } catch (error) {
-        
+        console.log(error);
+        return setServerError({msg: "Internal Server Error"}, res);
     }
 }

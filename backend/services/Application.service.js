@@ -35,4 +35,5 @@ const updateApplicationService = (id, applicationObj) => {
 export {
     getApplicationByIdService,
     registerApplicationService,
+    updateApplicationService,
 }
