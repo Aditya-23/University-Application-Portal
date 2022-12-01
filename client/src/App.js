@@ -15,6 +15,7 @@ import Registration from "./components/Registration";
 import University from "./components/University";
 import Application from "./components/Application";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./components/Footer";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -67,6 +68,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+      <Footer/>
     </Provider>
   );
 }
