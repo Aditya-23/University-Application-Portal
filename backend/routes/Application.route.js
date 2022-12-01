@@ -5,12 +5,14 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import {v4} from "uuid";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
+        const randomUuid = v4();
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(path.dirname(__filename));
-        const uploadFolder = __dirname + "/uploads/applications/" + req.userId;
+        const uploadFolder = __dirname + "/uploads/applications/temporary";
         let folderExists = fs.existsSync(uploadFolder);
         if(folderExists){
             console.log("exists");
@@ -29,6 +31,8 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage
 })
+
+
 
 const ApplicationRoutes = express.Router();
 

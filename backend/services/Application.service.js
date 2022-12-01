@@ -22,6 +22,16 @@ const registerApplicationService = (applicationObj) => {
         return null;
     }
 }
+
+const updateApplicationService = (id, applicationObj) => {
+    try {
+        const newApplicationObj = Application.findByIdAndUpdate(id, applicationObj, {new: true});
+        return newApplicationObj;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
 export {
     getApplicationByIdService,
     registerApplicationService,
