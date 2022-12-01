@@ -76,5 +76,7 @@ ApplicationRoutes.post("/", authJwt, upload.fields(fieldsArray), ApplicationCont
 
 ApplicationRoutes.put("/:id", authJwt, uploadUpdate.fields(fieldsArray), ApplicationControllers.updateApplication);
 
+ApplicationRoutes.delete("/:id", authJwt, ApplicationControllers.deleteApplication);
+
 
 export default ApplicationRoutes;

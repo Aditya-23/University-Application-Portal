@@ -1,6 +1,6 @@
 import { renameSync } from "fs";
 import Application from "../models/application.js";
-import { getApplicationByIdService, registerApplicationService, updateApplicationService } from "../services/Application.service.js";
+import { deleteApplicationService, getApplicationByIdService, registerApplicationService, updateApplicationService } from "../services/Application.service.js";
 import { setRequestError, setResponse, setServerError } from "./utils.js";
 import fs from "fs";
 import path from "path";
@@ -44,12 +44,35 @@ export const registerApplication = async(req, res, next) => {
 
 export const updateApplication = async(req, res) => {
     try {
-        const isApplicationPresent = await Application.findById(req.params.id).select("_id,applicationStatus");
+        const isApplicationPresent = await Application.findById(req.params.id).select("_id");
         if(!isApplicationPresent){
             return setRequestError({msg: "Application does not exist!"}, res); 
         }
         const newApplicationObj = await updateApplicationService(req.params.id, req.body);
         return setResponse(newApplicationObj, res);
+    } catch (error) {
+        console.log(error);
+        return setServerError({msg: "Internal Server Error"}, res);
+    }
+}
+
+export const deleteApplication = async(req, res) => {
+    try {
+        const isApplicationPresent = await Application.findById(req.params.id).select("_id");
+        if(!isApplicationPresent){
+            return setRequestError({msg: "Application does not exist!"}, res); 
+        }
+        const deletedObj = await deleteApplicationService(req.params.id);
+        if(!deletedObj){
+            return setRequestError({msg: "Could not delete the object"}, res);
+        }
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(path.dirname(__filename));
+        const uploadFolder = __dirname + "/uploads/applications/" + deletedObj.id;
+        if(fs.existsSync(uploadFolder)){
+            fs.rmSync(uploadFolder, {recursive: true, force: true})
+        }
+        return setResponse(deletedObj, res);
     } catch (error) {
         console.log(error);
         return setServerError({msg: "Internal Server Error"}, res);

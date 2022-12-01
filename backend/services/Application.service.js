@@ -32,8 +32,19 @@ const updateApplicationService = (id, applicationObj) => {
         return null;
     }
 }
+
+const deleteApplicationService = (id) => {
+    try {
+        const deletedObj = Application.findByIdAndDelete(id);
+        return deletedObj;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
 export {
     getApplicationByIdService,
     registerApplicationService,
     updateApplicationService,
+    deleteApplicationService,
 }
