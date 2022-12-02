@@ -5,7 +5,7 @@ import * as types from "./types";
 //status can be "saved" or submitted
 // pass id if the application is being saved for the second time or third time
 // id is not necessary if the application is being submitted or saved for the first time
-const applicationFormSave = (applicationForm, files, status, id="63897fec788586ff44d247ec") => async dispatch => {
+const applicationFormSave = (applicationForm, files, status, id="638994e4788586ff44d24834") => async dispatch => {
 
     const config = {
         headers: {
@@ -44,33 +44,44 @@ const applicationFormSave = (applicationForm, files, status, id="63897fec788586f
         if(files.resume.preview != ""){
             newFormObj.append("resume", files.resume.data);
         }
-
-        newFormObj.append(status, status);
+        newFormObj.append("status", status);
         // id == null means the application is not yet created and this is the first time the use is trying to
         // create an application
         if(id == null){
             const response = await axios.post("/applications", newFormObj, config);
-            console.log(response);
             if(response.status == 200){
                 dispatch({
                     type: types.APPLICATION_FORM_SAVE_SUCCESS,
                     payload: {
                         applicationObj: response.data
                     }
-                })
+                });
+                dispatch({
+                    type: types.SET_ALERT,
+                    payload: {
+                        msg: `Application ${status} successfully!`,
+                        alertType: "success"
+                    }
+                });
             }
         }
         //id != null means the application is already created and the use is updating it or submitting it
         else{
             const response = await axios.put("/applications/" + id, newFormObj, config);
-            console.log(response);
             if(response.status == 200){
                 dispatch({
                     type: types.APPLICATION_FORM_SAVE_SUCCESS,
                     payload: {
                         applicationObj: response.data
                     }
-                })
+                });
+                dispatch({
+                    type: types.SET_ALERT,
+                    payload: {
+                        msg: `Application ${status} successfully!`,
+                        alertType: "success"
+                    }
+                });
             }
         }
         

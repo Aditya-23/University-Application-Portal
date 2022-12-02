@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import {connect} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {applicationFormSave} from '../actions/application.js';
 
 function Application(props) {
 
+    const navigate = useNavigate();
     const [applicationForm,
         setApplicationForm] = useState({
         createdBy: null,
@@ -39,8 +41,6 @@ function Application(props) {
 
     const onSubmitHandler = async(e, status) => {
         e.preventDefault();
-        console.log(status);
-        console.log("INVOKED HERERREE");
         const filesUploaded = {
             sop,
             lor1,
@@ -48,7 +48,10 @@ function Application(props) {
             lor3,
             resume
         }
-        await props.applicationFormSave(applicationForm, filesUploaded, "submitted");
+        await props.applicationFormSave(applicationForm, filesUploaded, status);
+        if(status == "submitted"){
+            navigate("/dashboard");
+        }
     }
 
     const onChangeHandler = (e) => {
