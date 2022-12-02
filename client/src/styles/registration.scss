@@ -1,23 +1,21 @@
 
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
+@import "./login.scss";
 * {
 	box-sizing: border-box;
 }
 
-// body {
-// 	background: #f6f5f7;
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	flex-direction: column;
-// 	font-family: 'Montserrat', sans-serif;
-// 	// height: 80vh;
-// 	margin: -10px 0 10px;
-// }
+body {
+	background: #f6f5f7;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	margin: -10px 0 10px;
+}
 
-.form h1 {
+.form1 h1 {
 	font-weight: bold;
 	margin: 0;
 }
@@ -51,14 +49,21 @@ button:focus {
 	outline: none;
 }
 
-button.ghost {
-	background-color: 434242;
-	border-color: #FFFFFF;
+button.ghost1 {
+	background-color: #FF4B2B;
+ 
     cursor: pointer;
+    width:  150px;
+    height: 40px;
+    border-radius: 30px;
+    text-decoration:solid;
+    font-weight: bold;
+    color: white !important;
 }
 
-.form {
-	background-color: #FFFFFF;
+button
+
+.form1 {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -76,7 +81,7 @@ input {
 	width: 100%;
 }
 
-.container {
+.container1 {
 	background-color: #fff;
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
@@ -84,8 +89,8 @@ input {
 	position: relative;
 	overflow: hidden;
 	width: 768px;
-
-	min-height: 480px;
+	max-width: 100%;
+	min-height: 550px;
 	margin-top: 10vh;
 	margin-left: 40vh;
 }
@@ -97,12 +102,20 @@ input {
 	transition: all 0.6s ease-in-out;
 }
 
-.sign-in-container {
+.sign-in-container1 {
 	left: 0;
 	width: 50%;
 	z-index: 2;
+    background: -webkit-linear-gradient(to right, #c99400 #FF416C);
+	background: linear-gradient(to right, #c99400, #ffc82f);
+    text-align: center;
+    color: #fff;
+    
+    h1{
+        margin-top: 200px;
+    }
 
-    .form input[type=submit]{
+    .form1 input[type=submit]{
   background: #FD841F;
   border: none;
   color: #eee;
@@ -111,6 +124,7 @@ input {
   cursor: pointer;
     }
     
+
     input[type=submit]:hover {
         box-shadow: 1px 1px 5px #555;
       }
@@ -121,9 +135,6 @@ input {
 }
 
 
-.container.right-panel-active .sign-in-container {
-	transform: translateX(100%);
-}
 
 .sign-up-container {
 	left: 0;
@@ -159,32 +170,56 @@ input {
 	height: 100%;
 	overflow: hidden;
 	transition: transform 0.6s ease-in-out;
-	z-index: 100;
+	// z-index: 100;
 }
 
 .container.right-panel-active .overlay-container{
 	transform: translateX(-100%);
 }
 
-.overlay {
-	background: #ffde80;
-	background: -webkit-linear-gradient(to right, #ffde80, #FF416C);
-	background: linear-gradient(to right, #ffeebf, #e6a900);
+.overlay1 {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
-	color: #FFFFFF;
+	background-color: #fff;
 	position: relative;
 	left: -100%;
 	height: 100%;
 	width: 200%;
   	transform: translateX(0);
 	transition: transform 0.6s ease-in-out;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	// padding: 100px;
+	height: 100%;
+	text-align: center;
+
+        h1{
+            width:270px;
+            margin: 20px;
+        }
+
+
+    .form1 input[type=submit]{
+        background: #FD841F;
+        border: none;
+        color: #eee;
+        font-size: 18px;
+        font-weight: 200;
+        cursor: pointer;
+          }
+          
+          input[type=submit]:hover {
+              box-shadow: 1px 1px 5px #555;
+            }
+      
+            input[type=submit]:active {
+              box-shadow: 1px 1px 7px #222;
+            }  
 }
 
-.container.right-panel-active .overlay {
-  	transform: translateX(50%);
-}
 
 .overlay-panel {
 	position: absolute;
@@ -192,9 +227,8 @@ input {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	padding: 0 40px;
 	text-align: center;
-	top: 0;
+	
 	height: 100%;
 	width: 50%;
 	transform: translateX(0);
@@ -205,30 +239,8 @@ input {
 	transform: translateX(-20%);
 }
 
-.container.right-panel-active .overlay-left {
-	transform: translateX(0);
-}
 
 .overlay-right {
 	right: 0;
 	transform: translateX(0);
-}
-
-.container.right-panel-active .overlay-right {
-	transform: translateX(20%);
-}
-
-.social-container {
-	margin: 20px 0;
-}
-
-.social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
 }
