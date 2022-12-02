@@ -12,7 +12,7 @@ body {
 	justify-content: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	margin: -10px 0 10px;
+	// margin: -10px 0 10px;
 }
 
 .form1 h1 {
@@ -93,6 +93,8 @@ input {
 	min-height: 550px;
 	margin-top: 10vh;
 	margin-left: 40vh;
+	margin-bottom: 100px;
+	position:sticky;
 }
 
 .form-container {
