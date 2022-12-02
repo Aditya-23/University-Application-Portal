@@ -23,6 +23,7 @@ export const getApplicationById = async(req, res) => {
     }
 }
 
+//saving or submitting for the first time
 export const registerApplication = async(req, res, next) => {
     try {
         const savedApplicationObj = await registerApplicationService(req.body);
@@ -34,16 +35,18 @@ export const registerApplication = async(req, res, next) => {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(path.dirname(__filename));
         const oldUploadFolder = __dirname + "/uploads/applications/temporary";
+        // making sure that the files have been uploaded
         if (fs.existsSync(oldUploadFolder)) {
             const newUploadFolder = __dirname + "/uploads/applications/" + savedApplicationObj.id;
             renameSync(oldUploadFolder, newUploadFolder);
-            savedApplicationObj.lor1 = newUploadFolder + "/lor1";
-            savedApplicationObj.lor2 = newUploadFolder + "/lor2";
-            savedApplicationObj.lor3 = newUploadFolder + "/lor3";
-            savedApplicationObj.sop = newUploadFolder + "/sop";
+            //saving the file locations to the application object
+            Object
+                .keys(req.files)
+                .map(fileName => {
+                    savedApplicationObj[fileName] = newUploadFolder + "/" + fileName;
+                })
             await savedApplicationObj.save();
         }
-
         return setResponse(savedApplicationObj, res);
     } catch (error) {
         console.log(error);
@@ -64,18 +67,32 @@ export const updateApplication = async(req, res) => {
             }, res);
         }
         const newApplicationObj = await updateApplicationService(req.params.id, req.body);
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(path.dirname(__filename));
-        const UploadFolder = __dirname + "/uploads/applications/" + newApplicationObj.id;
-        if (fs.existsSync(UploadFolder)) {
-            newApplicationObj.lor1 = UploadFolder + "/lor1";
-            newApplicationObj.lor2 = UploadFolder + "/lor2";
-            newApplicationObj.lor3 = UploadFolder + "/lor3";
-            newApplicationObj.sop = UploadFolder + "/sop";
-            await newApplicationObj.save();
+
+        if (req.files.length > 0) {
+            const __filename = fileURLToPath(import.meta.url);
+            const __dirname = path.dirname(path.dirname(__filename));
+            const UploadFolder = __dirname + "/uploads/applications/" + newApplicationObj.id;
+            if (fs.existsSync(UploadFolder)) {
+                Object
+                    .keys(req.files)
+                    .map(fileName => {
+                        newApplicationObj[fileName] = UploadFolder + "/" + fileName;
+                    });
+            } else {
+                const oldUploadFolder = __dirname + "/uploads/applications/temporary";
+                const newUploadFolder = __dirname + "/uploads/applications/" + newApplicationObj.id;
+                renameSync(oldUploadFolder, newUploadFolder);
+                Object
+                    .keys(req.files)
+                    .map(fileName => {
+                        newApplicationObj[fileName] = newUploadFolder + "/" + fileName;
+                    });
+            }
         }
-        
+        await newApplicationObj.save();
+
         return setResponse(newApplicationObj, res);
+        
     } catch (error) {
         console.log(error);
         return setServerError({

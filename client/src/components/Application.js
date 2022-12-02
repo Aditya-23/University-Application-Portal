@@ -47,7 +47,7 @@ function Application(props) {
             lor3,
             resume
         }
-        await props.applicationFormSave(applicationForm, filesUploaded);
+        await props.applicationFormSave(applicationForm, filesUploaded, "submitted");
     }
 
     const onChangeHandler = (e) => {
@@ -88,7 +88,7 @@ function Application(props) {
             case "lor3":
                 setlor3(changedFile);
                 break;
-                
+
             case "resume":
                 setresume(changedFile);
                 break;
