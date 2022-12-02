@@ -37,8 +37,9 @@ function Application(props) {
     const [resume,
         setresume] = useState({preview: "", data: ""});
 
-    const onSubmitHandler = async(e) => {
+    const onSubmitHandler = async(e, status) => {
         e.preventDefault();
+        console.log(status);
         console.log("INVOKED HERERREE");
         const filesUploaded = {
             sop,
@@ -101,7 +102,7 @@ function Application(props) {
 
     return (
         <div className='application-container'>
-            <Form encType='multipart/form-data' onSubmit={(e) => onSubmitHandler(e)}>
+            <Form encType='multipart/form-data'>
                 <Form.Label>
                     <h3>Personal Information</h3>
                 </Form.Label>
@@ -223,9 +224,20 @@ function Application(props) {
                     <Form.Control name='resume' onChange={e => onFileChange(e)} type="file"/>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                <Row>
+                    <Col>
+                        <Button variant="primary" type="submit" value="saved" onClick={(e) => onSubmitHandler(e, "saved")}>
+                            Save
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button variant="primary" type="submit" value="submitted" onClick={(e) => onSubmitHandler(e, "submitted")}>
+                            Submit
+                        </Button>
+                    </Col>
+
+                </Row>
+
             </Form>
         </div>
     );

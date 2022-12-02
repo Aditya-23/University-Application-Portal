@@ -5,7 +5,7 @@ import * as types from "./types";
 //status can be "saved" or submitted
 // pass id if the application is being saved for the second time or third time
 // id is not necessary if the application is being submitted or saved for the first time
-const applicationFormSave = (applicationForm, files, status, id=null) => async dispatch => {
+const applicationFormSave = (applicationForm, files, status, id="63897fec788586ff44d247ec") => async dispatch => {
 
     const config = {
         headers: {
@@ -46,7 +46,7 @@ const applicationFormSave = (applicationForm, files, status, id=null) => async d
         }
 
         newFormObj.append(status, status);
-        // if == null means the application is not yet created and this is the first time the use is trying to
+        // id == null means the application is not yet created and this is the first time the use is trying to
         // create an application
         if(id == null){
             const response = await axios.post("/applications", newFormObj, config);

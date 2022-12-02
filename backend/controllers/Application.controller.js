@@ -68,7 +68,7 @@ export const updateApplication = async(req, res) => {
         }
         const newApplicationObj = await updateApplicationService(req.params.id, req.body);
 
-        if (req.files.length > 0) {
+        if (Object.keys(req.files).length > 0) {
             const __filename = fileURLToPath(import.meta.url);
             const __dirname = path.dirname(path.dirname(__filename));
             const UploadFolder = __dirname + "/uploads/applications/" + newApplicationObj.id;
@@ -92,7 +92,7 @@ export const updateApplication = async(req, res) => {
         await newApplicationObj.save();
 
         return setResponse(newApplicationObj, res);
-        
+
     } catch (error) {
         console.log(error);
         return setServerError({
