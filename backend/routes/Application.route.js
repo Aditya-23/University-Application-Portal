@@ -65,6 +65,9 @@ const fieldsArray = [
     {
         "name": "sop"
     },
+    {
+        "name": "resume"
+    },
 ]
 
 
