@@ -5,7 +5,14 @@
   overflow: scroll;
 
   .card {
+    width: 18rem;
+    height: 500px;
     padding: 10px;
     margin: 10px;
   }
+}
+
+.card-text {
+  max-height: 70px;
+  overflow: scroll;
 }

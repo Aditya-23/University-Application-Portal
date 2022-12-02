@@ -5,6 +5,8 @@ import { startUniversityLoad } from "../actions/universities";
 import ApplicationSection from "./ApplicationSection.js";
 import UniversitySection from "./TopUniversitySection.js";
 import store from "../store";
+import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { uniApiSlice } from "../api/uniTemp.js";
 
 function Dashboard(props) {
   const navigate = useNavigate();
@@ -20,10 +22,12 @@ function Dashboard(props) {
   return (
     <>
       {" "}
-      <h1>Dashboard</h1>
-      <UniversitySection />
-      <ApplicationSection />
-      <button onClick={() => onClickHandler()}>Click here</button>{" "}
+      <ApiProvider api={uniApiSlice}>
+        <h1>Dashboard</h1>
+        <UniversitySection />
+        <ApplicationSection />
+        <button onClick={() => onClickHandler()}>Click here</button>{" "}
+      </ApiProvider>
     </>
   );
 }
