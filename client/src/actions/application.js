@@ -2,7 +2,10 @@ import axios from "axios";
 import { setAuthToken } from "../utils";
 import * as types from "./types";
 
-const applicationFormSave = (applicationForm, files) => async dispatch => {
+//status can be "saved" or submitted
+// pass id if the application is being saved for the second time or third time
+// id is not necessary if the application is being submitted or saved for the first time
+const applicationFormSave = (applicationForm, files, status, id=null) => async dispatch => {
 
     const config = {
         headers: {
@@ -11,7 +14,7 @@ const applicationFormSave = (applicationForm, files) => async dispatch => {
     };
 
     try {
-        console.log(applicationForm);
+        // console.log(applicationForm);
         const newFormObj = new FormData();
         newFormObj.append("createdBy", applicationForm.createdBy);
         newFormObj.append("programName", applicationForm.programName);
@@ -41,25 +44,37 @@ const applicationFormSave = (applicationForm, files) => async dispatch => {
         if(files.resume.preview != ""){
             newFormObj.append("resume", files.resume.data);
         }
-        
-        const response = await axios.post("/applications", newFormObj, config);
-        console.log(response);
-        if(response.status == 200){
-            dispatch({
-                type: types.APPLICATION_FORM_SAVE_SUCCESS,
-                payload: {
-                    applicationObj: response.data
-                }
-            })
+
+        newFormObj.append(status, status);
+        // if == null means the application is not yet created and this is the first time the use is trying to
+        // create an application
+        if(id == null){
+            const response = await axios.post("/applications", newFormObj, config);
+            console.log(response);
+            if(response.status == 200){
+                dispatch({
+                    type: types.APPLICATION_FORM_SAVE_SUCCESS,
+                    payload: {
+                        applicationObj: response.data
+                    }
+                })
+            }
         }
+        //id != null means the application is already created and the use is updating it or submitting it
         else{
-            dispatch({
-                type: types.APPLICATION_FORM_SAVE_FAILED,
-                payload: {
-                    applicationObj: null
-                }
-            })
+            const response = await axios.put("/applications/" + id, newFormObj, config);
+            console.log(response);
+            if(response.status == 200){
+                dispatch({
+                    type: types.APPLICATION_FORM_SAVE_SUCCESS,
+                    payload: {
+                        applicationObj: response.data
+                    }
+                })
+            }
         }
+        
+        
     } catch (error) {
         dispatch({
             type: types.APPLICATION_FORM_SAVE_FAILED,
