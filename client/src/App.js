@@ -17,6 +17,7 @@ import Application from "./components/Application";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import AlertComponent from "./components/Alert";
+import EditProfile from "./components/EditProfile";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -34,6 +35,7 @@ function App() {
       <br></br>
       <BrowserRouter>
         <Routes>
+        
           <Route exact path="/" element={<Landing />} />
           <Route
             exact
@@ -56,6 +58,15 @@ function App() {
             element={
               <PrivateRoute>
                 <University />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/edit-profile"
+            element={
+              <PrivateRoute>
+                <EditProfile />
               </PrivateRoute>
             }
           />
