@@ -22,12 +22,10 @@ function Dashboard(props) {
   return (
     <>
       {" "}
-      <ApiProvider api={uniApiSlice}>
         <h1>Dashboard</h1>
         <UniversitySection />
         <ApplicationSection />
         <button onClick={() => onClickHandler()}>Click here</button>{" "}
-      </ApiProvider>
     </>
   );
 }
