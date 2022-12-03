@@ -5,11 +5,13 @@ import {connect} from 'react-redux';
 import {loginUser} from "../actions/auth";
 import {Fragment, Spinner} from "react";
 import {Navigate, useNavigate} from "react-router-dom";
-import { removeAlert } from '../actions/alert';
+import {removeAlert} from '../actions/alert';
+import { Alert } from 'react-bootstrap';
 
 function Login(props) {
 
     const navigate = useNavigate();
+
     const [loginForm,
         setloginForm] = useState({email: "", password: ""})
 
@@ -35,7 +37,7 @@ function Login(props) {
         )
     }
 
-    if(props.auth.isAuthenticated){
+    if (props.auth.isAuthenticated) {
         navigate("/dashboard");
     }
 
@@ -43,34 +45,33 @@ function Login(props) {
         await props.removeAlert();
     }
 
-    return (
-        <div className="login-wrap">
-            {props.alert.msg != null
-                ? <div class="alert">
-                        <span class="closebtn" onClick={() => closeAlert()}>&times;</span>
-                        {props.alert.msg}
-                    </div>
-                : null}
-            <h2>Welcome, Sign In here</h2>
 
-            <form className="form" onSubmit={e => onSubmit(e)}>
-                <input
-                    type="text"
-                    required
-                    placeholder="Email"
-                    onChange={e => onChangeHandler(e)}
-                    name="email"
-                    value={loginForm.email}/>
-                <input
-                    type="password"
-                    required
-                    placeholder="Password"
-                    onChange={e => onChangeHandler(e)}
-                    name="password"
-                    value={loginForm.password}/>
-                <input type="submit" value="Login"/>
-            </form>
-        </div>
+    return (
+        <>
+            <div className="login-wrap">
+            
+                <h2>Welcome, Sign In here</h2>
+
+                <form className="form" onSubmit={e => onSubmit(e)}>
+                    <input
+                        type="text"
+                        required
+                        placeholder="Email"
+                        onChange={e => onChangeHandler(e)}
+                        name="email"
+                        value={loginForm.email}/>
+                    <input
+                        type="password"
+                        required
+                        placeholder="Password"
+                        onChange={e => onChangeHandler(e)}
+                        name="password"
+                        value={loginForm.password}/>
+                    <input type="submit" value="Login"/>
+                </form>
+            </div>
+        </>
+        
     );
 }
 
@@ -80,7 +81,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loginUser,
-    removeAlert,
+    removeAlert
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
