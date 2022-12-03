@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
 const educationSchema = new mongoose.Schema({
-  Gpa: {
+  university: {
+    type: String
+  },
+  gpa: {
     type: Number,
   },
   degree: {
@@ -50,11 +53,15 @@ const studentSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   name: {
     type: String,
     required: true,
+  },
+  gender: {
+    type: String,
+    enum: ["male", "female", "other"]
   },
   phone: {
     type: String,
