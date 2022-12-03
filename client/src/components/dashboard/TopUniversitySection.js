@@ -1,10 +1,10 @@
-import "../styles/main.scss";
+import "../../styles/main.scss";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { startUniversityLoad } from "../actions/universities";
-import { useGetUniversitiesQuery } from "../api/uniTemp.js";
+import { startUniversityLoad } from "../../actions/universities";
+import { useGetUniversitiesQuery } from "../../api/uniTemp.js";
 
 function UniversityCard(props) {
   const navigate = useNavigate();

@@ -6,7 +6,7 @@ import Landing from "./components/Landing";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/dashboard";
 import { loadUser } from "./actions/auth";
 import { useEffect } from "react";
 import { setAuthToken } from "./utils";
@@ -70,7 +70,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-      <Footer/>
+      <Footer />
     </Provider>
   );
 }
