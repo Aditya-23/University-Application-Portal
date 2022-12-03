@@ -2,9 +2,11 @@
   display: flex;
   flex-direction: row;
   list-style-type: none;
-  overflow: hidden;
+  overflow: scroll;
 
   .card {
+    width: 18rem;
+    height: 500px;
     padding: 10px;
     margin: 10px;
   }
@@ -12,4 +14,9 @@
   .pStyle{
     font-size: xx-large;
   }
+}
+
+.card-text {
+  max-height: 70px;
+  overflow: scroll;
 }

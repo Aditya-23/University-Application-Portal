@@ -3,11 +3,11 @@ import alertReducer from "./alert";
 import applicationReducer from "./Application";
 import authReducer from "./authReducer";
 import universityReducer from "./universityReducer";
-
+import { uniApiSlice } from "../api/uniTemp.js";
 
 export default combineReducers({
-    authReducer,
-    alertReducer,
-    universityReducer,
-    applicationReducer,
-})
+  [uniApiSlice.reducerPath]: uniApiSlice.reducer,
+  authReducer,
+  alertReducer,
+  universityReducer,
+});

@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { startUniversityLoad } from "../actions/universities";
 import ApplicationSection from "./ApplicationSection.js";
 import UniversitySection from "./TopUniversitySection.js";
-import store from "../store";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function Dashboard(props) {
   const navigate = useNavigate();
