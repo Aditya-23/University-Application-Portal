@@ -1,21 +1,32 @@
 import React, {useState} from 'react';
-import {Form} from 'react-bootstrap';
+import {Button, Form} from 'react-bootstrap';
 import {connect} from 'react-redux';
+import AddEducationForm from './AddEducationForm';
 import Education from './Education';
 
 function EditProfile(props) {
 
-    const [editProfile, setEditProfile] = useState({
+    const [editProfile,
+        setEditProfile] = useState({
         name: "",
         gender: "",
         email: "",
         phone: "",
-        education : [...props.auth.user.education],
+        education: [...props.auth.user.education],
         experience: [...props.auth.user.experience],
         greScore: "",
         toeflScore: "",
         ieltsScore: ""
     })
+
+    const [showEducationForm,
+        setShowEducationForm] = useState(false);
+
+    const [showExperienceForm,
+        setShowExperienceForm] = useState(false);
+
+    const [showAddEducationButton,
+        setShowAddEducationButton] = useState(true)
 
     const onChangeHandler = (e) => {
         setEditProfile((editProfile) => {
@@ -24,6 +35,16 @@ function EditProfile(props) {
                 [e.target.name]: e.target.value
             })
         })
+    }
+
+    const educationFormHandler = () => {
+        setShowEducationForm(true);
+        setShowAddEducationButton(false);
+    }
+
+    const removeEducationFormHandler = () => {
+        setShowAddEducationButton(true);
+        setShowEducationForm(false);
     }
 
     return (
@@ -74,8 +95,19 @@ function EditProfile(props) {
                     <h3>Education</h3>
                 </Form.Label>
 
-                <Education onChangeHandler/>
+                <Education onChangeHandler/> 
                 
+                {showAddEducationButton
+                    ? <Button variant='success' onClick={() => educationFormHandler()}>Add education</Button>
+                    : null
+                }
+
+                {showEducationForm
+                    ? <AddEducationForm/>
+                    : null
+                }
+
+                {showEducationForm ? <Button variant='danger' onClick={() => removeEducationFormHandler()}>Cancel</Button> : null}
             </Form>
         </div>
     );
