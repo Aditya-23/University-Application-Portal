@@ -1,19 +1,29 @@
 import "../styles/main.scss";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { connect } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { startUniversityLoad } from "../actions/universities";
+import { useGetUniversitiesQuery } from "../api/uniTemp.js";
 
-function UniversityCard() {
+function UniversityCard(props) {
+  const navigate = useNavigate();
+  const uniLoadHandler = () => {
+    console.log("uniLoadHandler", props.id);
+    props.startUniversityLoad(props.id);
+    navigate("/university");
+  };
+
   var card = (
-    <li class="cards__item">
-      <Card bg="Primary" style={{ width: "18rem" }}>
+    <li className="cards__item">
+      <Card bg="Primary">
         {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <div onClick={() => uniLoadHandler()}>
+            <Card.Title> {props.name} </Card.Title>
+            <Card.Text>{props.description}</Card.Text>
+          </div>
+          <Button variant="primary">Shortlist Uni</Button>
         </Card.Body>
       </Card>
     </li>
@@ -21,18 +31,47 @@ function UniversityCard() {
   return card;
 }
 
-function UniversitySection() {
-  const items = [];
-  for (let i = 0; i < 10; i++) {
-    items.push(<UniversityCard />);
+function UniversitySection(props) {
+  const {
+    data: Universities,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetUniversitiesQuery();
+
+  var items = [];
+  if (isLoading) {
+    items = <p>Loading...</p>;
+  } else if (isSuccess) {
+    items = Universities.map((uni) => (
+      <UniversityCard
+        key={uni._id}
+        id={uni._id}
+        name={uni.name}
+        description={uni.description}
+        startUniversityLoad={props.startUniversityLoad}
+      />
+    ));
+  } else if (isError) {
+    items = <p>Loading</p>;
   }
+
   return (
     <div className="dashboardSection PopUniversity">
       <h2 className="title">Top Universities</h2>
       <ul className="cardsList">{items}</ul>
-      {/* <UniversityCard /> */}
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    auth: state.authReducer,
+  };
+};
 
-export default UniversitySection;
+export default connect(mapStateToProps, { startUniversityLoad })(
+  UniversitySection
+);
+
+// export default UniversitySection;

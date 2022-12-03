@@ -45,8 +45,8 @@ function Registration(props) {
     return (
         <div className="login-wrap">
             {props.alert.msg != null
-                ? <div class="alert">
-                        <span class="closebtn" onClick={() => closeAlert()}>&times;</span>
+                ? <div className="alert">
+                        <span className="closebtn" onClick={() => closeAlert()}>&times;</span>
                         {props.alert.msg}
                     </div>
                 : null}

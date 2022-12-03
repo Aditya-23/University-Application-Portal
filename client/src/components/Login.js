@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import {useState} from 'react';
 import {connect} from 'react-redux';
@@ -11,6 +11,11 @@ import { Alert } from 'react-bootstrap';
 function Login(props) {
 
     const navigate = useNavigate();
+    useEffect(() => {
+        if (props.auth.isAuthenticated) {
+            navigate('/dashboard');
+        }
+    }, [navigate, props.auth.isAuthenticated])
 
     const [loginForm,
         setloginForm] = useState({email: "", password: ""})
@@ -37,9 +42,6 @@ function Login(props) {
         )
     }
 
-    if (props.auth.isAuthenticated) {
-        navigate("/dashboard");
-    }
 
     const closeAlert = async() => {
         await props.removeAlert();
