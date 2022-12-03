@@ -49,7 +49,7 @@ export const loginService = async (email, password) => {
     }
     const studentObj = {
         token: jsonwebtoken.sign(payload, config.get("jwtSecret"), {expiresIn: 1800}),
-        userId: student.id,
+        _id: student.id,
         name: student.name,
         email: student.email,
         phone: student.phone,
@@ -74,7 +74,7 @@ export const getStudentById = (id) => {
 
 export const updateStudentById = (id, studentObj) => {
     try {
-        const newStudentObj = Student.findByIdAndUpdate(id, studentObj, {new: true});
+        const newStudentObj = Student.findByIdAndUpdate(id, studentObj, {new: true}).select("-password");;
         return newStudentObj;
     } catch (error) {
         console.log(error);

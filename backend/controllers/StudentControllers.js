@@ -43,8 +43,10 @@ const updateStudent = async (req, res) => {
         if(!isStudentPresent){
             return setRequestError({msg: "Student does not exist!"}, res); 
         }
-        const updatedStudent = await updateStudentById(req.params.id, currentStudent);
+        const updatedStudent = await updateStudentById(req.params.id, currentStudent);  
         if(updatedStudent){
+            updatedStudent.userId = req.userId;
+            await updatedStudent.save();
             return setResponse(updatedStudent, res);
         }
         return setRequestError({msg: "Could not update the student!"}, res); 

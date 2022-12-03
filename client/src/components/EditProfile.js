@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, ReactDOM} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import { updateProfile } from '../actions/auth';
+import { Navigate, useNavigate } from 'react-router-dom';
+import {updateProfile} from '../actions/auth';
 import Education from './Education';
+import Experience from './Experience';
 
 function EditProfile(props) {
+
+    const navigate = useNavigate();
 
     const [editProfile,
         setEditProfile] = useState({
@@ -22,6 +26,16 @@ function EditProfile(props) {
     const [education,
         setEducation] = useState({university: "", degree: "", gpa: 0.0, specialization: ""});
 
+    const [experience,
+        setExperience] = useState({
+        companyName: "",
+        jobTitle: "",
+        startDate: "",
+        endDate: "",
+        currentWorkFlag: false,
+        description: ""
+    })
+
     const [showEducationForm,
         setShowEducationForm] = useState(false);
 
@@ -30,6 +44,9 @@ function EditProfile(props) {
 
     const [showAddEducationButton,
         setShowAddEducationButton] = useState(true)
+
+    const [showAddExperienceButton,
+        setShowAddExperienceButton] = useState(true)
 
     const onChangeHandler = (e) => {
         setEditProfile((editProfile) => {
@@ -49,15 +66,53 @@ function EditProfile(props) {
         })
     }
 
+    const onExperienceChangeHandler = (e) => {
+        setExperience((experience) => {
+            return ({
+                ...experience,
+                [e.target.name]: e.target.value
+            })
+        })
+    }
+
     const addEducationToState = (e) => {
         e.preventDefault();
         setEditProfile({
             ...editProfile,
-            education: [...editProfile.education, education]
+            education: [
+                ...editProfile.education,
+                education
+            ]
         });
         setShowEducationForm(false);
         setShowAddEducationButton(true);
         setEducation({university: "", degree: "", gpa: 0.0, specialization: ""});
+    }
+
+    const addExperienceToState = (e) => {
+        e.preventDefault();
+        setEditProfile({
+            ...editProfile,
+            experience: [
+                ...editProfile.experience,
+                experience
+            ]
+        });
+        setShowExperienceForm(false);
+        setShowAddExperienceButton(true);
+        setExperience({
+            companyName: "",
+            jobTitle: "",
+            startDate: "",
+            endDate: "",
+            currentWorkFlag: false,
+            description: ""
+        });
+    }
+
+    const openEducationForm = () => {
+        setShowEducationForm(true);
+        setShowAddEducationButton(false);
     }
 
     const removeEducationForm = () => {
@@ -66,14 +121,20 @@ function EditProfile(props) {
         setEducation({university: "", degree: "", gpa: 0.0, specialization: ""});
     }
 
-    const openEducationForm = () => {
-        setShowEducationForm(true);
-        setShowAddEducationButton(false);
+    const openExperienceForm = () => {
+        setShowAddExperienceButton(false);
+        setShowExperienceForm(true);
     }
 
-    const finalSaveProfile = (e) => {
+    const removeExperienceForm = () => {
+        setShowAddExperienceButton(true);
+        setShowExperienceForm(false);
+    }
+
+    const finalSaveProfile = async (e) => {
         e.preventDefault();
-        props.updateProfile(props.auth.user.userId, editProfile);
+        await props.updateProfile(props.auth.user._id, editProfile);
+        navigate("/dashboard");
     }
 
     return (
@@ -125,13 +186,10 @@ function EditProfile(props) {
                     <h3>Education</h3>
                 </Form.Label>
 
-                <Education educationList={editProfile.education} onChangeHandler/> 
-                
-                {showAddEducationButton
+                <Education educationList={editProfile.education}/> {showAddEducationButton
                     ? <Button variant='success' onClick={() => openEducationForm()}>Add education</Button>
                     : null
-                }
-
+}
 
                 {showEducationForm
                     ? <Form.Group className="mb-3">
@@ -179,15 +237,79 @@ function EditProfile(props) {
                         </Form.Group>
                     : null}
 
-                    
-                    <br></br>
-                    <br></br>
-                    <Row>
-                        <Col>
-                            <Button type='submit' variant='success' onClick={(e) => finalSaveProfile(e)}>Save Profile</Button>
-                        </Col>
-                    </Row>
-                    
+                <br></br>
+                <br></br>
+                <Form.Label>
+                    <h3>Experience</h3>
+                </Form.Label>
+
+                <Experience experienceList={editProfile.experience} onChangeHandler/> {showAddExperienceButton
+                    ? <Button variant='success' onClick={() => openExperienceForm()}>Add experience</Button>
+                    : null
+}
+
+                {showExperienceForm
+                    ? <Form.Group className="mb-3">
+                            <Form.Label>
+                                <h5>
+                                    Add experience here
+                                </h5>
+                            </Form.Label>
+                            <br/>
+                            <Form.Label>Company</Form.Label>
+                            <Form.Control
+                                name='companyName'
+                                onChange={e => onExperienceChangeHandler(e)}
+                                type="text"/>
+                            <br></br>
+                            <Form.Label>Job Title</Form.Label>
+                            <Form.Control
+                                name='jobTitle'
+                                onChange={e => onExperienceChangeHandler(e)}
+                                type="text"/>
+                            <br></br>
+                            <Form.Label>Start date</Form.Label>
+                            <Form.Control
+                                name='startDate'
+                                onChange={e => onExperienceChangeHandler(e)}
+                                type="date"/>
+                            <br></br>
+                            <Form.Check type="checkbox" id="default-checbox" onChange={(e) => setExperience({...experience, currentWorkFlag: e.target.checked})} label="Currently working in this company"/>
+                            <br></br>
+                            <Form.Label>End date</Form.Label>
+                            <Form.Control
+                                name='endDate'
+                                onChange={e => onExperienceChangeHandler(e)}
+                                type="date"
+                                disabled={experience.currentWorkFlag}/>
+                            <br></br>
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control
+                                name='description'
+                                onChange={e => onExperienceChangeHandler(e)}
+                                type="text"/>
+                            <br></br>
+                            <Row>
+                                <Col>
+                                    <Button
+                                        type='submit'
+                                        variant='success'
+                                        onClick={(e) => addExperienceToState(e)}>Add</Button>
+                                    <Button variant='danger' onClick={() => removeExperienceForm()}>Cancel</Button>
+                                </Col>
+                            </Row>
+
+                        </Form.Group>
+                    : null}
+
+                <br></br>
+                <br></br>
+                <Row>
+                    <Col>
+                        <Button type='submit' variant='success' onClick={(e) => finalSaveProfile(e)}>Save Profile</Button>
+                    </Col>
+                </Row>
+
             </Form>
         </div>
     );

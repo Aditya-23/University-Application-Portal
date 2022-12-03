@@ -15,35 +15,35 @@ function Education(props) {
                                 <Form.Group className="mb-3">
                                     <Form.Label>University</Form.Label>
                                     <Form.Control
-                                        name='createdBy'
-                                        onChange={e => props.onChangeHandler(e)}
+                                        name='university'
                                         type="text"
                                         placeholder="Enter full name as per your passport"
-                                        defaultValue={ed.university}/>
+                                        defaultValue={ed.university}
+                                        disabled/>
                                     <br></br>
                                     <Form.Label>Degree</Form.Label>
                                     <Form.Control
-                                        name='createdBy'
-                                        onChange={e => props.onChangeHandler(e)}
+                                        name='degree'
                                         type="text"
                                         placeholder="Enter full name as per your passport"
-                                        defaultValue={ed.degree}/>
+                                        defaultValue={ed.degree}
+                                        disabled/>
                                     <br></br>
                                     <Form.Label>GPA</Form.Label>
                                     <Form.Control
-                                        name='createdBy'
-                                        onChange={e => props.onChangeHandler(e)}
+                                        name='gpa'
                                         type="text"
                                         placeholder="Enter full name as per your passport"
-                                        defaultValue={ed.gpa}/>
+                                        defaultValue={ed.gpa}
+                                        disabled/>
                                     <br></br>
                                     <Form.Label>Specialization</Form.Label>
                                     <Form.Control
-                                        name='createdBy'
-                                        onChange={e => props.onChangeHandler(e)}
+                                        name='specialization'
                                         type="text"
                                         placeholder="Enter full name as per your passport"
-                                        defaultValue={ed.specialization}/>
+                                        defaultValue={ed.specialization}
+                                        disabled/>
                                     <br></br>
                                 </Form.Group>
                             </li>
