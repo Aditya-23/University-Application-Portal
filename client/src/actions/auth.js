@@ -164,7 +164,7 @@ const updateProfile = (id, profile) => async dispatch => {
             dispatch({
                 type: SET_ALERT,
                 payload: {
-                    msg: "Added education successfully",
+                    msg: "Saved Profile successfully",
                     alertType: "success"
                 }
             })

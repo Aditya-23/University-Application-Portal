@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import "./App.css";
+import "./styles/main.scss";
 import { Provider } from "react-redux";
 import store from "./store";
 import Landing from "./components/Landing";

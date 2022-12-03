@@ -172,15 +172,6 @@ function EditProfile(props) {
                         defaultValue={props.auth.user.phone}
                         required/>
                 </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label>Gender</Form.Label>
-                    <Form.Select name='gender' onChange={e => onChangeHandler(e)} required>
-                        <option>Select your gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </Form.Select>
-                </Form.Group>
                 <br></br>
                 <Form.Label>
                     <h3>Education</h3>

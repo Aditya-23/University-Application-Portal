@@ -5,7 +5,7 @@ import { startUniversityLoad } from "../actions/universities";
 import ApplicationSection from "./ApplicationSection.js";
 import UniversitySection from "./TopUniversitySection.js";
 import store from "../store";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 function Dashboard(props) {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Dashboard(props) {
     <>
       {" "}
       <h3>Welcome, {props.auth.user.name}</h3>
-      <h5>Get started with your study aborad journey by editing your profile here : <Button variant="success" onClick={() => navigate("/edit-profile")}> Edit Profile </Button> </h5>
+      <p>Get started with your study aborad journey by editing your profile here : <Button variant="success" onClick={() => navigate("/edit-profile")}> Edit Profile </Button> </p>
       <UniversitySection />
       <ApplicationSection />
       <button onClick={() => onClickHandler()}>Click here</button>{" "}
