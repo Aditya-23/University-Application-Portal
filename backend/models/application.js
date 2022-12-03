@@ -4,21 +4,27 @@ const applicationSchema = new mongoose.Schema({
   studentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Student",
-    required: true,
   },
   createdBy: {
     type: String,
-    required: true,
   },
   createdByEmail: {
     type: String,
-    required: true,
+  },
+  gender: {
+    type: String
+  },
+  dateOfBirth: {
+    type: String
   },
   applicationStatus: {
     type: String,
     enum: ["Pending", "In Review", "Accepted", "Rejected"],
     default: "Pending",
-    required: true,
+  },
+  status: {
+    type: String,
+    default: "saved" // or submitted
   },
   applyingTo: {
     type: String,
