@@ -1,6 +1,7 @@
 
 const initialState = {
-    msg: null
+    msg: null,
+    alertType: null
 }
 
 // This is where the state variables are updated
@@ -15,7 +16,8 @@ const alertReducer = (state = initialState, action) => {
             };
         case 'REMOVE_ALERT' :
             return {
-                msg: null
+                msg: null,
+                alertType: null
             }
         default : 
             return state;

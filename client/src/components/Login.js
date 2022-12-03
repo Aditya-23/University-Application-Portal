@@ -42,6 +42,7 @@ function Login(props) {
         await props.removeAlert();
     }
 
+
     return (
 
         <><div class="container" id="container">   
@@ -80,7 +81,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     loginUser,
-    removeAlert,
+    removeAlert
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

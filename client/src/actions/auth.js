@@ -81,7 +81,8 @@ const loginUser = (userObj) => async dispatch => {
         dispatch({
             type: SET_ALERT,
             payload: {
-                msg: error.response.data.msg
+                msg: error.response.data.msg,
+                alertType: "danger"
             }
         })
     }
