@@ -7,7 +7,7 @@ function UniversityCard(props) {
   var card = (
     <li className="cards__item">
       <Card bg="Primary">
-        <Card.Img variant="top" src="holder.js/100px180" />
+        {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
         <Card.Body>
           <Card.Title> {props.name} </Card.Title>
           <Card.Text>{props.description}</Card.Text>
