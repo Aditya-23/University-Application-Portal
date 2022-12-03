@@ -89,3 +89,23 @@ export const deleteStudentById = (id) => {
         console.log(error);
     }
 }
+
+export const addEducationService = async(id, educationObj) => {
+    try {
+        const studentObj = await Student.findById(id);
+        studentObj.education.push(educationObj);
+        return studentObj.save();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addExperienceService = async(id, experienceObj) => {
+    try {
+        const studentObj = await Student.findById(id);
+        studentObj.experience.push(experienceObj);
+        return studentObj.save();
+    } catch (error) {
+        console.log(error);
+    }
+}

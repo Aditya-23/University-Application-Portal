@@ -6,11 +6,9 @@ import { connect } from 'react-redux';
 function Education(props) {
     return (
         <ol>
-            {props.auth.user.education.length > 0
+            {props.educationList.length > 0
                 ? props
-                    .auth
-                    .user
-                    .education
+                    .educationList
                     .map(ed => {
                         return (
                             <li>

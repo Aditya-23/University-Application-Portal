@@ -25,7 +25,6 @@ const loadUser = () => async dispatch => {
             type:LOADING_STARTED
         })
         const response = await axios.get("students/");
-        console.log(response);
         if(response.status == 200){
             dispatch({
                 type: USER_AUTHENTICATED,
@@ -141,9 +140,49 @@ const registerUser = (userObj) => async dispatch => {
     }
 }
 
+const updateProfile = (id, profile) => async dispatch => {
+
+    const token = localStorage.getItem('token');
+    if(token){
+        setAuthToken(token);
+    }
+
+    const config = {
+        headers: {
+            'Content-Type' : "application/json"
+        }
+    };
+
+    try {
+        const response = await axios.put("/students/" + id, profile, config);
+        console.log(response);
+        if(response.status == 200){
+            dispatch({
+                type: USER_AUTHENTICATED,
+                payload: response.data
+            });
+            dispatch({
+                type: SET_ALERT,
+                payload: {
+                    msg: "Added education successfully",
+                    alertType: "success"
+                }
+            })
+        }
+        
+    } catch (error) {
+        console.log(error);
+        dispatch({
+            type: USER_AUTHENTICATION_FAILED,
+            payload: null
+        })
+    }
+}
+
 export {
     loginUser,
     loadUser,
     logoutUser,
     registerUser,
+    updateProfile,
 }

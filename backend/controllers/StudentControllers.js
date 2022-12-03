@@ -1,5 +1,5 @@
 import Student from "../models/student.js";
-import { deleteStudentById, getStudentById, saveStudent, updateStudentById, loginService } from "../services/StudentServices.js";
+import { deleteStudentById, getStudentById, saveStudent, updateStudentById, loginService, addEducationService, addExperienceService } from "../services/StudentServices.js";
 import { setResponse, setRequestError, setServerError} from "./utils.js";
 
 
@@ -83,10 +83,32 @@ const loginStudent = async (req, res) => {
     }
 }
 
+const addEducation = async (req, res) => {
+    try {
+        const newStudentObj = await addEducationService(req.params.id, req.body);
+        return setResponse(newStudentObj, res);
+    } catch (error) {
+        console.log(error);
+        return setRequestError({msg: "Internal server error"}, res); 
+    }
+}
+
+const addExperience = async (req, res) => {
+    try {
+        const newStudentObj = await addExperienceService(req.params.id, req.body);
+        return setResponse(newStudentObj, res);
+    } catch (error) {
+        console.log(error);
+        return setRequestError({msg: "Internal server error"}, res); 
+    }
+}
+
 export {
     registerStudent,
     getStudent,
     updateStudent,
     deleteStudent,
     loginStudent,
+    addEducation,
+    addExperience,
 }

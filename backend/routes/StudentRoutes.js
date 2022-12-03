@@ -19,4 +19,9 @@ StudentRoutes.put("/:id", authJwt, StudentControllers.updateStudent);
 
 StudentRoutes.delete("/:id", authJwt, StudentControllers.deleteStudent);
 
+StudentRoutes.put("/add-education/:id", authJwt, StudentControllers.addEducation);
+
+StudentRoutes.put("/add-experience/:id", authJwt, StudentControllers.addExperience);
+
+
 export default StudentRoutes;
