@@ -1,25 +1,17 @@
 import mongoose from "mongoose";
 
 const educationSchema = new mongoose.Schema({
-  transcript: {
-    type: String,
-    required: true,
+  university: {
+    type: String
   },
-  degreeCertificate: {
-    type: String,
-    required: true,
-  },
-  Gpa: {
+  gpa: {
     type: Number,
-    required: true,
   },
   degree: {
     type: String,
-    required: true,
   },
   specialization: {
     type: String,
-    required: false,
   },
 });
 
@@ -61,7 +53,7 @@ const studentSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   name: {
     type: String,

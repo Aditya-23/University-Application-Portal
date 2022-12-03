@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { startUniversityLoad } from "../actions/universities";
 import ApplicationSection from "./ApplicationSection.js";
 import UniversitySection from "./TopUniversitySection.js";
-import store from "../store";
-import { ApiProvider } from "@reduxjs/toolkit/query/react";
-import { uniApiSlice } from "../api/uniTemp.js";
+import { Button } from "react-bootstrap";
 
 function Dashboard(props) {
   const navigate = useNavigate();
@@ -15,17 +13,19 @@ function Dashboard(props) {
     return <h1>Loading</h1>;
   }
   const onClickHandler = async () => {
-    await props.startUniversityLoad("6386a6757c2ac332f66c643e");
+    await props.startUniversityLoad("63869b3066f1b3a566d37e03");
     navigate("/university");
   };
+
 
   return (
     <>
       {" "}
-        <h1>Dashboard</h1>
-        <UniversitySection />
-        <ApplicationSection />
-        <button onClick={() => onClickHandler()}>Click here</button>{" "}
+      <h3>Welcome, {props.auth.user.name}</h3>
+      <p>Get started with your study aborad journey by editing your profile here : <Button variant="success" onClick={() => navigate("/edit-profile")}> Edit Profile </Button> </p>
+      <UniversitySection />
+      <ApplicationSection />
+      <button onClick={() => onClickHandler()}>Click here</button>{" "}
     </>
   );
 }
