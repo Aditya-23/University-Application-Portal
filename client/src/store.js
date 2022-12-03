@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reducers from "./reducers";
-import { uniApiSlice } from "./api/uniTemp.js";
+import { apiSlice } from "./api/apiSlice";
 
 const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(uniApiSlice.middleware);
+    return getDefaultMiddleware().concat(apiSlice.middleware);
   },
 });
 
