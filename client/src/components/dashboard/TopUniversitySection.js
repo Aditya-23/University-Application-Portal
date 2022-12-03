@@ -2,7 +2,7 @@ import "../../styles/main.scss";
 import { connect } from "react-redux";
 import { startUniversityLoad } from "../../actions/universities";
 import UniversityCard from "./UniCard.js";
-import { useGetUniversitiesQuery } from "../../api/uniTemp.js";
+import { useGetUniversitiesQuery } from "../../api/uniApi.js";
 
 function UniversitySection(props) {
   const {
