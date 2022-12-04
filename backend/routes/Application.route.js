@@ -5,7 +5,7 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import {v4} from "uuid";
+import { v4 } from "uuid";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -13,16 +13,15 @@ const storage = multer.diskStorage({
         const __dirname = path.dirname(path.dirname(__filename));
         const uploadFolder = __dirname + "/uploads/applications/temporary";
         let folderExists = fs.existsSync(uploadFolder);
-        if(folderExists){
+        if (folderExists) {
             return cb(null, uploadFolder);
-        }
-        else{
-            return fs.mkdir(uploadFolder, (error) => cb(error, uploadFolder));
+        } else {
+            return fs.mkdir(uploadFolder, error => cb(error, uploadFolder));
         }
     },
     filename: (req, file, cb) => {
         return cb(null, file.fieldname);
-    }
+    },
 });
 
 const storageForUpdate = multer.diskStorage({
@@ -32,54 +31,62 @@ const storageForUpdate = multer.diskStorage({
         const __dirname = path.dirname(path.dirname(__filename));
         const uploadFolder = __dirname + "/uploads/applications/" + req.params.id;
         let folderExists = fs.existsSync(uploadFolder);
-        if(folderExists){
+        if (folderExists) {
             return cb(null, uploadFolder);
-        }
-        else{
-            return fs.mkdir(uploadFolder, (error) => cb(error, uploadFolder));
+        } else {
+            return fs.mkdir(uploadFolder, error => cb(error, uploadFolder));
         }
     },
     filename: (req, file, cb) => {
         return cb(null, file.fieldname);
-    }
+    },
 });
 
 const upload = multer({
-    storage: storage
+    storage: storage,
 });
 
 const uploadUpdate = multer({
-    storage: storageForUpdate
+    storage: storageForUpdate,
 });
 
 const fieldsArray = [
     {
-        "name": "lor1"
+        name: "lor1",
     },
     {
-        "name": "lor2"
+        name: "lor2",
     },
     {
-        "name": "lor3"
+        name: "lor3",
     },
     {
-        "name": "sop"
+        name: "sop",
     },
     {
-        "name": "resume"
+        name: "resume",
     },
-]
-
+];
 
 const ApplicationRoutes = express.Router();
 
 ApplicationRoutes.get("/:id", authJwt, ApplicationControllers.getApplicationById);
+ApplicationRoutes.get("/", authJwt, ApplicationControllers.getApplications);
 
-ApplicationRoutes.post("/", authJwt, upload.fields(fieldsArray), ApplicationControllers.registerApplication);
+ApplicationRoutes.post(
+    "/",
+    authJwt,
+    upload.fields(fieldsArray),
+    ApplicationControllers.registerApplication
+);
 
-ApplicationRoutes.put("/:id", authJwt, uploadUpdate.fields(fieldsArray), ApplicationControllers.updateApplication);
+ApplicationRoutes.put(
+    "/:id",
+    authJwt,
+    uploadUpdate.fields(fieldsArray),
+    ApplicationControllers.updateApplication
+);
 
 ApplicationRoutes.delete("/:id", authJwt, ApplicationControllers.deleteApplication);
-
 
 export default ApplicationRoutes;
