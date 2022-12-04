@@ -42,8 +42,6 @@ function ShortlistSection(props) {
     return (
         <div>
             <h3>Shortlist Section</h3>
-            <h2 className="title">Top Universities</h2>
-            <p>{shortlistedIds.join(", ")}</p>
             <ul className="cardsList">{items}</ul>
         </div>
     );
