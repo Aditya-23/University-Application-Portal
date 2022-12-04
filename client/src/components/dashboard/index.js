@@ -4,6 +4,7 @@ import { startUniversityLoad } from "../../actions/universities";
 import { useNavigate } from "react-router-dom";
 import ApplicationSection from "./ApplicationSection.js";
 import UniversitySection from "./TopUniversitySection.js";
+import ShortlistSection from "./ShortlistSection.js";
 import { Button } from "react-bootstrap";
 
 function Dashboard(props) {
@@ -22,8 +23,9 @@ function Dashboard(props) {
     <>
       <h3>Welcome, {props.auth.user.name}</h3>
       <p>Get started with your study aborad journey by editing your profile here : <Button variant="success" onClick={() => navigate("/edit-profile")}> Edit Profile </Button> </p>
-      <UniversitySection />
       <ApplicationSection />
+      <UniversitySection />
+      <ShortlistSection/>
       <button onClick={() => onClickHandler()}>Click here</button>{" "}
     </>
   );

@@ -6,7 +6,12 @@ const UniversityRoutes = express.Router();
 
 UniversityRoutes.post("/", authJwt, UniversityControllers.registerUniversity);
 
-UniversityRoutes.get("/",authJwt, UniversityControllers.getAllUniversities);
+UniversityRoutes.get("/", authJwt, UniversityControllers.getAllUniversities);
+
+// UniversityRoutes.get("/", (req, res) => {
+//     console.log(req.query);
+//     res.send(req.query);
+// });
 
 UniversityRoutes.get("/:id", authJwt, UniversityControllers.getUniversityById);
 

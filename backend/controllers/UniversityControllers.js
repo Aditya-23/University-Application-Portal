@@ -41,11 +41,13 @@ export const getAllUniversities = async (req, res) => {
     try {
         if (Object.keys(req.query).includes("ids")) {
             const ids = req.query.ids;
+            // check if ids is not an array
+            if (!Array.isArray(ids)) {
+                return setRequestError({ msg: "Ids should be an array" });
+            }
             allUniversities = await getUniversitiesByIdsService(ids);
         } else if (Object.keys(req.query).length === 0) {
-            console.log("Getting all universities");
             allUniversities = await getAllUniversitiesService();
-            console.log(req.query);
         }
         return setResponse(allUniversities, res);
     } catch (error) {
