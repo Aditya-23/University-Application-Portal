@@ -43,17 +43,23 @@ function Registration(props) {
     }
 
     return (
-        <div className="login-wrap">
+        <div className="container1" id="container1">
+            <div class="form-container sign-in-container1">
             {props.alert.msg != null
-                ? <div className="alert">
-                        <span className="closebtn" onClick={() => closeAlert()}>&times;</span>
+                    ? <div class="alert">
+                        <span class="closebtn" onClick={() => closeAlert()}>&times;</span>
                         {props.alert.msg}
                     </div>
-                : null}
-
-            <h2>Welcome, Sign Up here</h2>
-
-            <form className="form" onSubmit={e => onSubmit(e)}>
+                    : null}
+                  <h1>Welcome Back</h1>
+                        <p>To keep connected with us please login with your personal information.</p>
+                        <button class="ghost1" id="signUp1">Sign In</button>   
+        </div>
+        <div class="overlay-container">
+                <div class="overlay1">
+                    <div class="overlay-panel overlay-right">
+                    <form className="form1" onSubmit={e => onSubmit(e)}>
+                    <h1>Create Account</h1>
                 <input
                     type="text"
                     placeholder="Name"
@@ -90,7 +96,14 @@ function Registration(props) {
                     required
                     value={registrationForm.phone}/>
                 <input type="submit" value="Sign Up"/>
-            </form>
+                </form>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     );
 }
