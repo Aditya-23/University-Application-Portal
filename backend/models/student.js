@@ -1,25 +1,17 @@
 import mongoose from "mongoose";
 
 const educationSchema = new mongoose.Schema({
-  transcript: {
+  university: {
     type: String,
-    required: true,
   },
-  degreeCertificate: {
-    type: String,
-    required: true,
-  },
-  Gpa: {
+  gpa: {
     type: Number,
-    required: true,
   },
   degree: {
     type: String,
-    required: true,
   },
   specialization: {
     type: String,
-    required: false,
   },
 });
 
@@ -61,7 +53,7 @@ const studentSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   name: {
     type: String,
@@ -80,6 +72,13 @@ const studentSchema = new mongoose.Schema({
   // experience is an array of ids referring to the experience model
   experience: {
     type: [experienceSchema],
+    required: false,
+    default: [],
+  },
+  // array of application ids
+  applications: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Application",
     required: false,
     default: [],
   },

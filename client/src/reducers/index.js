@@ -3,11 +3,11 @@ import alertReducer from "./alert";
 import applicationReducer from "./Application";
 import authReducer from "./authReducer";
 import universityReducer from "./universityReducer";
-
+import { apiSlice } from "../api/apiSlice";
 
 export default combineReducers({
-    authReducer,
-    alertReducer,
-    universityReducer,
-    applicationReducer,
-})
+  [apiSlice.reducerPath]: apiSlice.reducer,
+  authReducer,
+  alertReducer,
+  universityReducer,
+});

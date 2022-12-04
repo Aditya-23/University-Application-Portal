@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import {useState} from 'react';
 import {connect} from 'react-redux';
 import {loginUser} from "../actions/auth";
 import {Fragment, Spinner} from "react";
-import {Navigate} from "react-router-dom";
-import { removeAlert } from '../actions/alert';
+import {Navigate, useNavigate} from "react-router-dom";
+import {removeAlert} from '../actions/alert';
+import { Alert } from 'react-bootstrap';
 
 function Login(props) {
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (props.auth.isAuthenticated) {
+            navigate('/dashboard');
+        }
+    }, [navigate, props.auth.isAuthenticated])
 
     const [loginForm,
         setloginForm] = useState({email: "", password: ""})
@@ -34,9 +42,6 @@ function Login(props) {
         )
     }
 
-    if (props.auth.isAuthenticated) {
-        return (<Navigate to="/dashboard"/>)
-    }
 
     const closeAlert = async() => {
         await props.removeAlert();
@@ -44,34 +49,31 @@ function Login(props) {
 
 
     return (
+        <>
+            <div className="login-wrap">
+            
+                <h2>Welcome, Sign In here</h2>
 
-        <><div class="container" id="container">   
-            <div class="form-container sign-in-container">
-            {props.alert.msg != null
-                    ? <div class="alert">
-                        <span class="closebtn" onClick={() => closeAlert()}>&times;</span>
-                        {props.alert.msg}
-                    </div>
-                    : null}
                 <form className="form" onSubmit={e => onSubmit(e)}>
-                    <h1>Welcome, Sign in here</h1>
-                    <input className="email" type="text" placeholder="Email" onChange={e => onChangeHandler(e)} name="email" value={loginForm.email} />
-                    <input className="password" type="password" placeholder="Password" onChange={e => onChangeHandler(e)} name="password" value={loginForm.password} />
-                    <input className="login-btn" type="submit" value="Sign In" />
+                    <input
+                        type="text"
+                        required
+                        placeholder="Email"
+                        onChange={e => onChangeHandler(e)}
+                        name="email"
+                        value={loginForm.email}/>
+                    <input
+                        type="password"
+                        required
+                        placeholder="Password"
+                        onChange={e => onChangeHandler(e)}
+                        name="password"
+                        value={loginForm.password}/>
+                    <input type="submit" value="Login"/>
                 </form>
             </div>
-            <div class="overlay-container">
-                <div class="overlay">
-                    <div class="overlay-panel overlay-right">
-                        <h1>Hello Student!</h1>
-                        <p>Enter your details and start your application journey with us</p>
-                        <button class="ghost" id="signUp">Sign Up</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </>
         
-            </>
     );
 }
 
