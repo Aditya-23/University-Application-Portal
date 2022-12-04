@@ -165,10 +165,10 @@ function EditProfile(props) {
                 <Form.Group className="mb-3">
                     <Form.Label>Phone</Form.Label>
                     <Form.Control
-                        name='createdBy'
+                        name='phone'
                         onChange={e => onChangeHandler(e)}
                         type="text"
-                        placeholder="Enter full name as per your passport"
+                        placeholder="Enter a valid phone number"
                         defaultValue={props.auth.user.phone}
                         required/>
                 </Form.Group>

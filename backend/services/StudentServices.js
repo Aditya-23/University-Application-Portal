@@ -13,7 +13,7 @@ export const saveStudent = async (studentObjToCreate) => {
         const payload = {
             userId: newStudent.id
         }
-        const token = jsonwebtoken.sign(payload, config.get("jwtSecret"), {expiresIn: 1800});//creating jwt
+        const token = jsonwebtoken.sign(payload, config.get("jwtSecret"), {expiresIn: 3600});//creating jwt
         const studentObjCreated = {
             name: newStudent.name,
             email: newStudent.email,
@@ -48,7 +48,7 @@ export const loginService = async (email, password) => {
         userId: student.id
     }
     const studentObj = {
-        token: jsonwebtoken.sign(payload, config.get("jwtSecret"), {expiresIn: 1800}),
+        token: jsonwebtoken.sign(payload, config.get("jwtSecret"), {expiresIn: 3600}),
         _id: student.id,
         name: student.name,
         email: student.email,
@@ -59,6 +59,8 @@ export const loginService = async (email, password) => {
         toeflScore: student.toeflScore,
         ieltsScore: student.ieltsScore,
         governmentId: student.governmentId,
+        dateOfBirth: student.dateOfBirth,
+        gender: student.gender
     }
     return studentObj;
 }
@@ -74,7 +76,7 @@ export const getStudentById = (id) => {
 
 export const updateStudentById = (id, studentObj) => {
     try {
-        const newStudentObj = Student.findByIdAndUpdate(id, studentObj, {new: true}).select("-password");;
+        const newStudentObj = Student.findByIdAndUpdate(id, studentObj, {new: true}).select("-password");
         return newStudentObj;
     } catch (error) {
         console.log(error);

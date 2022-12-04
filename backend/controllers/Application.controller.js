@@ -58,6 +58,7 @@ export const getApplicationById = async (req, res) => {
 //saving or submitting for the first time
 export const registerApplication = async (req, res, next) => {
     try {
+        console.log(req.body);
         const savedApplicationObj = await registerApplicationService(req.body);
         if (!savedApplicationObj) {
             return setRequestError(

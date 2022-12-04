@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import ApplicationSection from "./ApplicationSection.js";
 import UniversitySection from "./TopUniversitySection.js";
 import { Button } from "react-bootstrap";
+import { getApplication } from "../../actions/application";
+import { loadUser } from "../../actions/auth";
 
 function Dashboard(props) {
   const navigate = useNavigate();
@@ -13,9 +15,15 @@ function Dashboard(props) {
     return <h1>Loading</h1>;
   }
   const onClickHandler = async () => {
-    await props.startUniversityLoad("63869b3066f1b3a566d37e03");
+    await props.startUniversityLoad("638c043031111c396dc2bad7");
     navigate("/university");
   };
+
+  const onClickApplicationHandler = async () => {
+    await props.loadUser();
+    await props.getApplication("638cf137f6096b0f8bd91319");
+    navigate("/application");
+  }
 
 
   return (
@@ -25,6 +33,7 @@ function Dashboard(props) {
       <UniversitySection />
       <ApplicationSection />
       <button onClick={() => onClickHandler()}>Click here</button>{" "}
+      <button onClick={() => onClickApplicationHandler()}>Click here 1</button>{" "}
     </>
   );
 }
@@ -35,4 +44,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { startUniversityLoad })(Dashboard);
+export default connect(mapStateToProps, { startUniversityLoad, getApplication, loadUser })(Dashboard);

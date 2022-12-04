@@ -6,7 +6,7 @@ export default function ProgramList(props) {
         <ListGroup as="ol" numbered >
             {props
                 .programs
-                .map(program => <ListGroup.Item as="li" >{program}</ListGroup.Item>)}
+                .map(program => <ListGroup.Item as="li" >{program.courseName}</ListGroup.Item>)}
 
         </ListGroup>
     );
