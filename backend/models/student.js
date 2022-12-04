@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const educationSchema = new mongoose.Schema({
   university: {
-    type: String
+    type: String,
   },
   gpa: {
     type: Number,
@@ -72,6 +72,13 @@ const studentSchema = new mongoose.Schema({
   // experience is an array of ids referring to the experience model
   experience: {
     type: [experienceSchema],
+    required: false,
+    default: [],
+  },
+  // array of application ids
+  applications: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Application",
     required: false,
     default: [],
   },

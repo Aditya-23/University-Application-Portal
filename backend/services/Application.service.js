@@ -1,9 +1,9 @@
-import {Application} from "../models/index.js";
+import { Application } from "../models/index.js";
 import bcryptjs from "bcryptjs";
 import jsonwebtoken from "jsonwebtoken";
 import config from "config";
 
-const getApplicationByIdService = (id) => {
+const getApplicationByIdService = id => {
     try {
         const applicationObj = Application.findById(id);
         return applicationObj;
@@ -11,9 +11,21 @@ const getApplicationByIdService = (id) => {
         console.log(error);
         return null;
     }
-}
+};
 
-const registerApplicationService = (applicationObj) => {
+const getApplicationsByStudentId = studentId => {
+    try {
+        const applicationObjs = Application.find({
+            studentId: studentId,
+        });
+        return applicationObjs;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+
+const registerApplicationService = applicationObj => {
     try {
         const savedApplicationObj = Application(applicationObj);
         return savedApplicationObj.save();
@@ -21,19 +33,19 @@ const registerApplicationService = (applicationObj) => {
         console.log(error);
         return null;
     }
-}
+};
 
 const updateApplicationService = (id, applicationObj) => {
     try {
-        const newApplicationObj = Application.findByIdAndUpdate(id, applicationObj, {new: true});
+        const newApplicationObj = Application.findByIdAndUpdate(id, applicationObj, { new: true });
         return newApplicationObj;
     } catch (error) {
         console.log(error);
         return null;
     }
-}
+};
 
-const deleteApplicationService = (id) => {
+const deleteApplicationService = id => {
     try {
         const deletedObj = Application.findByIdAndDelete(id);
         return deletedObj;
@@ -41,10 +53,11 @@ const deleteApplicationService = (id) => {
         console.log(error);
         return null;
     }
-}
+};
 export {
     getApplicationByIdService,
+    getApplicationsByStudentId,
     registerApplicationService,
     updateApplicationService,
     deleteApplicationService,
-}
+};
