@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useGetApplicationsByStudentIdQuery } from "../../api/applicationApi";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import { useSelector } from "react-redux";
 
 const AppplicationStatus = ["Pending", "In Review", "Accepted", "Rejected"];
 
@@ -19,10 +20,14 @@ function ApplicationSelector({ statusFilter, setStatusFilter }) {
     // refresh Section when statusFilter changes
     useEffect(() => {}, [statusFilter]);
     function handleSelect(e) {
-        console.log(e);
         setStatusFilter(e);
     }
 
+    const AllItem = (
+        <Dropdown.Item key="All" eventKey="All">
+            All
+        </Dropdown.Item>
+    );
     var selectorContent = AppplicationStatus.map(status => (
         <Dropdown.Item key={status} eventKey={status}>
             {status}
@@ -38,9 +43,7 @@ function ApplicationSelector({ statusFilter, setStatusFilter }) {
                 title={statusFilter}
             >
                 <Dropdown.Menu>
-                    <Dropdown.Item key="All" eventKey="All">
-                        All
-                    </Dropdown.Item>
+                    {AllItem}
                     {selectorContent}
                 </Dropdown.Menu>
             </DropdownButton>
@@ -49,13 +52,17 @@ function ApplicationSelector({ statusFilter, setStatusFilter }) {
 }
 
 function ApplicationSection() {
+    // get studentId from auth
+    const auth = useSelector(state => state.authReducer);
+    const studentId = auth.user._id;
     const {
         data: Applications,
         isLoading,
         isSuccess,
         isError,
         error,
-    } = useGetApplicationsByStudentIdQuery("6382996e0b0d5cc4eccec77c");
+    } = useGetApplicationsByStudentIdQuery(studentId);
+    // useGetApplicationsByStudentIdQuery("6382996e0b0d5cc4eccec77c");
     // var statusFilter = "all";
     const [statusFilter, setStatusFilter] = useState("All");
 
@@ -87,7 +94,6 @@ function ApplicationSection() {
                 statusFilter={statusFilter}
                 setStatusFilter={setStatusFilter}
             />
-            <p>{statusFilter}</p>
             <ul>{items}</ul>
         </div>
     );
