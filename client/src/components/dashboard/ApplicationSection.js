@@ -4,14 +4,26 @@ import { useGetApplicationsByStudentIdQuery } from "../../api/applicationApi";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { useSelector } from "react-redux";
+import Card from 'react-bootstrap/Card';
 
 const AppplicationStatus = ["Pending", "In Review", "Accepted", "Rejected"];
-
+const colorVariant = ["#ffff81","#ffd078","#a7ffa7","#f89c9c"];
 function ApplicationCard({ Application }) {
+    const bgColor = colorVariant[AppplicationStatus.indexOf(Application.applicationStatus)]
     return (
         <div>
-            {Application._id}
-            {Application.applicationStatus}
+           <Card
+          style={{ width: '18rem',margin:"10px 5px" }}
+          className="mb-2"
+            >
+        <Card.Header ><strong>{Application.applyingTo}</strong></Card.Header>
+          <Card.Body>
+            
+            <Card.Text><strong>Sem Intake: </strong>{Application.semIntake}</Card.Text>
+            <Card.Text><strong>Program: </strong>{Application.programName}</Card.Text>
+          </Card.Body>
+          <Card.Footer style={{backgroundColor:bgColor}} >{Application.applicationStatus}</Card.Footer>
+        </Card>
         </div>
     );
 }
@@ -88,13 +100,13 @@ function ApplicationSection() {
     }
 
     return (
-        <div>
+        <div style={{overflowY:"auto"}}>
             <h2>Applications</h2>
             <ApplicationSelector
                 statusFilter={statusFilter}
                 setStatusFilter={setStatusFilter}
             />
-            <ul>{items}</ul>
+            <ul style={{display:"flex", flexFlow:"row"}}>{items}</ul>
         </div>
     );
 }
