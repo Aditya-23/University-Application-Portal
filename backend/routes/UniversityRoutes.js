@@ -6,7 +6,7 @@ const UniversityRoutes = express.Router();
 
 UniversityRoutes.post("/", authJwt, UniversityControllers.registerUniversity);
 
-UniversityRoutes.get("/", authJwt, UniversityControllers.getAllUniversities);
+UniversityRoutes.get("/",authJwt, UniversityControllers.getAllUniversities);
 
 UniversityRoutes.get("/:id", authJwt, UniversityControllers.getUniversityById);
 
@@ -14,6 +14,10 @@ UniversityRoutes.put("/:id", authJwt, UniversityControllers.updateUniversityById
 
 UniversityRoutes.delete("/:id", authJwt, UniversityControllers.deleteUniversityById);
 
-UniversityRoutes.get("/university-images/:universityId/:num", authJwt, UniversityControllers.getUniversityImage);
+UniversityRoutes.get(
+    "/university-images/:universityId/:num",
+    authJwt,
+    UniversityControllers.getUniversityImage
+);
 
 export default UniversityRoutes;

@@ -1,9 +1,9 @@
-import {University} from "../models/index.js";
+import { University } from "../models/index.js";
 import config from "config";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const saveUniversityService = async(universityObj) => {
+const saveUniversityService = async universityObj => {
     try {
         const savedUniversityObj = University(universityObj);
         return savedUniversityObj.save();
@@ -11,9 +11,9 @@ const saveUniversityService = async(universityObj) => {
         console.log(error);
         return null;
     }
-}
+};
 
-const getAllUniversitiesService = async() => {
+const getAllUniversitiesService = async () => {
     try {
         const allUniversities = University.find();
         return allUniversities;
@@ -21,9 +21,19 @@ const getAllUniversitiesService = async() => {
         console.log(error);
         return null;
     }
-}
+};
 
-const getUniversityByIdService = async(id) => {
+const getUniversitiesByIdsService = async ids => {
+    try {
+        const universities = await University.find({ _id: { $in: ids } });
+        return universities;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+
+const getUniversityByIdService = async id => {
     try {
         const university = University.findById(id);
         return university;
@@ -31,19 +41,21 @@ const getUniversityByIdService = async(id) => {
         console.log(error);
         return null;
     }
-}
+};
 
-const updateUniversityByIdService = async(id, updateUniversity) => {
+const updateUniversityByIdService = async (id, updateUniversity) => {
     try {
-        const updatedUniversity = University.findByIdAndUpdate(id, updateUniversity, {new: true});
+        const updatedUniversity = University.findByIdAndUpdate(id, updateUniversity, {
+            new: true,
+        });
         return updatedUniversity;
     } catch (error) {
         console.log(error);
         return null;
     }
-}
+};
 
-const deleteUniversityByIdService = async(id) => {
+const deleteUniversityByIdService = async id => {
     try {
         const deletedUniversity = University.findByIdAndDelete(id);
         return deletedUniversity;
@@ -51,9 +63,9 @@ const deleteUniversityByIdService = async(id) => {
         console.log(error);
         return null;
     }
-}
+};
 
-const getUniversityImageService = async (id) => {
+const getUniversityImageService = async id => {
     try {
         const university = University.findById(id);
         return university;
@@ -61,13 +73,14 @@ const getUniversityImageService = async (id) => {
         console.log(error);
         return null;
     }
-}
+};
 
 export {
     saveUniversityService,
     getAllUniversitiesService,
+    getUniversitiesByIdsService,
     getUniversityByIdService,
     updateUniversityByIdService,
     deleteUniversityByIdService,
-    getUniversityImageService
-}
+    getUniversityImageService,
+};
