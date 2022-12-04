@@ -27,12 +27,18 @@ const applicationSchema = new mongoose.Schema({
         type: String,
         default: "saved", // or submitted
     },
-    // universityId is the id of the university that the student is applying to
+    // Name of the university the student is applying to
     applyingTo: {
+        type: String,
+        required: true,
+    },
+    // universityId is the id of the university that the student is applying to
+    universityId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "University",
         required: true,
     },
+
     programName: {
         type: String,
         required: true,
