@@ -22,7 +22,7 @@ function Navbar(props) {
             <input id="searchBar" class="searchbar" type="text" placeholder="Search..."/>
   <a id="btnSearch" class="btn-search"><i class="fa fa-search"></i></a>{" "}
           </form>
-          <a onClick={() => onLogout()}> Logout </a>
+          <a onClick={() => onLogout()} className="logout-style"> Log Out </a>
         </div></>
       ) : (
         <div className="topnav">
