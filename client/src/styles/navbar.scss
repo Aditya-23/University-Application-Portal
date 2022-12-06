@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+
+
 .logo_styles{
     display: flex;
     flex-direction: row;
@@ -10,6 +13,7 @@
     font-size: large;
     margin-left: 20px;
     margin-top:10px;
+    font-family: 'Lato', sans-serif;
 }
 
 .topnav {
@@ -48,6 +52,7 @@
         .search_bar{
             margin-inline: 3px;
             padding: 3px;
+            width: 300px;
         }
 
     }

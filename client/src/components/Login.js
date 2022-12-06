@@ -65,7 +65,6 @@ function Login(props) {
                         <h1>Hello Student!</h1>
                         <p>Enter your details and start your application journey with us</p>
                         <a href = '/register' className='sign_up_style'> <button class="ghost" id="signUp">Sign Up</button></a>
-                        {/* <button class="ghost" id="signUp">Sign Up</button> */}
                     </div>
                 </div>
             </div>
