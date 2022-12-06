@@ -33,7 +33,9 @@ function UniversitySection(props) {
   return (
     <div className="dashboardSection PopUniversity">
       <h2 className="title">Top Universities</h2>
-      <ul className="cardsList">{items}</ul>
+      <div className="dashboardTile">
+        <ul className="cardsList">{items}</ul>
+        </div>
     </div>
   );
 }
