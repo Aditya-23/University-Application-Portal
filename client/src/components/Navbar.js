@@ -15,7 +15,7 @@ function Navbar(props) {
       <>
             {props.auth.isAuthenticated
                 ? <div className='topnav'> <div className='logo_styles'>
-                    <img src={require("../static/logo.ico")} className="img_style" />
+                    <img src={require("../static/uniicon.ico")} className="img_style" />
                     <p className="name_style">University Application</p>
                 </div> <form className = 'search_bar_wrap' > <input
                     className='search_bar'
@@ -26,7 +26,7 @@ function Navbar(props) {
                 </div>
                 : <div className='topnav'>
                   <div className='logo_styles'>
-                    <img src={require("../static/logo.ico")} className="img_style" />
+                    <img src={require("../static/uniicon.ico")} className="img_style" />
                     <p className="name_style">University Application</p>
                   </div>
                     <div className='log_out_nav'> 

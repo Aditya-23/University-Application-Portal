@@ -55,7 +55,28 @@ button.ghost {
 	background-color: #2dc1e7;
 	border-color: #FFFFFF;
     cursor: pointer;
+	color: white !important;
+	a{
+		color: white;
+	}
+
+	:hover{
+		box-shadow: 1px 1px 5px #555;
+	}
 }
+
+
+
+.sign_up_style{
+
+	// box-shadow: 1px 1px 5px #555;
+	border-color: #FFFFFF;
+    cursor: pointer;
+	color: white !important;
+
+
+}
+
 
 .form {
 	background-color: #FFFFFF;

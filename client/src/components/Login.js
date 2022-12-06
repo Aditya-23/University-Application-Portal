@@ -56,7 +56,7 @@ function Login(props) {
                     <h1>Welcome, Sign in here</h1>
                     <input className="email" type="text" placeholder="Email" onChange={e => onChangeHandler(e)} name="email" value={loginForm.email} />
                     <input className="password" type="password" placeholder="Password" onChange={e => onChangeHandler(e)} name="password" value={loginForm.password} />
-                    <input className="login-btn" type="submit" value="Sign In" />
+                    <input className="login-btn" type="submit" value="Log In" />
                 </form>
             </div>
             <div class="overlay-container">
@@ -64,7 +64,8 @@ function Login(props) {
                     <div class="overlay-panel overlay-right">
                         <h1>Hello Student!</h1>
                         <p>Enter your details and start your application journey with us</p>
-                        <button class="ghost" id="signUp">Sign Up</button>
+                        <a href = '/register' className='sign_up_style'> <button class="ghost" id="signUp">Sign Up</button></a>
+                        {/* <button class="ghost" id="signUp">Sign Up</button> */}
                     </div>
                 </div>
             </div>
