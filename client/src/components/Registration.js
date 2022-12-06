@@ -53,7 +53,7 @@ function Registration(props) {
                     : null}
                   <h1>Welcome Back</h1>
                         <p>To keep connected with us please login with your personal information.</p>
-                        <button class="ghost1" id="signUp1">Sign In</button>   
+                       <a href = '/login' className ="login_in_style"> <button class="ghost1" id="signUp1">Sign In</button> </a>
         </div>
         <div class="overlay-container">
                 <div class="overlay1">
