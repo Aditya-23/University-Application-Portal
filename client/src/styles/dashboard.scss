@@ -1,22 +1,37 @@
 .cardsList {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  overflow: scroll;
-
-  .card {
-    width: 18rem;
-    height: 500px;
-    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    overflow: scroll;
     margin: 10px;
-  }
+    padding: 20px;
 
-  .pStyle{
-    font-size: xx-large;
-  }
+    .card {
+        width: 18rem;
+        height: 250px;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .pStyle {
+        font-size: xx-large;
+    }
 }
 
 .card-text {
-  max-height: 70px;
-  overflow: scroll;
+    max-height: 100px;
+    overflow: scroll;
+}
+
+.dashboardTile {
+    // make tile minimum height of 250px
+    min-height: 250px;
+    // display center vertically & horizontally
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //make border
+    border: 1px solid #ccc;
+    //make border radius
+    border-radius: 25px;
 }

@@ -1,3 +1,38 @@
-.page-one{
-     margin-bottom: 75vh;
+.showcase {
+    align-items: center;
+    justify-content: space-between;
+    background: #111;
+}
+
+.showcase img {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    opacity: 0.5;
+    top: 0;
+}
+
+.text {
+    position: relative;
+    padding: 100px;
+    color: white;
+}
+
+.text h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    padding-top: 1%;
+}
+
+.text h2 {
+    font-weight: 600;
+    font-size: 2rem;
+    padding-top: 3%;
+}
+
+.text p {
+    font-size: 1.1rem;
+    padding-top: 2%;
+    font-weight: 500;
+    max-width: 800px;
 }
