@@ -1,22 +1,22 @@
 .cardsList {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    overflow: scroll;
 
-  .card {
-    width: 18rem;
-    height: 500px;
-    padding: 10px;
-    margin: 10px;
-  }
+    .card {
+        width: 18rem;
+        height: 250px;
+        padding: 10px;
+        margin: 10px;
+    }
 
-  .pStyle{
-    font-size: xx-large;
-  }
+    .pStyle {
+        font-size: xx-large;
+    }
 }
 
 .card-text {
-  max-height: 70px;
-  overflow: scroll;
+    max-height: 100px;
+    overflow: scroll;
 }
