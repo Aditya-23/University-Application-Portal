@@ -25,7 +25,7 @@ function Dashboard(props) {
       <p>Get started with your study aborad journey by editing your profile here : <Button variant="success" onClick={() => navigate("/edit-profile")}> Edit Profile </Button> </p>
       <ApplicationSection />
       <UniversitySection />
-      {/* <ShortlistSection/> */}
+      <ShortlistSection/>
       <button onClick={() => onClickHandler()}>Click here</button>{" "}
     </Container>
   );
