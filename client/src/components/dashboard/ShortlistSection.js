@@ -11,7 +11,6 @@ function ShortlistSection(props) {
         const shortlistedIds = auth.user.shortlistedUniversities;
         console.log(shortlistedIds);
     }, [auth]);
-    // TODO: shortlistedIds failing on first render returned empty
     const shortlistedIds = auth.user.shortlistedUniversities;
     const {
         data: Universities,
@@ -24,17 +23,19 @@ function ShortlistSection(props) {
     if (isLoading) {
         items = <p>Loading...</p>;
     } else if (isSuccess) {
-        // TODO: Handle how to show when no shortlisted universities
-        console.log("Load Successful", Universities);
-        items = Universities.map(uni => (
-            <UniversityCard
-                key={uni._id}
-                id={uni._id}
-                name={uni.name}
-                description={uni.description}
-                startUniversityLoad={props.startUniversityLoad}
-            />
-        ));
+        if (Universities === null) {
+            items = <p>No shortlisted universities</p>;
+        } else {
+            items = Universities.map(uni => (
+                <UniversityCard
+                    key={uni._id}
+                    id={uni._id}
+                    name={uni.name}
+                    description={uni.description}
+                    startUniversityLoad={props.startUniversityLoad}
+                />
+            ));
+        }
     } else if (isError) {
         items = <p>Loading</p>;
     }
@@ -42,7 +43,9 @@ function ShortlistSection(props) {
     return (
         <div>
             <h3>Shortlist Section</h3>
-            <ul className="cardsList">{items}</ul>
+            <div className="dashboardTile">
+                <ul className="cardsList">{items}</ul>
+                </div>
         </div>
     );
 }
