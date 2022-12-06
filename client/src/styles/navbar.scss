@@ -9,10 +9,11 @@
 
 .name_style{
     color: white;
-    padding: 14px;
-    font-size: large;
+    padding: 12px;
+    
     margin-left: 20px;
     margin-top:10px;
+    font-size: 25px;
     font-family: 'Lato', sans-serif;
 }
 
@@ -49,11 +50,20 @@
         flex-direction: row;
         justify-content: space-between;
 
-        .search_bar{
-            margin-inline: 3px;
-            padding: 3px;
-            width: 300px;
-        }
+        // .search_bar{
+        //     margin-inline: 3px;
+        //     padding: 3px;
+        //     width: 300px;
+        // }
+
+        input[type=text] {
+            float: right;
+            padding: 6px;
+            border: none;
+            margin-top: 8px;
+            margin-right: 16px;
+            font-size: 17px;
+          }
 
     }
 
