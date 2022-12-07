@@ -45,8 +45,9 @@ const updateStudent = async (req, res) => {
         }
         const updatedStudent = await updateStudentById(req.params.id, currentStudent);  
         if(updatedStudent){
-            updatedStudent.userId = req.userId;
+            updatedStudent.userId = req.params.id;
             await updatedStudent.save();
+            console.log(updatedStudent)
             return setResponse(updatedStudent, res);
         }
         return setRequestError({msg: "Could not update the student!"}, res); 

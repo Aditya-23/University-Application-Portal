@@ -5,7 +5,7 @@ import * as types from "./types";
 //status can be "saved" or submitted
 // pass id if the application is being saved for the second time or third time
 // id is not necessary if the application is being submitted or saved for the first time
-const applicationFormSave = (applicationForm, files, status, id="638994e4788586ff44d24834") => async dispatch => {
+const applicationFormSave = (applicationForm, files, status, id="638c375608b9cd60df607692", universityId, studentId) => async dispatch => {
 
     const config = {
         headers: {
@@ -14,7 +14,7 @@ const applicationFormSave = (applicationForm, files, status, id="638994e4788586f
     };
 
     try {
-        // console.log(applicationForm);
+        console.log(applicationForm);
         const newFormObj = new FormData();
         newFormObj.append("createdBy", applicationForm.createdBy);
         newFormObj.append("programName", applicationForm.programName);
@@ -24,6 +24,8 @@ const applicationFormSave = (applicationForm, files, status, id="638994e4788586f
         newFormObj.append("name", applicationForm.name);
         newFormObj.append("dataOfBirth", applicationForm.dateOfBirth);
         newFormObj.append("applyingTo", applicationForm.applyingTo);
+        newFormObj.append("universityId", universityId);
+        newFormObj.append("studentId", studentId);
         
         if(files.sop.preview != ""){
             newFormObj.append("sop", files.sop.data);
@@ -96,6 +98,35 @@ const applicationFormSave = (applicationForm, files, status, id="638994e4788586f
     }
 }
 
+const getApplication = (id) => async dispatch => {
+    try {
+        if(id != null){
+            const response = await axios.get("/applications/" + id);
+            if(response.status == 200){
+                const uniResponse = await axios.get("/universities/" + response.data.universityId);
+                dispatch({
+                    type: "APPLICATION_FORM_RECEIVED",
+                    payload: response.data
+                })
+                dispatch({
+                    type: "UNIVERSITY_LOADED",
+                    payload: uniResponse.data
+                })
+            }
+        }
+        else{
+            dispatch({
+                type: "APPLICATION_NEW"
+            })
+        }
+        
+    } catch (error) {
+        console.log(error);
+
+    }
+} 
+
 export {
     applicationFormSave,
+    getApplication,
 }
