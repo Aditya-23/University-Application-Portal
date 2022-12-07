@@ -127,7 +127,14 @@ const getApplication = (id) => async dispatch => {
     }
 } 
 
+const clearApplication = () => async dispatch => {
+    dispatch({
+        type: types.CLEAR_APPLICATION
+    })
+}
+
 export {
     applicationFormSave,
     getApplication,
+    clearApplication,
 }

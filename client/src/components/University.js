@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import {Carousel, Col, Container, Row} from "react-bootstrap";
 import ProgramList from './ProgramList';
+import { clearApplication } from '../actions/application';
 
 function University(props) {
 
@@ -18,6 +19,7 @@ function University(props) {
     }, []);
 
     const navigateToApplicationForm = () => {
+        props.clearApplication();
         navigate("/application");
     }
 
@@ -128,7 +130,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    getUniversityById
+    getUniversityById,
+    clearApplication
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(University);
