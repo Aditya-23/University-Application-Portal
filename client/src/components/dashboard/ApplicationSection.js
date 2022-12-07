@@ -4,26 +4,33 @@ import { useGetApplicationsByStudentIdQuery } from "../../api/applicationApi";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { useSelector } from "react-redux";
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 
 const AppplicationStatus = ["Pending", "In Review", "Accepted", "Rejected"];
-const colorVariant = ["#ffff81","#ffd078","#a7ffa7","#f89c9c"];
+const colorVariant = ["#ffff81", "#ffd078", "#a7ffa7", "#f89c9c"];
 function ApplicationCard({ Application }) {
-    const bgColor = colorVariant[AppplicationStatus.indexOf(Application.applicationStatus)]
+    const bgColor =
+        colorVariant[AppplicationStatus.indexOf(Application.applicationStatus)];
     return (
         <div>
-           <Card
-          style={{ width: '18rem',margin:"10px 5px" }}
-          className="mb-2"
-            >
-        <Card.Header ><strong>{Application.applyingTo}</strong></Card.Header>
-          <Card.Body>
-            
-            <Card.Text><strong>Sem Intake: </strong>{Application.semIntake}</Card.Text>
-            <Card.Text><strong>Program: </strong>{Application.programName}</Card.Text>
-          </Card.Body>
-          <Card.Footer style={{backgroundColor:bgColor}} >{Application.applicationStatus}</Card.Footer>
-        </Card>
+            <Card style={{ width: "18rem", margin: "10px 5px" }} className="mb-2">
+                <Card.Header>
+                    <strong>{Application.applyingTo}</strong>
+                </Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        <strong>Sem Intake: </strong>
+                        {Application.semIntake}
+                    </Card.Text>
+                    <Card.Text>
+                        <strong>Program: </strong>
+                        {Application.programName}
+                    </Card.Text>
+                </Card.Body>
+                <Card.Footer style={{ backgroundColor: bgColor }}>
+                    {Application.applicationStatus}
+                </Card.Footer>
+            </Card>
         </div>
     );
 }
@@ -84,14 +91,25 @@ function ApplicationSection() {
     if (isLoading) {
         items = <p>Loading...</p>;
     } else if (isSuccess) {
+        var displayApplications = [];
         if (AppplicationStatus.includes(statusFilter)) {
-            items = Applications.filter(
+            displayApplications = Applications.filter(
                 Application => Application.applicationStatus === statusFilter
-            ).map(Application => (
-                <ApplicationCard key={Application._id} Application={Application} />
-            ));
+            );
         } else {
-            items = Applications.map(Application => (
+            displayApplications = Applications;
+        }
+        // if length is 0, show no application
+        if (displayApplications.length === 0) {
+            if (statusFilter === "All") {
+                items = <p>No Applications saved or submitted</p>;
+            }
+            else {
+                items = <p>No Applications with status "{statusFilter}"</p>;
+            }
+            
+        } else {
+            items = displayApplications.map(Application => (
                 <ApplicationCard key={Application._id} Application={Application} />
             ));
         }
@@ -100,13 +118,18 @@ function ApplicationSection() {
     }
 
     return (
-        <div style={{overflowY:"auto"}}>
+        <div style={{ overflowY: "auto" }}>
             <h2>Applications</h2>
+
             <ApplicationSelector
                 statusFilter={statusFilter}
                 setStatusFilter={setStatusFilter}
             />
-            <ul style={{display:"flex", flexFlow:"row"}}>{items}</ul>
+            <div className="dashboardTile">
+                <ul style={{ display: "flex", flexFlow: "row" }} className="cardsList">
+                    {items}
+                </ul>
+            </div>
         </div>
     );
 }
