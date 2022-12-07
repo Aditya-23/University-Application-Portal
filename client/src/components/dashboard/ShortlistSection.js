@@ -7,10 +7,6 @@ import { startUniversityLoad } from "../../actions/universities";
 
 function ShortlistSection(props) {
     const auth = useSelector(state => state.authReducer);
-    useEffect(() => {
-        const shortlistedIds = auth.user.shortlistedUniversities;
-        console.log(shortlistedIds);
-    }, [auth]);
     const shortlistedIds = auth.user.shortlistedUniversities;
     const {
         data: Universities,
@@ -18,7 +14,9 @@ function ShortlistSection(props) {
         isSuccess,
         isError,
         error,
-    } = useGetUniversitiesByIdsQuery(shortlistedIds);
+        refetch,
+    } = useGetUniversitiesByIdsQuery(shortlistedIds, auth);
+
     var items = [];
     if (isLoading) {
         items = <p>Loading...</p>;
@@ -45,7 +43,7 @@ function ShortlistSection(props) {
             <h3>Shortlist Section</h3>
             <div className="dashboardTile">
                 <ul className="cardsList">{items}</ul>
-                </div>
+            </div>
         </div>
     );
 }
