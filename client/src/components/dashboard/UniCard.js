@@ -52,6 +52,14 @@ function UniversityCard(props) {
         // <FaRegStar />
         <BookmarkHeart />
     );
+    var ButtonVariant = shortlistedUniversities.includes(props.id)
+        ? "success"
+        : "outline-primary";
+    var ButtonText = shortlistedUniversities.includes(props.id)
+        ? "Shortlisted!!"
+        : "Shortlist";
+    // outline-primary
+    // success
 
     var card = (
         <li className="cards__item">
@@ -62,12 +70,9 @@ function UniversityCard(props) {
                         <Card.Title> {props.name} </Card.Title>
                         <Card.Text>{props.description}</Card.Text>
                     </div>
-                    <div className="shortlistIcon" onClick={shortlistHandler}>
-                        {shortlistedIcon}
-                    </div>
-                    {/* <Button variant="primary" onClick={shortlistHandler}>
-                        Shortlist Uni
-                    </Button> */}
+                    <Button variant={ButtonVariant} onClick={shortlistHandler}>
+                        {shortlistedIcon} {ButtonText}
+                    </Button>
                 </Card.Body>
             </Card>
         </li>
