@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Form, Row} from 'react-bootstrap';
-import {connect} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
-import {applicationFormSave, getApplication} from '../actions/application.js';
+import React, { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import { connect, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { applicationFormSave, getApplication } from "../actions/application.js";
+import { apiSlice } from "../api/apiSlice.js";
+// import { useAppDispatch } from './store/hooks'
 
 function Application(props) {
-
     const navigate = useNavigate();
-    const [applicationForm,
-        setApplicationForm] = useState({
+    const dispatch = useDispatch();
+    const [applicationForm, setApplicationForm] = useState({
         createdBy: "",
         createdByEmail: "",
         gender: "",
@@ -21,43 +22,50 @@ function Application(props) {
         lor2: "",
         lor3: "",
         sop: "",
-        resume: ""
+        resume: "",
     });
 
-    const [sop,
-        setsop] = useState({preview: "", data: ""});
+    const [sop, setsop] = useState({ preview: "", data: "" });
 
-    const [lor1,
-        setlor1] = useState({preview: "", data: ""});
+    const [lor1, setlor1] = useState({ preview: "", data: "" });
 
-    const [lor2,
-        setlor2] = useState({preview: "", data: ""});
+    const [lor2, setlor2] = useState({ preview: "", data: "" });
 
-    const [lor3,
-        setlor3] = useState({preview: "", data: ""});
+    const [lor3, setlor3] = useState({ preview: "", data: "" });
 
-    const [resume,
-        setresume] = useState({preview: "", data: ""});
+    const [resume, setresume] = useState({ preview: "", data: "" });
 
-    const onSubmitHandler = async(e, status) => {
+    const onSubmitHandler = async (e, status) => {
         e.preventDefault();
         const filesUploaded = {
             sop,
             lor1,
             lor2,
             lor3,
-            resume
-        }
-        var id = null
-        if(props.application._id != null){
+            resume,
+        };
+        var id = null;
+        if (props.application._id != null) {
             id = props.application._id;
         }
-        await props.applicationFormSave(applicationForm, filesUploaded, status, id, props.university._id, props.auth.user._id);
+        await props.applicationFormSave(
+            applicationForm,
+            filesUploaded,
+            status,
+            id,
+            props.university._id,
+            props.auth.user._id
+        );
         navigate("/dashboard");
-    }
+        dispatch(
+            apiSlice.endpoints.getApplicationsByStudentId.initiate(props.auth.user._id, {
+                subscribe: false,
+                forceRefetch: true,
+            })
+        );
+    };
 
-    const [specializations,
-        setSpecializations] = useState([])
+    const [specializations, setSpecializations] = useState([]);
 
     useEffect(() => {
         setApplicationForm({
@@ -73,47 +81,45 @@ function Application(props) {
             lor2: props.application.lor2,
             lor3: props.application.lor3,
             sop: props.application.sop,
-            resume: props.application.resume
-        })
-    }, [])
+            resume: props.application.resume,
+        });
+    }, []);
 
-    const onChangeHandler = (e) => {
+    const onChangeHandler = e => {
         console.log(e.target.name, e.target.value);
-        setApplicationForm((applicationForm) => {
-            return ({
+        setApplicationForm(applicationForm => {
+            return {
                 ...applicationForm,
-                [e.target.name]: e.target.value
-            })
-        })
-    }
+                [e.target.name]: e.target.value,
+            };
+        });
+    };
 
-    const selectProgramHandler = (e) => {
-        let specializationList = props
-            .university
-            .programs
-            .find(element => element.courseName == e.target.value)
-            .specialization;
+    const selectProgramHandler = e => {
+        let specializationList = props.university.programs.find(
+            element => element.courseName == e.target.value
+        ).specialization;
 
         setApplicationForm({
             ...applicationForm,
-            programName: e.target.value
+            programName: e.target.value,
         });
 
         setSpecializations(specializationList);
-    }
+    };
 
-    const onFileChange = (e) => {
+    const onFileChange = e => {
         var changedFile;
         if (e.target.files.length == 0) {
             changedFile = {
                 preview: "",
-                data: ""
-            }
+                data: "",
+            };
         } else {
             changedFile = {
                 preview: URL.createObjectURL(e.target.files[0]),
-                data: e.target.files[0]
-            }
+                data: e.target.files[0],
+            };
         }
         switch (e.target.name) {
             case "sop":
@@ -139,35 +145,36 @@ function Application(props) {
             default:
                 break;
         }
-
-    }
+    };
 
     return (
-        <div className='application-container'>
-            <Form encType='multipart/form-data'>
+        <div className="application-container">
+            <Form encType="multipart/form-data">
                 <Form.Label>
                     <h3>Personal Information</h3>
                 </Form.Label>
                 <Form.Group className="mb-3">
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control
-                        name='createdBy'
+                        name="createdBy"
                         onChange={e => onChangeHandler(e)}
                         type="text"
                         placeholder="Enter full name as per your passport"
                         defaultValue={applicationForm.createdBy}
-                        disabled/>
+                        disabled
+                    />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
-                        name='createdByEmail'
+                        name="createdByEmail"
                         type="email"
                         onChange={e => onChangeHandler(e)}
                         placeholder="Enter your personal email"
                         defaultValue={applicationForm.createdByEmail}
-                        disabled/>
+                        disabled
+                    />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -175,31 +182,36 @@ function Application(props) {
 
                 <Form.Group className="mb-3">
                     <Form.Select
-                        name='gender'
+                        name="gender"
                         onChange={e => onChangeHandler(e)}
                         defaultValue={applicationForm.gender}
-                        disabled>
-                        <option value={props.auth.user.gender}>{props.auth.user.gender}</option>
+                        disabled
+                    >
+                        <option value={props.auth.user.gender}>
+                            {props.auth.user.gender}
+                        </option>
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                     <Form.Label>Date of Birth</Form.Label>
                     <Form.Control
-                        name='dateOfBirth'
+                        name="dateOfBirth"
                         onChange={e => onChangeHandler(e)}
                         type="text"
                         defaultValue={props.auth.user.dateOfBirth}
-                        disabled/>
+                        disabled
+                    />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                     <Form.Label>Phone</Form.Label>
                     <Form.Control
-                        name='phone'
+                        name="phone"
                         type="text"
                         defaultValue={props.auth.user.phone}
-                        disabled/>
+                        disabled
+                    />
                 </Form.Group>
 
                 <Form.Label>
@@ -207,20 +219,23 @@ function Application(props) {
                 </Form.Label>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Applying to
-                    </Form.Label>
+                    <Form.Label>Applying to</Form.Label>
                     <Form.Control
-                        name='applyingTo'
+                        name="applyingTo"
                         type="text"
                         onChange={e => onChangeHandler(e)}
                         defaultValue={props.university.name}
-                        disabled/>
+                        disabled
+                    />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Semester Intake
-                    </Form.Label>
-                    <Form.Select name='semIntake' onChange={e => onChangeHandler(e)} required>
+                    <Form.Label>Semester Intake</Form.Label>
+                    <Form.Select
+                        name="semIntake"
+                        onChange={e => onChangeHandler(e)}
+                        required
+                    >
                         <option>Select from the list of Intakes</option>
                         <option value="spring 2023">Spring 2023</option>
                         <option value="fall 2023">Fall 2023</option>
@@ -229,33 +244,38 @@ function Application(props) {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Select your program
-                    </Form.Label>
+                    <Form.Label>Select your program</Form.Label>
                     <Form.Select
-                        name='programName'
+                        name="programName"
                         onChange={e => selectProgramHandler(e)}
-                        required>
+                        required
+                    >
                         <option>Select from the list of programs</option>
-                        {props
-                            .university
-                            .programs
-                            .map(program => <option
-                                selected={applicationForm.programName == program.courseName}
-                                value={program.courseName}>{program.courseName}</option>)}
-
+                        {props.university.programs.map(program => (
+                            <option
+                                selected={
+                                    applicationForm.programName == program.courseName
+                                }
+                                value={program.courseName}
+                            >
+                                {program.courseName}
+                            </option>
+                        ))}
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Select your specialization
-                    </Form.Label>
-                    <Form.Select name='specialization' onChange={e => onChangeHandler(e)} required>
-                        {specializations
-                            .map(sp => <option 
-                                selected={sp == applicationForm.specialization}>
-                                    {sp}
-                                </option>)}
-
+                    <Form.Label>Select your specialization</Form.Label>
+                    <Form.Select
+                        name="specialization"
+                        onChange={e => onChangeHandler(e)}
+                        required
+                    >
+                        {specializations.map(sp => (
+                            <option selected={sp == applicationForm.specialization}>
+                                {sp}
+                            </option>
+                        ))}
                     </Form.Select>
                 </Form.Group>
 
@@ -264,55 +284,83 @@ function Application(props) {
                 </Form.Label>
 
                 <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label>Statement Of Purpose
-                    </Form.Label>
-
-                    <Form.Control name='sop' onChange={e => onFileChange(e)} type="file"/> {applicationForm.sop != null
-                        ? <Form.Text className="text-muted">
-                                This document has already been submitted, however, you may submit an updated
-                                document before finally submitting the application.
-                            </Form.Text>
-                        : null}
+                    <Form.Label>Statement Of Purpose</Form.Label>
+                    <Form.Control
+                        name="sop"
+                        onChange={e => onFileChange(e)}
+                        type="file"
+                    />{" "}
+                    {applicationForm.sop != null ? (
+                        <Form.Text className="text-muted">
+                            This document has already been submitted, however, you may
+                            submit an updated document before finally submitting the
+                            application.
+                        </Form.Text>
+                    ) : null}
                 </Form.Group>
 
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Letter Of Recommendation 1</Form.Label>
-                    <Form.Control name='lor1' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor1 != null
-                        ? <Form.Text className="text-muted">
-                                This document has already been submitted, however, you may submit an updated
-                                document before finally submitting the application.
-                            </Form.Text>
-                        : null}
+                    <Form.Control
+                        name="lor1"
+                        onChange={e => onFileChange(e)}
+                        type="file"
+                    />{" "}
+                    {applicationForm.lor1 != null ? (
+                        <Form.Text className="text-muted">
+                            This document has already been submitted, however, you may
+                            submit an updated document before finally submitting the
+                            application.
+                        </Form.Text>
+                    ) : null}
                 </Form.Group>
 
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Letter Of Recommendation 2</Form.Label>
-                    <Form.Control name='lor2' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor2 != null
-                        ? <Form.Text className="text-muted">
-                                This document has already been submitted, however, you may submit an updated
-                                document before finally submitting the application.
-                            </Form.Text>
-                        : null}
+                    <Form.Control
+                        name="lor2"
+                        onChange={e => onFileChange(e)}
+                        type="file"
+                    />{" "}
+                    {applicationForm.lor2 != null ? (
+                        <Form.Text className="text-muted">
+                            This document has already been submitted, however, you may
+                            submit an updated document before finally submitting the
+                            application.
+                        </Form.Text>
+                    ) : null}
                 </Form.Group>
 
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Letter Of Recommendation 3</Form.Label>
-                    <Form.Control name='lor3' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor3 != null
-                        ? <Form.Text className="text-muted">
-                                This document has already been submitted, however, you may submit an updated
-                                document before finally submitting the application.
-                            </Form.Text>
-                        : null}
+                    <Form.Control
+                        name="lor3"
+                        onChange={e => onFileChange(e)}
+                        type="file"
+                    />{" "}
+                    {applicationForm.lor3 != null ? (
+                        <Form.Text className="text-muted">
+                            This document has already been submitted, however, you may
+                            submit an updated document before finally submitting the
+                            application.
+                        </Form.Text>
+                    ) : null}
                 </Form.Group>
 
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Resume</Form.Label>
-                    <Form.Control name='resume' onChange={e => onFileChange(e)} type="file"/> {applicationForm.resume != null
-                        ? <Form.Text className="text-muted">
-                                This document has already been submitted, however, you may submit an updated
-                                document before finally submitting the application.
-                            </Form.Text>
-                        : null}
+                    <Form.Control
+                        name="resume"
+                        onChange={e => onFileChange(e)}
+                        type="file"
+                    />{" "}
+                    {applicationForm.resume != null ? (
+                        <Form.Text className="text-muted">
+                            This document has already been submitted, however, you may
+                            submit an updated document before finally submitting the
+                            application.
+                        </Form.Text>
+                    ) : null}
                 </Form.Group>
 
                 <Row>
@@ -321,7 +369,8 @@ function Application(props) {
                             variant="primary"
                             type="submit"
                             value="saved"
-                            onClick={(e) => onSubmitHandler(e, "saved")}>
+                            onClick={e => onSubmitHandler(e, "saved")}
+                        >
                             Save
                         </Button>
                     </Col>
@@ -330,25 +379,28 @@ function Application(props) {
                             variant="primary"
                             type="submit"
                             value="submitted"
-                            onClick={(e) => onSubmitHandler(e, "submitted")}>
+                            onClick={e => onSubmitHandler(e, "submitted")}
+                        >
                             Submit
                         </Button>
                     </Col>
-
                 </Row>
-
             </Form>
         </div>
     );
 }
 
 const mapStateToProps = state => {
-    return {auth: state.authReducer, application: state.applicationReducer, university: state.universityReducer}
-}
+    return {
+        auth: state.authReducer,
+        application: state.applicationReducer,
+        university: state.universityReducer,
+    };
+};
 
 const mapDispatchToProps = {
     applicationFormSave,
-    getApplication
-}
+    getApplication,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);
