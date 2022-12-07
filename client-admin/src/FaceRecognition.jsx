@@ -1,47 +1,55 @@
 import React from 'react';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Form} from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 export default function FaceRecognition(props) {
     var faceio;
     useEffect(() => {
         faceio = new faceIO("fioacd1c");
-    }, [])
+    }, []);
 
-    const handleSignIn = async() => {
+    const [email, setEmail] = useState("");
+    const [pin, setPin] = useState("");
+
+
+    const navigate = useNavigate();
+
+
+    const handleSignIn = async(e) => {
+
+      console.log(email, pin);
+      var faceio = new faceIO("fioacd1c");
+      e.preventDefault();
         try {
             let response = await faceio.enroll({
                 locale: "auto",
                 payload: {
-                    email: props.email,
-                    pin: props.pin
+                    email: email,
+                    pin: pin
                 }
             });
 
             console.log(response);
+
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleLogIn = async() => {
+    const handleLogIn = async(e) => {
+        e.preventDefault();
+        var faceio = new faceIO("fioacd1c");
         try {
             let response = await faceio.authenticate({locale: "auto"});
 
             console.log(response);
+            navigate("/university-admin");
         } catch (error) {
             console.log(error);
         }
     };
 
-    const onChangeHandler = (e) => {
-        setEditProfile((editProfile) => {
-            return ({
-                ...editProfile,
-                [e.target.name]: e.target.value
-            })
-        })
-    }
 
     return (
         <div>
@@ -50,7 +58,8 @@ export default function FaceRecognition(props) {
                     <Form.Label>User</Form.Label>
                     <Form.Control
                         name='email'
-                        onChange={e => onChangeHandler(e)}
+                        onChange={e => setEmail(e.target.value)}
+                        value={email}
                         type="text"
                         required/>
                 </Form.Group>
@@ -59,14 +68,15 @@ export default function FaceRecognition(props) {
                     <Form.Label>Pin</Form.Label>
                     <Form.Control
                         name='pin'
-                        onChange={e => onChangeHandler(e)}
+                        onChange={e => setPin(e.target.value)}
+                        value={pin}
                         type="text"
                         required/>
                 </Form.Group>
                 <br></br>
 
-                <button onClick={() => handleSignIn()}>Sign-in</button>
-                <button onClick={() => handleLogIn()}>Log-in</button>
+                <button onClick={(e) => handleSignIn(e)} >Sign-in </button>
+                <button onClick={(e) => handleLogIn(e)}>Log in</button>
             </Form>
 
         </div>
