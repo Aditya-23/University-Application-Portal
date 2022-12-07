@@ -33,7 +33,7 @@ function App() {
     <Provider store={store}>
       <Navbar />
       <AlertComponent />
-      <br></br>
+     
       <BrowserRouter>
         <Routes>
         
