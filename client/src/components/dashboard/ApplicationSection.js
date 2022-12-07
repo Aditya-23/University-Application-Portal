@@ -3,15 +3,26 @@ import {useEffect, useState} from "react";
 import {useGetApplicationsByStudentIdQuery} from "../../api/applicationApi";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import Card from "react-bootstrap/Card";
 import {Button} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
+import { getApplication } from "../../actions/application";
+import { loadUser } from "../../actions/auth";
 
 const AppplicationStatus = ["Pending", "In Review", "Accepted", "Rejected"];
 const colorVariant = ["#ffff81", "#ffd078", "#a7ffa7", "#f89c9c"];
-function ApplicationCard({Application}) {
+
+function ApplicationCard({Application, getApplication, loadUser}) {
     const bgColor = colorVariant[AppplicationStatus.indexOf(Application.applicationStatus)];
 
+    const navigate = useNavigate();
+
+    const navigateToEditApplicationForm = async() => {
+        await loadUser();
+        await getApplication(Application._id);
+        navigate("/application");
+    }
     return (
         <div>
             <Card
@@ -42,7 +53,7 @@ function ApplicationCard({Application}) {
                     {Application.applicationStatus}
                 </Card.Footer>
                 {Application.status == "saved"
-                    ? <Button variant="primary">Continue your application</Button>
+                    ? <Button variant="primary" onClick={() => navigateToEditApplicationForm()}>Continue your application</Button>
                     : <Button variant="success">View your application</Button>
 }
 
@@ -85,7 +96,7 @@ function ApplicationSelector({statusFilter, setStatusFilter}) {
     );
 }
 
-function ApplicationSection() {
+function ApplicationSection(props) {
     // get studentId from auth
     const auth = useSelector(state => state.authReducer);
     const studentId = auth.user._id;
@@ -116,7 +127,11 @@ function ApplicationSection() {
             }
 
         } else {
-            items = displayApplications.map(Application => (<ApplicationCard key={Application._id} Application={Application}/>));
+            items = displayApplications.map(Application => (<ApplicationCard
+                key={Application._id}
+                Application={Application}
+                getApplication={props.getApplication}
+                loadUser={props.loadUser}/>));
         }
     } else if (isError) {
         items = <p>Loading</p>;
@@ -145,4 +160,4 @@ function ApplicationSection() {
     );
 }
 
-export default ApplicationSection;
+export default connect(null, {getApplication, loadUser})(ApplicationSection);
