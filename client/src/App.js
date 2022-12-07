@@ -18,6 +18,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import AlertComponent from "./components/Alert";
 import EditProfile from "./components/EditProfile";
+import ApplicationDisplay from "./components/ApplicationDisplay";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -76,6 +77,15 @@ function App() {
             element={
               <PrivateRoute>
                 <Application />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/display-application"
+            element={
+              <PrivateRoute>
+                <ApplicationDisplay />
               </PrivateRoute>
             }
           />

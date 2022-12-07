@@ -48,10 +48,12 @@ function Application(props) {
             lor3,
             resume
         }
-        await props.applicationFormSave(applicationForm, filesUploaded, status, null, props.university._id, props.auth.user._id);
-        if (status == "submitted") {
-            navigate("/dashboard");
+        var id = null
+        if(props.application._id != null){
+            id = props.application._id;
         }
+        await props.applicationFormSave(applicationForm, filesUploaded, status, id, props.university._id, props.auth.user._id);
+        navigate("/dashboard");
     }
 
     const [specializations,
@@ -76,6 +78,7 @@ function Application(props) {
     }, [])
 
     const onChangeHandler = (e) => {
+        console.log(e.target.name, e.target.value);
         setApplicationForm((applicationForm) => {
             return ({
                 ...applicationForm,
@@ -249,8 +252,7 @@ function Application(props) {
                     <Form.Select name='specialization' onChange={e => onChangeHandler(e)} required>
                         {specializations
                             .map(sp => <option 
-                                selected={sp == applicationForm.sp} 
-                                onChange={e => onChangeHandler(e)}>
+                                selected={sp == applicationForm.specialization}>
                                     {sp}
                                 </option>)}
 
@@ -265,7 +267,7 @@ function Application(props) {
                     <Form.Label>Statement Of Purpose
                     </Form.Label>
 
-                    <Form.Control name='sop' onChange={e => onFileChange(e)} type="file"/> {applicationForm.sop != ""
+                    <Form.Control name='sop' onChange={e => onFileChange(e)} type="file"/> {applicationForm.sop != null
                         ? <Form.Text className="text-muted">
                                 This document has already been submitted, however, you may submit an updated
                                 document before finally submitting the application.
@@ -275,7 +277,7 @@ function Application(props) {
 
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Letter Of Recommendation 1</Form.Label>
-                    <Form.Control name='lor1' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor1 != ""
+                    <Form.Control name='lor1' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor1 != null
                         ? <Form.Text className="text-muted">
                                 This document has already been submitted, however, you may submit an updated
                                 document before finally submitting the application.
@@ -285,7 +287,7 @@ function Application(props) {
 
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Letter Of Recommendation 2</Form.Label>
-                    <Form.Control name='lor2' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor2 != ""
+                    <Form.Control name='lor2' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor2 != null
                         ? <Form.Text className="text-muted">
                                 This document has already been submitted, however, you may submit an updated
                                 document before finally submitting the application.
@@ -295,7 +297,7 @@ function Application(props) {
 
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Letter Of Recommendation 3</Form.Label>
-                    <Form.Control name='lor3' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor3 != ""
+                    <Form.Control name='lor3' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor3 != null
                         ? <Form.Text className="text-muted">
                                 This document has already been submitted, however, you may submit an updated
                                 document before finally submitting the application.
@@ -305,7 +307,7 @@ function Application(props) {
 
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Resume</Form.Label>
-                    <Form.Control name='resume' onChange={e => onFileChange(e)} type="file"/> {applicationForm.lor4 != ""
+                    <Form.Control name='resume' onChange={e => onFileChange(e)} type="file"/> {applicationForm.resume != null
                         ? <Form.Text className="text-muted">
                                 This document has already been submitted, however, you may submit an updated
                                 document before finally submitting the application.

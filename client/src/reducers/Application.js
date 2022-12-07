@@ -13,7 +13,8 @@ const initialState = {
     lor2: null,
     lor3: null,
     sop: null,
-    resume: null
+    resume: null,
+    _id: null
 }
 
 const applicationReducer = (state = initialState, action) => {
