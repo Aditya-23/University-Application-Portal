@@ -79,8 +79,11 @@ export const registerApplication = async (req, res, next) => {
             Object.keys(req.files).map(fileName => {
                 savedApplicationObj[fileName] = newUploadFolder + "/" + fileName;
             });
-            await savedApplicationObj.save();
         }
+        if(req.body.status == "submitted"){
+            savedApplicationObj.applicationStatus = "In Review";
+        }
+        await savedApplicationObj.save();
         return setResponse(savedApplicationObj, res);
     } catch (error) {
         console.log(error);
@@ -123,7 +126,12 @@ export const updateApplication = async (req, res) => {
                 });
             }
         }
+        if(req.body.status == "submitted"){
+            console.log("HERERER");
+            newApplicationObj.applicationStatus = "In Review";
+        }
         await newApplicationObj.save();
+        console.log()
 
         return setResponse(newApplicationObj, res);
     } catch (error) {
