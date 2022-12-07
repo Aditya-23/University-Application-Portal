@@ -23,6 +23,12 @@ function ApplicationCard({Application, getApplication, loadUser}) {
         await getApplication(Application._id);
         navigate("/application");
     }
+
+    const navigateToDisplayApplication = async() => {
+        await loadUser();
+        await getApplication(Application._id);
+        navigate("/display-application");
+    }
     return (
         <div>
             <Card
@@ -54,7 +60,7 @@ function ApplicationCard({Application, getApplication, loadUser}) {
                 </Card.Footer>
                 {Application.status == "saved"
                     ? <Button variant="primary" onClick={() => navigateToEditApplicationForm()}>Continue your application</Button>
-                    : <Button variant="success">View your application</Button>
+                    : <Button variant="success" onClick={() => navigateToDisplayApplication()}>View your application</Button>
 }
 
             </Card>
