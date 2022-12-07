@@ -11,7 +11,7 @@ export default function Landing() {
           <h4>The Real Meaning of ‘Working Knowledge’</h4>
           <h6>
           University-name is the world leader in experiential learning. 
-          Here, graduate students—from the master’s through the doctorate, and in professional and certificate programs—put
+          Here, graduate students—from the master's through the doctorate, and in professional and certificate programs—put
            knowledge to work at Fortune 500 and startup companies,
            universities, government agencies, nonprofits, and global organizations.
          </h6>
@@ -20,7 +20,11 @@ export default function Landing() {
         </div> 
 
       <div className="second-container1">
-        hello
+        <div className="research-container">
+          
+      <img src={require("../static/research.webp")} className="img_style" />
+      
+      </div>
       </div>
 
     </>
