@@ -48,10 +48,12 @@ function Application(props) {
             lor3,
             resume
         }
-        await props.applicationFormSave(applicationForm, filesUploaded, status, null, props.university._id, props.auth.user._id);
-        if (status == "submitted") {
-            navigate("/dashboard");
+        var id = null
+        if(props.application._id != null){
+            id = props.application._id;
         }
+        await props.applicationFormSave(applicationForm, filesUploaded, status, id, props.university._id, props.auth.user._id);
+        navigate("/dashboard");
     }
 
     const [specializations,
@@ -76,6 +78,7 @@ function Application(props) {
     }, [])
 
     const onChangeHandler = (e) => {
+        console.log(e.target.name, e.target.value);
         setApplicationForm((applicationForm) => {
             return ({
                 ...applicationForm,
@@ -249,8 +252,7 @@ function Application(props) {
                     <Form.Select name='specialization' onChange={e => onChangeHandler(e)} required>
                         {specializations
                             .map(sp => <option 
-                                selected={sp == applicationForm.sp} 
-                                onChange={e => onChangeHandler(e)}>
+                                selected={sp == applicationForm.specialization}>
                                     {sp}
                                 </option>)}
 

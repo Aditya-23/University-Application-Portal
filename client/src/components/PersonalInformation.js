@@ -20,7 +20,6 @@ export default function PersonalInformation(props) {
                     </Form.Group>
                 )
             })}
-            
         </div>
     );
 }

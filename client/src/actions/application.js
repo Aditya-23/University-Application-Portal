@@ -5,7 +5,7 @@ import * as types from "./types";
 //status can be "saved" or submitted
 // pass id if the application is being saved for the second time or third time
 // id is not necessary if the application is being submitted or saved for the first time
-const applicationFormSave = (applicationForm, files, status, id="638c375608b9cd60df607692", universityId, studentId) => async dispatch => {
+const applicationFormSave = (applicationForm, files, status, id, universityId, studentId) => async dispatch => {
 
     const config = {
         headers: {
@@ -24,6 +24,7 @@ const applicationFormSave = (applicationForm, files, status, id="638c375608b9cd6
         newFormObj.append("name", applicationForm.name);
         newFormObj.append("dataOfBirth", applicationForm.dateOfBirth);
         newFormObj.append("applyingTo", applicationForm.applyingTo);
+        newFormObj.append("specialization", applicationForm.specialization);
         newFormObj.append("universityId", universityId);
         newFormObj.append("studentId", studentId);
         
