@@ -7,6 +7,7 @@ export const applicationApiSlice = apiSlice.injectEndpoints({
         getApplicationsByStudentId: builder.query({
             query: studentId => `applications/?studentId=${studentId}`,
             providesTags: ["Applications"],
+            refetchOnWindowFocus: true,
         }),
     }),
 });
