@@ -11,7 +11,8 @@ import {
     SET_ALERT,
     REGISTER_FAIL,
     REGISTER_SUCCESS,
-    CLEAR_UNIVERSITY
+    CLEAR_UNIVERSITY,
+    CLEAR_APPLICATION
 } from "./types";
 
 const loadUser = () => async dispatch => {
@@ -94,6 +95,9 @@ const logoutUser = () => async dispatch => {
     dispatch({
         type: CLEAR_UNIVERSITY
     })
+    dispatch({
+        type: CLEAR_APPLICATION
+    })
 }
 
 //register a user
@@ -152,6 +156,7 @@ const updateProfile = (id, profile) => async dispatch => {
             'Content-Type' : "application/json"
         }
     };
+    console.log(profile);
 
     try {
         const response = await axios.put("/students/" + id, profile, config);
@@ -164,7 +169,7 @@ const updateProfile = (id, profile) => async dispatch => {
             dispatch({
                 type: SET_ALERT,
                 payload: {
-                    msg: "Saved Profile successfully",
+                    msg: "Profile saved successfully",
                     alertType: "success"
                 }
             })

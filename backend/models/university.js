@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {programSchema} from "./program.js";
 
 const universitySchema = new mongoose.Schema({
   name: {
@@ -10,8 +11,8 @@ const universitySchema = new mongoose.Schema({
     required: true,
   },
   programs: {
-    type: Array,
-    required: true,
+    type: [programSchema],
+    required: false,
   },
   description: {
     type: String,

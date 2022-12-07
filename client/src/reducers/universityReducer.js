@@ -8,7 +8,7 @@ const initialState = {
     imgURL1: null,
     imgURL2: null,
     imgURL3: null,
-    id: null
+    _id: null
 }
 
 const universityReducer = (state = initialState, action) => {
@@ -27,19 +27,12 @@ const universityReducer = (state = initialState, action) => {
                 description: payload.description,
                 programs: payload.programs,
                 location: payload.location,
+                _id: payload._id
             }
         case types.UNIVERSITY_LOADED_FAILED:
         case types.CLEAR_UNIVERSITY:
-            return{
-                ...state,
-                name: null,
-                description: null,
-                programs: [],
-                location: "",
-                imgURL1: null,
-                imgURL2: null,
-                imgURL3: null,
-            }
+            return initialState;
+            
         case types.IMG1_RECEIVED:
             return{
                 ...state,
