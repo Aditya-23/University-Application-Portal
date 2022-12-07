@@ -1,74 +1,85 @@
-import {applyPatches} from "immer";
-import {useEffect, useState} from "react";
-import {useGetApplicationsByStudentIdQuery} from "../../api/applicationApi";
+import { applyPatches } from "immer";
+import { useEffect, useState } from "react";
+import { useGetApplicationsByStudentIdQuery } from "../../api/applicationApi";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import {connect, useSelector} from "react-redux";
+import { connect, useSelector } from "react-redux";
 import Card from "react-bootstrap/Card";
-import {Button} from "react-bootstrap";
-import {useNavigate} from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { getApplication } from "../../actions/application";
 import { loadUser } from "../../actions/auth";
 
 const AppplicationStatus = ["Pending", "In Review", "Accepted", "Rejected"];
 const colorVariant = ["#ffff81", "#ffd078", "#a7ffa7", "#f89c9c"];
 
-function ApplicationCard({Application, getApplication, loadUser}) {
-    const bgColor = colorVariant[AppplicationStatus.indexOf(Application.applicationStatus)];
+function ApplicationCard({ Application, getApplication, loadUser }) {
+    const bgColor =
+        colorVariant[AppplicationStatus.indexOf(Application.applicationStatus)];
 
     const navigate = useNavigate();
 
-    const navigateToEditApplicationForm = async() => {
+    const navigateToEditApplicationForm = async () => {
         await loadUser();
         await getApplication(Application._id);
         navigate("/application");
-    }
+    };
 
-    const navigateToDisplayApplication = async() => {
+    const navigateToDisplayApplication = async () => {
         await loadUser();
         await getApplication(Application._id);
         navigate("/display-application");
-    }
+    };
     return (
         <div>
             <Card
                 style={{
-                width: "18rem",
-                margin: "10px 5px"
-            }}
-                className="mb-2">
+                    width: "18rem",
+                    margin: "10px 5px",
+                }}
+                className="mb-2"
+            >
                 <Card.Header>
                     <strong>{Application.applyingTo}</strong>
                 </Card.Header>
                 <Card.Body>
                     <Card.Text>
-                        <strong>Sem Intake:
-                        </strong>
+                        <strong>Sem Intake:</strong>
                         {Application.semIntake}
                     </Card.Text>
                     <Card.Text>
-                        <strong>Program:
-                        </strong>
+                        <strong>Program:</strong>
                         {Application.programName}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer
                     style={{
-                    backgroundColor: bgColor
-                }}>
+                        backgroundColor: bgColor,
+                    }}
+                >
                     {Application.applicationStatus}
                 </Card.Footer>
-                {Application.status == "saved"
-                    ? <Button variant="primary" onClick={() => navigateToEditApplicationForm()}>Continue your application</Button>
-                    : <Button variant="success" onClick={() => navigateToDisplayApplication()}>View your application</Button>
-}
-
+                {Application.status == "saved" ? (
+                    <Button
+                        variant="primary"
+                        onClick={() => navigateToEditApplicationForm()}
+                    >
+                        Continue your application
+                    </Button>
+                ) : (
+                    <Button
+                        variant="success"
+                        onClick={() => navigateToDisplayApplication()}
+                    >
+                        View your application
+                    </Button>
+                )}
             </Card>
         </div>
     );
 }
 
-function ApplicationSelector({statusFilter, setStatusFilter}) {
+function ApplicationSelector({ statusFilter, setStatusFilter }) {
     // refresh Section when statusFilter changes
     useEffect(() => {}, [statusFilter]);
     function handleSelect(e) {
@@ -92,7 +103,8 @@ function ApplicationSelector({statusFilter, setStatusFilter}) {
             <DropdownButton
                 id="dropdown-basic-button"
                 onSelect={handleSelect}
-                title={statusFilter}>
+                title={statusFilter}
+            >
                 <Dropdown.Menu>
                     {AllItem}
                     {selectorContent}
@@ -106,11 +118,16 @@ function ApplicationSection(props) {
     // get studentId from auth
     const auth = useSelector(state => state.authReducer);
     const studentId = auth.user._id;
-    const {data: Applications, isLoading, isSuccess, isError, error} = useGetApplicationsByStudentIdQuery(studentId);
+    const {
+        data: Applications,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } = useGetApplicationsByStudentIdQuery(studentId);
     // useGetApplicationsByStudentIdQuery("6382996e0b0d5cc4eccec77c"); var
     // statusFilter = "all";
-    const [statusFilter,
-        setStatusFilter] = useState("All");
+    const [statusFilter, setStatusFilter] = useState("All");
 
     var items = [];
     // refresh Section when statusFilter changes
@@ -120,7 +137,9 @@ function ApplicationSection(props) {
     } else if (isSuccess) {
         var displayApplications = [];
         if (AppplicationStatus.includes(statusFilter)) {
-            displayApplications = Applications.filter(Application => Application.applicationStatus === statusFilter);
+            displayApplications = Applications.filter(
+                Application => Application.applicationStatus === statusFilter
+            );
         } else {
             displayApplications = Applications;
         }
@@ -131,34 +150,40 @@ function ApplicationSection(props) {
             } else {
                 items = <p>No Applications with status "{statusFilter}"</p>;
             }
-
         } else {
-            items = displayApplications.map(Application => (<ApplicationCard
-                key={Application._id}
-                Application={Application}
-                getApplication={props.getApplication}
-                loadUser={props.loadUser}/>));
+            items = displayApplications.map(Application => (
+                <ApplicationCard
+                    key={Application._id}
+                    Application={Application}
+                    getApplication={props.getApplication}
+                    loadUser={props.loadUser}
+                />
+            ));
         }
     } else if (isError) {
         items = <p>Loading</p>;
     }
 
     return (
-        <div style={{
-            overflowY: "auto"
-        }}>
+        <div
+            style={{
+                overflowY: "auto",
+            }}
+        >
             <h2>Applications</h2>
 
             <ApplicationSelector
                 statusFilter={statusFilter}
-                setStatusFilter={setStatusFilter}/>
+                setStatusFilter={setStatusFilter}
+            />
             <div className="dashboardTile">
                 <ul
                     style={{
-                    display: "flex",
-                    flexFlow: "row"
-                }}
-                    className="cardsList">
+                        display: "flex",
+                        flexFlow: "row",
+                    }}
+                    className="cardsList"
+                >
                     {items}
                 </ul>
             </div>
@@ -166,4 +191,4 @@ function ApplicationSection(props) {
     );
 }
 
-export default connect(null, {getApplication, loadUser})(ApplicationSection);
+export default connect(null, { getApplication, loadUser })(ApplicationSection);
