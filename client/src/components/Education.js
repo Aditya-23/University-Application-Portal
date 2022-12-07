@@ -17,7 +17,6 @@ function Education(props) {
                                     <Form.Control
                                         name='university'
                                         type="text"
-                                        placeholder="Enter full name as per your passport"
                                         defaultValue={ed.university}
                                         disabled/>
                                     <br></br>
@@ -25,7 +24,6 @@ function Education(props) {
                                     <Form.Control
                                         name='degree'
                                         type="text"
-                                        placeholder="Enter full name as per your passport"
                                         defaultValue={ed.degree}
                                         disabled/>
                                     <br></br>
@@ -33,7 +31,6 @@ function Education(props) {
                                     <Form.Control
                                         name='gpa'
                                         type="text"
-                                        placeholder="Enter full name as per your passport"
                                         defaultValue={ed.gpa}
                                         disabled/>
                                     <br></br>
@@ -41,7 +38,6 @@ function Education(props) {
                                     <Form.Control
                                         name='specialization'
                                         type="text"
-                                        placeholder="Enter full name as per your passport"
                                         defaultValue={ed.specialization}
                                         disabled/>
                                     <br></br>

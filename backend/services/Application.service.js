@@ -25,6 +25,20 @@ const getApplicationsByStudentId = studentId => {
     }
 };
 
+
+const getApplicationsByUniId = universityId => {
+    try {
+        const applicationObjs = Application.find({
+            universityId: universityId,
+        });
+        return applicationObjs;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+
+
 const registerApplicationService = applicationObj => {
     try {
         const savedApplicationObj = Application(applicationObj);
@@ -57,6 +71,7 @@ const deleteApplicationService = id => {
 export {
     getApplicationByIdService,
     getApplicationsByStudentId,
+    getApplicationsByUniId,
     registerApplicationService,
     updateApplicationService,
     deleteApplicationService,
