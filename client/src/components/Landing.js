@@ -5,7 +5,7 @@ export default function Landing() {
     <>
       <div className="container4">
         <div className="showcase">
-          <img src="landing.png" alt=""></img>
+        <img src={require("../static/landing.webp")} className="img_style" />
           <div className="centered">
             <h2>University Name - Experiential Learning</h2>
             <h4>The Real Meaning of ‘Working Knowledge’</h4>
