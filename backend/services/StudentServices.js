@@ -59,6 +59,7 @@ export const loginService = async (email, password) => {
         toeflScore: student.toeflScore,
         ieltsScore: student.ieltsScore,
         governmentId: student.governmentId,
+        shortlistedUniversities: student.shortlistedUniversities,
         dateOfBirth: student.dateOfBirth,
         gender: student.gender
     }
