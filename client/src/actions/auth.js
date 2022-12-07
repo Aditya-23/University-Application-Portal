@@ -156,6 +156,7 @@ const updateProfile = (id, profile) => async dispatch => {
             'Content-Type' : "application/json"
         }
     };
+    console.log(profile);
 
     try {
         const response = await axios.put("/students/" + id, profile, config);

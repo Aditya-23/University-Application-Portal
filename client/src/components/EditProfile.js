@@ -1,7 +1,7 @@
 import React, {useEffect, useState, ReactDOM} from 'react';
 import {Button, Col, Form, Row} from 'react-bootstrap';
 import {connect} from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 import {updateProfile} from '../actions/auth';
 import Education from './Education';
 import Experience from './Experience';
@@ -16,8 +16,8 @@ function EditProfile(props) {
         gender: props.auth.user.gender,
         email: props.auth.user.email,
         phone: props.auth.user.phone,
-        education: props.auth.user.education,
-        experience: props.auth.user.experience,
+        education: [...props.auth.user.education],
+        experience: [...props.auth.user.experience],
         greScore: props.auth.user.greScore,
         toeflScore: props.auth.user.toeflScore,
         ieltsScore: props.auth.user.ieltsScore
@@ -75,6 +75,12 @@ function EditProfile(props) {
         })
     }
 
+    const getDateFromDateTimeObj = (str) => {
+        return str != null
+            ? str.split("T")[0]
+            : null;
+    }
+
     const addEducationToState = (e) => {
         e.preventDefault();
         setEditProfile({
@@ -110,6 +116,53 @@ function EditProfile(props) {
         });
     }
 
+    const editExistingEducation = (e, id) => {
+        var educationObjIndex = editProfile
+            .education
+            .findIndex(ed => ed._id == id);
+        var educationObj = Object.assign({}, editProfile.education[educationObjIndex]);
+
+        educationObj[e.target.name] = e.target.value;
+
+        var educationList = Object.assign([], editProfile.education);
+        educationList = educationList.filter(ex => ex._id != id);
+        educationList.push(educationObj)
+        setEditProfile((currentEditProf) => {
+            return {
+                ...currentEditProf,
+                education: [...educationList]
+            }
+        })
+    }
+
+    const editExistingExperience = (e, id) => {
+
+        var experienceObjIndex = editProfile
+            .experience
+            .findIndex(ex => ex._id == id);
+        var experienceObj = Object.assign({}, editProfile.experience[experienceObjIndex]);
+        
+        if(e.target.name == "currentWorkFlag"){
+            experienceObj["currentWorkFlag"] = e.target.checked;
+            if(e.target.checked){
+                experienceObj["endDate"] = "";
+            }
+        }
+        else{
+            experienceObj[e.target.name] = e.target.value;
+        }
+
+        var experienceList = Object.assign([], editProfile.experience);
+        experienceList = experienceList.filter(ex => ex._id != id);
+        experienceList.push(experienceObj)
+        setEditProfile((currentEditProf) => {
+            return {
+                ...currentEditProf,
+                experience: [...experienceList]
+            }
+        })
+    }
+
     const openEducationForm = () => {
         setShowEducationForm(true);
         setShowAddEducationButton(false);
@@ -131,7 +184,7 @@ function EditProfile(props) {
         setShowExperienceForm(false);
     }
 
-    const finalSaveProfile = async (e) => {
+    const finalSaveProfile = async(e) => {
         e.preventDefault();
         await props.updateProfile(props.auth.user._id, editProfile);
         navigate("/dashboard");
@@ -139,7 +192,6 @@ function EditProfile(props) {
 
     return (
         <div className='application-container'>
-            {console.log(editProfile)}
             <Form>
                 <Form.Label>
                     <h3>Personal Information</h3>
@@ -177,7 +229,57 @@ function EditProfile(props) {
                     <h3>Education</h3>
                 </Form.Label>
 
-                <Education educationList={editProfile.education}/> {showAddEducationButton
+                {/* //editable education form */}
+
+                <ol>
+                    {editProfile.education.length > 0
+                        ? editProfile
+                            .education
+                            .map(ed => {
+                                return (
+                                    <li>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>University</Form.Label>
+                                            <Form.Control
+                                                name='university'
+                                                type="text"
+                                                defaultValue={ed.university}
+                                                onChange={e => editExistingEducation(e, ed._id)}/>
+                                            <br></br>
+                                            <Form.Label>Degree</Form.Label>
+                                            <Form.Control
+                                                name='degree'
+                                                type="text"
+                                                placeholder="Enter full name as per your passport"
+                                                defaultValue={ed.degree}
+                                                onChange={e => editExistingEducation(e, ed._id)}/>
+                                            <br></br>
+                                            <Form.Label>GPA</Form.Label>
+                                            <Form.Control
+                                                name='gpa'
+                                                type="text"
+                                                placeholder="Enter full name as per your passport"
+                                                defaultValue={ed.gpa}
+                                                onChange={e => editExistingEducation(e, ed._id)}/>
+                                            <br></br>
+                                            <Form.Label>Specialization</Form.Label>
+                                            <Form.Control
+                                                name='specialization'
+                                                type="text"
+                                                placeholder="Enter full name as per your passport"
+                                                defaultValue={ed.specialization}
+                                                onChange={e => editExistingEducation(e, ed._id)}/>
+                                            <br></br>
+                                        </Form.Group>
+                                    </li>
+                                )
+                            })
+                        : null
+}
+                </ol>
+
+                {/* <Education educationList={editProfile.education}/>  */}
+                {showAddEducationButton
                     ? <Button variant='success' onClick={() => openEducationForm()}>Add education</Button>
                     : null
 }
@@ -228,13 +330,77 @@ function EditProfile(props) {
                         </Form.Group>
                     : null}
 
+
+
                 <br></br>
                 <br></br>
                 <Form.Label>
                     <h3>Experience</h3>
                 </Form.Label>
 
-                <Experience experienceList={editProfile.experience} onChangeHandler/> {showAddExperienceButton
+                <ol>
+                    {editProfile.experience.length > 0
+                        ? editProfile
+                            .experience
+                            .map(ex => {
+                                return (
+                                    <li>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Company</Form.Label>
+                                            <Form.Control
+                                                name='companyName'
+                                                type="text"
+                                                defaultValue={ex.companyName}
+                                                onChange={e => editExistingExperience(e, ex._id)}/>
+                                            <br></br>
+                                            <Form.Label>Job Title</Form.Label>
+                                            <Form.Control
+                                                name='jobTitle'
+                                                type="text"
+                                                defaultValue={ex.jobTitle}
+                                                onChange={e => editExistingExperience(e, ex._id)}/>
+                                            <br></br>
+                                            <Form.Label>Start Date</Form.Label>
+                                            <Form.Control
+                                                name='startDate'
+                                                type="date"
+                                                value={getDateFromDateTimeObj(ex.startDate)}
+                                                onChange={e => editExistingExperience(e, ex._id)}/>
+                                            <br></br>
+                                            <Form.Check
+                                                name="currentWorkFlag"
+                                                type="checkbox"
+                                                id="default-checbox"
+                                                checked={ex.currentWorkFlag}
+                                                label="Currently working in this company"
+                                                onChange={e => editExistingExperience(e, ex._id)}
+                                                />
+                                            <br></br>
+                                            <Form.Label>End Date</Form.Label>
+                                            <Form.Control
+                                                name='endDate'
+                                                type="date"
+                                                value={ex.endDate != "" ? getDateFromDateTimeObj(ex.endDate) : ""}
+                                                onChange={e => editExistingExperience(e, ex._id)}
+                                                disabled={ex.currentWorkFlag}/>
+                                            <br></br>
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control
+                                                name='description'
+                                                type="text"
+                                                defaultValue={ex.description}
+                                                onChange={e => editExistingExperience(e, ex._id)}/>
+                                            <br></br>
+                                        </Form.Group>
+                                    </li>
+                                )
+                            })
+                        : null
+}
+                </ol>
+
+                {/* <Experience experienceList={editProfile.experience} onChangeHandler/>  */}
+                {showAddExperienceButton
                     ? <Button variant='success' onClick={() => openExperienceForm()}>Add experience</Button>
                     : null
 }
@@ -265,7 +431,14 @@ function EditProfile(props) {
                                 onChange={e => onExperienceChangeHandler(e)}
                                 type="date"/>
                             <br></br>
-                            <Form.Check type="checkbox" id="default-checbox" onChange={(e) => setExperience({...experience, currentWorkFlag: e.target.checked})} label="Currently working in this company"/>
+                            <Form.Check
+                                type="checkbox"
+                                id="default-checbox"
+                                onChange={(e) => setExperience({
+                                ...experience,
+                                currentWorkFlag: e.target.checked
+                            })}
+                                label="Currently working in this company"/>
                             <br></br>
                             <Form.Label>End date</Form.Label>
                             <Form.Control
