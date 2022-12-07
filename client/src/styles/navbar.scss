@@ -22,7 +22,7 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: #89083c;
-    
+    height:90px;
     
 
     .img_style {
@@ -47,13 +47,14 @@
 }
 
     a {
-        // margin-top: 15px;
-        // // margin-left: 10px;
-        // margin-bottom: 10px;
+       
         float: right;
+        
+        margin-right:20px;
+        padding-top:10px;
         color: #f2f2f2;
         text-align: center;
-        padding: 18px 24px;
+        // padding: 18px 24px;
         text-decoration: none;
         font-family: 'Lato', sans-serif;
 
@@ -155,7 +156,7 @@
         float: right;
         color: #f2f2f2;
         text-align: center;
-        padding: 14px 25px;
+        padding: 24px 25px;
         text-decoration: none;
         font-size: 17px;
         cursor: pointer;

@@ -8,10 +8,9 @@ export default function Footer() {
             <h4> University Name </h4>
           <div className='myDivElement'>
           <ul>
-               <li><a href="#home">Home</a></li>
-               <li><a href="#about">About Us</a></li>
-               <li><a href="#clients">Our Clients</a></li>  
-               <li><a href="#contact">Contact Us</a></li>
+               <li><a href="/dashboard">Home</a></li>
+               <li><a href="/">About Us</a></li>
+          
           </ul>
           </div>
           <div className='copyright'>
