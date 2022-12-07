@@ -6,6 +6,7 @@ import {
     registerApplicationService,
     updateApplicationService,
     getApplicationsByStudentId,
+    getApplicationsByUniId,
 } from "../services/Application.service.js";
 import { setRequestError, setResponse, setServerError } from "./utils.js";
 import fs from "fs";
@@ -13,22 +14,30 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 export const getApplications = async (req, res) => {
+    console.log(req.query);
     try {
+        // if only StudentId is present in the query
         if (Object.keys(req.query).includes("studentId")) {
             // send response with applications of the student
             const applications = await getApplicationsByStudentId(req.query.studentId);
             setResponse(applications, res);
+        }
+        // if only UniversityId is present in the query
+        else if (Object.keys(req.query).includes("universityId")) {
+            // send response with applications of the university
+            const applications = await getApplicationsByUniId(req.query.universityId);
+            setResponse(applications, res);
         } else if (!req.query) {
             // send error response
             setRequestError(
-                res,
-                "No query parameters found. API doesn't support fetch all applications"
+                "No query parameters found. API doesn't support fetch all applications",
+                res
             );
         } else {
             // send error response
             setRequestError(
-                res,
-                "Invalid query parameters. API only supports studentId query parameter"
+                "Invalid query parameters. API only supports `studentId` or `universityId`  query parameter",
+                res
             );
         }
     } catch (error) {
@@ -58,6 +67,7 @@ export const getApplicationById = async (req, res) => {
 //saving or submitting for the first time
 export const registerApplication = async (req, res, next) => {
     try {
+        console.log(req.body);
         const savedApplicationObj = await registerApplicationService(req.body);
         if (!savedApplicationObj) {
             return setRequestError(
@@ -72,7 +82,8 @@ export const registerApplication = async (req, res, next) => {
         const oldUploadFolder = __dirname + "/uploads/applications/temporary";
         // making sure that the files have been uploaded
         if (fs.existsSync(oldUploadFolder)) {
-            const newUploadFolder = __dirname + "/uploads/applications/" + savedApplicationObj.id;
+            const newUploadFolder =
+                __dirname + "/uploads/applications/" + savedApplicationObj.id;
             renameSync(oldUploadFolder, newUploadFolder);
             //saving the file locations to the application object
             Object.keys(req.files).map(fileName => {
@@ -94,7 +105,9 @@ export const registerApplication = async (req, res, next) => {
 
 export const updateApplication = async (req, res) => {
     try {
-        const isApplicationPresent = await Application.findById(req.params.id).select("_id");
+        const isApplicationPresent = await Application.findById(req.params.id).select(
+            "_id"
+        );
         if (!isApplicationPresent) {
             return setRequestError(
                 {
@@ -108,14 +121,16 @@ export const updateApplication = async (req, res) => {
         if (Object.keys(req.files).length > 0) {
             const __filename = fileURLToPath(import.meta.url);
             const __dirname = path.dirname(path.dirname(__filename));
-            const UploadFolder = __dirname + "/uploads/applications/" + newApplicationObj.id;
+            const UploadFolder =
+                __dirname + "/uploads/applications/" + newApplicationObj.id;
             if (fs.existsSync(UploadFolder)) {
                 Object.keys(req.files).map(fileName => {
                     newApplicationObj[fileName] = UploadFolder + "/" + fileName;
                 });
             } else {
                 const oldUploadFolder = __dirname + "/uploads/applications/temporary";
-                const newUploadFolder = __dirname + "/uploads/applications/" + newApplicationObj.id;
+                const newUploadFolder =
+                    __dirname + "/uploads/applications/" + newApplicationObj.id;
                 renameSync(oldUploadFolder, newUploadFolder);
                 Object.keys(req.files).map(fileName => {
                     newApplicationObj[fileName] = newUploadFolder + "/" + fileName;
@@ -138,7 +153,9 @@ export const updateApplication = async (req, res) => {
 
 export const deleteApplication = async (req, res) => {
     try {
-        const isApplicationPresent = await Application.findById(req.params.id).select("_id");
+        const isApplicationPresent = await Application.findById(req.params.id).select(
+            "_id"
+        );
         if (!isApplicationPresent) {
             return setRequestError(
                 {

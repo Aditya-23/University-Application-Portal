@@ -6,6 +6,9 @@ import ApplicationSection from "./ApplicationSection.js";
 import UniversitySection from "./TopUniversitySection.js";
 import ShortlistSection from "./ShortlistSection.js";
 import { Button } from "react-bootstrap";
+import { getApplication } from "../../actions/application";
+import { loadUser } from "../../actions/auth";
+
 import Container from 'react-bootstrap/Container';
 function Dashboard(props) {
   const navigate = useNavigate();
@@ -14,9 +17,15 @@ function Dashboard(props) {
     return <h1>Loading</h1>;
   }
   const onClickHandler = async () => {
-    await props.startUniversityLoad("63869b3066f1b3a566d37e03");
+    await props.startUniversityLoad("638c043031111c396dc2bad7");
     navigate("/university");
   };
+
+  const onClickApplicationHandler = async () => {
+    await props.loadUser();
+    await props.getApplication("638cf137f6096b0f8bd91319");
+    navigate("/application");
+  }
 
 
   return (
@@ -27,6 +36,7 @@ function Dashboard(props) {
       <UniversitySection />
       <ShortlistSection/>
       <button onClick={() => onClickHandler()}>Click here</button>{" "}
+      <button onClick={() => onClickApplicationHandler()}>Click here 1</button>{" "}
     </Container>
   );
 }
@@ -37,4 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { startUniversityLoad })(Dashboard);
+export default connect(mapStateToProps, { startUniversityLoad, getApplication, loadUser })(Dashboard);

@@ -9,7 +9,7 @@ export const uniApiSlice = apiSlice.injectEndpoints({
             providesTags: ["Universities"],
         }),
         getUniversitiesByIds: builder.query({
-            query: ids => {
+            query: (ids, refreshUpdate) => {
                 // convert array of ids to a string of individual ids separated by commas
                 const idsString = "ids[]=" + ids.join("&ids[]=");
                 console.log(idsString);

@@ -3,30 +3,30 @@ import mongoose from "mongoose";
 const programSchema = new mongoose.Schema({
     courseName: {
       type: String,
-      required: true,
+      required: false,
     },
     courseDuration: {
       type: String,
-      required: true,
+      required: false,
     },
     credits: {
       type: Number,
-      required: true,
+      required: false,
     },
     university: {
       type: String,
-      required: true,
+      required: false,
     },
     fees: {
       type: Number,
-      required: true,
+      required: false,
     },
     education: {
       type: String,
       required: false,
     },
     specialization: {
-      type: String,
+      type: [String],
       required: false,
     },
     description: {
@@ -35,11 +35,11 @@ const programSchema = new mongoose.Schema({
     },
     school: {
       type: String,
-      required: true,
+      required: false,
     },
   });
   
   const Program = mongoose.model("Program", programSchema);
   
-  export default Program;
+  export {Program, programSchema};
   
