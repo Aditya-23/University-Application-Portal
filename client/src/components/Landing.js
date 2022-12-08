@@ -3,7 +3,7 @@ import React from 'react';
 export default function Landing() {
   return (
     <>
-   
+      {/* First div to contain intro for university */}
       <div className="container4">
         <div className="showcase">
         <img src={require("../static/landing.webp")} className="img_style" />
@@ -21,6 +21,7 @@ export default function Landing() {
         </div>
       </div>
 
+      {/* Second divto contain Research oinformation */}
       <div className="second-container1">
         <div className="research-container">
           <img src={require("../static/research.webp")} className="img_style" />
@@ -40,6 +41,7 @@ export default function Landing() {
         </div>
       </div>
 
+      {/* Third div to contain global reach of university */}
       <div className="third-container1">
         <div className="world-container">
           <img src={require("../static/world.png")} className="img_style2" />

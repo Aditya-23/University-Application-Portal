@@ -42,10 +42,12 @@ function Login(props) {
 
   return (
     <>
+    {/* Div container 3 contains all the elements inside it and is the parent div for this page */}
       <div class="container3" id="container3">
         <div class="form-container sign-in-container">
           {props.alert.msg != null ? (
             <div class="alert">
+              {/* throws an alert if the fields are empty  */}
               <span class="closebtn" onClick={() => closeAlert()}>
                 &times;
               </span>
@@ -54,6 +56,7 @@ function Login(props) {
           ) : null}
           <form className="form" onSubmit={(e) => onSubmit(e)}>
             <h1>Welcome, Sign in here</h1>
+            {/* Displays Sign in  form on */}
             <input
               className="email"
               type="text"
@@ -76,6 +79,7 @@ function Login(props) {
         <div class="overlay-container">
           <div class="overlay">
             <div class="overlay-panel overlay-right">
+              {/* displays a new panel on right which asks for new user to sign in */}
               <h1>Hello Student!</h1>
               <p>
                 Enter your details and start your application journey with us
