@@ -1,8 +1,9 @@
 import React from 'react';
-import {Modal, Button} from "react-bootstrap";
+import {Modal, Button, Form, ListGroup} from "react-bootstrap";
 
 export default function ProgramDetails(props) {
-    const [modalShow, setModalShow] = React.useState(false);
+    const [modalShow,
+        setModalShow] = React.useState(false);
     return (
         <Modal
             {...props}
@@ -11,20 +12,28 @@ export default function ProgramDetails(props) {
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Modal heading
+                    {props.currentProgram.courseName}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>Centered Modal</h4>
-                <p>
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac
-                    facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac,
-                    vestibulum at eros.
-                </p>
+                <Form.Label>Credits :
+                </Form.Label>
+                <Form.Label>{props.currentProgram.credits}</Form.Label>
+                <br></br>
+                <Form.Label>Specializations :
+                </Form.Label>
+                <br></br>
+                <ListGroup>
+                    {props.currentProgram.specialization
+                        ? props
+                            .currentProgram
+                            .specialization
+                            .map(sp => <ListGroup.Item>{sp}</ListGroup.Item>) : null}
+                </ListGroup>
+                <br></br>
+                <Form.Label>Description :   </Form.Label>
+                <Form.Label>{props.currentProgram.description}</Form.Label>
             </Modal.Body>
-            <Modal.Footer>
-                <h1>Footer</h1>
-            </Modal.Footer>
         </Modal>
     );
 }
