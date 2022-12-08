@@ -6,8 +6,18 @@ import PersonalInformation from './PersonalInformation';
 import Education from './Education';
 import Experience from './Experience';
 import UniversityInformation from './UniversityInformation';
+import { withdrawApplication } from '../actions/application';
 
 function ApplicationDisplay(props) {
+
+    const navigate = useNavigate();
+
+    const onwWithdrawApplication = async (e) => {
+        e.preventDefault();
+        await props.withdrawApplication(props.application._id);
+        navigate("/dashboard");
+    }
+
     const [userInformation,
         setuserInformation] = useState(props.auth.user);
     const [universityApplicationInformation,
@@ -40,6 +50,15 @@ function ApplicationDisplay(props) {
             </Form.Label>
 
             <Experience experienceList={userInformation.experience}/>
+            <Col>
+                <Button
+                    variant="danger"
+                    type="submit"
+                    value="withdraw"
+                    onClick={e => onwWithdrawApplication(e)}>
+                    Withdraw Application
+                </Button>
+            </Col>
 
         </div>
     );
@@ -49,4 +68,4 @@ const mapStateToProps = state => {
     return {auth: state.authReducer, application: state.applicationReducer}
 }
 
-export default connect(mapStateToProps, null)(ApplicationDisplay);
+export default connect(mapStateToProps, {withdrawApplication})(ApplicationDisplay);

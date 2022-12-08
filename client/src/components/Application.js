@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { connect, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { applicationFormSave, getApplication } from "../actions/application.js";
+import { applicationFormSave, getApplication, withdrawApplication } from "../actions/application.js";
 import { apiSlice } from "../api/apiSlice.js";
 // import { useAppDispatch } from './store/hooks'
 
@@ -64,6 +64,8 @@ function Application(props) {
             })
         );
     };
+
+
 
     const [specializations, setSpecializations] = useState([]);
 
@@ -384,15 +386,7 @@ function Application(props) {
                             Submit
                         </Button>
                     </Col>
-                    <Col>
-                        <Button
-                            variant="danger"
-                            type="submit"
-                            value="withdraw"
-                        >
-                            Withdraw
-                        </Button>
-                    </Col>
+                    
                 </Row>
             </Form>
         </div>
@@ -410,6 +404,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     applicationFormSave,
     getApplication,
+    withdrawApplication,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application);
