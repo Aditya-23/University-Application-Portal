@@ -5,7 +5,7 @@ export default function Footer() {
     <>
         <footer className='container-footer'>
           <div className='footer-main'>
-            <h4> University Name </h4>
+            <h4> ADMIT </h4>
           <div className='myDivElement'>
           <ul>
                <li><a href="/dashboard">Home</a></li>
@@ -14,7 +14,7 @@ export default function Footer() {
           </ul>
           </div>
           <div className='copyright'>
-              <p>©2022 University | 390 Huntington Avenue, Boston, MA </p>
+              <p>©2022 ADMIT | 390 Huntington Avenue, Boston, MA </p>
           </div>
           </div>
         </footer>

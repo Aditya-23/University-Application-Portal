@@ -28,7 +28,7 @@ function Navbar(props) {
                   className="img_style"
                 />
               </a>
-              <p className="name_style">University Application</p>
+              <p className="name_style">ADMIT</p>
             </div>{" "}
             <form className="search_bar_wrap">
               {" "}
@@ -57,13 +57,13 @@ function Navbar(props) {
                 className="img_style"
               />
             </a>{" "}
-            <p className="name_style">University Application</p>
+            <p className="name_style">ADMIT</p>
           </div>
           <div className="log_out_nav">
             <a href="/login" className="login_style">
               Login
             </a>
-            <a href="/register" className="sign_up_style">
+            <a href="/register" className="login_style">
               {" "}
               SignUp{" "}
             </a>
