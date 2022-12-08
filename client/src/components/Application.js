@@ -25,6 +25,7 @@ function Application(props) {
         resume: "",
     });
 
+    //file states
     const [sop, setsop] = useState({ preview: "", data: "" });
 
     const [lor1, setlor1] = useState({ preview: "", data: "" });

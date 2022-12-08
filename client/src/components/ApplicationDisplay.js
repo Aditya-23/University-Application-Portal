@@ -11,7 +11,7 @@ import { withdrawApplication } from '../actions/application';
 function ApplicationDisplay(props) {
 
     const navigate = useNavigate();
-
+// Handler to withdraw the application 
     const onwWithdrawApplication = async (e) => {
         e.preventDefault();
         await props.withdrawApplication(props.application._id);

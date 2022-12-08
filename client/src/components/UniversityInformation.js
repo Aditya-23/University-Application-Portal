@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
+//Display university related information of the application
 export default function UniversityInformation(props) {
     const universityFields = props.universityFields;
     const fields = ["applyingTo", "semIntake", "programName", "specialization"]

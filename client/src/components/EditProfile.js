@@ -6,6 +6,7 @@ import {updateProfile} from '../actions/auth';
 import Education from './Education';
 import Experience from './Experience';
 
+//Here you can edit existing education, experience and add new ones
 function EditProfile(props) {
 
     const navigate = useNavigate();
@@ -229,7 +230,7 @@ function EditProfile(props) {
                     <h3>Education</h3>
                 </Form.Label>
 
-                {/* //editable education form */}
+                {/* //Edit existing education*/}
 
                 <ol>
                     {editProfile.education.length > 0
@@ -278,12 +279,11 @@ function EditProfile(props) {
 }
                 </ol>
 
-                {/* <Education educationList={editProfile.education}/>  */}
                 {showAddEducationButton
                     ? <Button variant='success' onClick={() => openEducationForm()}>Add education</Button>
                     : null
 }
-
+{/* Open a form to add a new education  */}
                 {showEducationForm
                     ? <Form.Group className="mb-3">
                             <Form.Label>
@@ -337,7 +337,7 @@ function EditProfile(props) {
                 <Form.Label>
                     <h3>Experience</h3>
                 </Form.Label>
-
+{/* Edit existing experience */}
                 <ol>
                     {editProfile.experience.length > 0
                         ? editProfile
@@ -398,13 +398,12 @@ function EditProfile(props) {
                         : null
 }
                 </ol>
-
-                {/* <Experience experienceList={editProfile.experience} onChangeHandler/>  */}
+{/* Add experience button  */}
                 {showAddExperienceButton
                     ? <Button variant='success' onClick={() => openExperienceForm()}>Add experience</Button>
                     : null
 }
-
+{/* Add new experience */}
                 {showExperienceForm
                     ? <Form.Group className="mb-3">
                             <Form.Label>
