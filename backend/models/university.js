@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import {programSchema} from "./program.js";
 
+//University object 
 const universitySchema = new mongoose.Schema({
   name: {
     type: String,

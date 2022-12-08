@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+//This is the main application schema 
 const applicationSchema = new mongoose.Schema({
     studentId: {
         type: mongoose.Schema.Types.ObjectId,

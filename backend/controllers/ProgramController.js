@@ -7,6 +7,7 @@ import {
 } from "../services/Program.service.js";
 import { setResponse, setRequestError, setServerError } from "./utils.js";
 
+//Create program route
 async function createProgram(req, res) {
   try {
     var programObj = req.body;
@@ -25,6 +26,7 @@ async function createProgram(req, res) {
   }
 }
 
+//get all programs
 async function getPrograms(req, res) {
   try {
     const programObj = await getAllPrograms(req.params.id);
@@ -35,6 +37,8 @@ async function getPrograms(req, res) {
   }
 }
 
+
+//update a program
 async function updateProgram(req, res) {
   try {
     const currentProgram = req.body;
@@ -58,6 +62,8 @@ async function updateProgram(req, res) {
   }
 }
 
+
+//delete a program
 async function deleteProgram(req, res) {
   try {
     const isProgramPresent = await Program.findById(req.params.id).select(

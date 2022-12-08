@@ -11,4 +11,4 @@ jspm_packages/
 .vscode
 logs
 *.log
-backend/uploads/students
+uploads/applications/

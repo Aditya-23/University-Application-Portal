@@ -5,14 +5,14 @@ import { removeAlert } from '../actions/alert';
 
 function AlertComponent(props) {
 
-    const closeAlert = async() => {
-        await props.removeAlert();
+    const closeAlert = () => {
+        setTimeout(() => props.removeAlert, 3000);
     }
 
     return (
         <>
             {props.alert.msg != null
-                    ? <Alert variant={props.alert.alertType} onClose={() => closeAlert()} dismissible>
+                    ? <Alert variant={props.alert.alertType} onClose={() => closeAlert()}>
                             <p>
                                 {props.alert.msg}
                             </p>

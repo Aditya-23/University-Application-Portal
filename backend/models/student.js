@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+//Education details to be included in the education array
 const educationSchema = new mongoose.Schema({
   university: {
     type: String,
@@ -15,6 +16,7 @@ const educationSchema = new mongoose.Schema({
   },
 });
 
+//experience details to be included in the experience array
 const experienceSchema = new mongoose.Schema({
   jobTitle: {
     type: String,

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { setAuthToken } from "../utils";
+import { removeAlert } from "./alert";
 import {
     LOADING_STARTED,
     LOADING_DONE,
@@ -14,6 +15,7 @@ import {
     CLEAR_UNIVERSITY,
     CLEAR_APPLICATION
 } from "./types";
+import * as types from "./types"
 
 const loadUser = () => async dispatch => {
     const token = localStorage.getItem('token');
@@ -85,6 +87,10 @@ const loginUser = (userObj) => async dispatch => {
                 alertType: "danger"
             }
         })
+        setTimeout(() => dispatch({
+            type: types.REMOVE_ALERT,
+            
+        }), 3000);
     }
 }
 
@@ -173,7 +179,15 @@ const updateProfile = (id, profile) => async dispatch => {
                     alertType: "success"
                 }
             })
+            setTimeout(() => dispatch({
+                type: types.REMOVE_ALERT,
+                
+            }), 3000);
         }
+        setTimeout(() => dispatch({
+            type: types.REMOVE_ALERT,
+            
+        }), 3000);
         
     } catch (error) {
         console.log(error);
@@ -181,6 +195,10 @@ const updateProfile = (id, profile) => async dispatch => {
             type: USER_AUTHENTICATION_FAILED,
             payload: null
         })
+        setTimeout(() => dispatch({
+            type: types.REMOVE_ALERT,
+            
+        }), 3000);
     }
 }
 

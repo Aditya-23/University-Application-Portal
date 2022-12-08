@@ -109,9 +109,9 @@ function University(props) {
                 }}>
                     Our Programs:
                     <br></br>
-                    {/* {props.university.programs != undefined
+                    {props.university.programs != undefined
                         ? <ProgramList programs={props.university.programs}/>
-                        : null} */}
+                        : null}
                 </Col>
             </Row>
             <br></br>
