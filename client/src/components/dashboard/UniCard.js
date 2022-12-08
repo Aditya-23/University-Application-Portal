@@ -5,8 +5,8 @@ import { updateProfile } from "../../actions/auth";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-// import { FaStar, FaRegStar } from "react-icons/fa";
-// import { BookmarkHeart, BookmarkHeartFill } from "react-bootstrap-icons";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import { BookmarkHeart, BookmarkHeartFill } from "react-bootstrap-icons";
 
 function UniversityCard(props) {
     const navigate = useNavigate();
