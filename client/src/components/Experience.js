@@ -2,6 +2,7 @@ import React from 'react';
 import {Form} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
+//Display experience part of user
 function Experience(props) {
 
     const getDateFromDateTimeObj = (str) => {

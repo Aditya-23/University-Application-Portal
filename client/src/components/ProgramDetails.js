@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal, Button, Form, ListGroup} from "react-bootstrap";
 
 export default function ProgramDetails(props) {
-
+// Open a modal to show the program information and its specializations
     return (
         <Modal
             {...props}

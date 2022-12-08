@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-
+//Display education part of the user
 function Education(props) {
     return (
         <ol>

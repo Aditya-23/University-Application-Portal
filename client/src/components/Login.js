@@ -18,7 +18,7 @@ function Login(props) {
       };
     });
   };
-
+//Call the login action once you hit the submit button
   const onSubmit = async (e) => {
     e.preventDefault();
     await props.loginUser(loginForm);

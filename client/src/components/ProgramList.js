@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { ListGroup } from 'react-bootstrap';
 import ProgramDetails from './ProgramDetails';
 
-
+//Display list of programs of a particular university
 export default function ProgramList(props) {
 
     const [show, setShow] = useState(false);

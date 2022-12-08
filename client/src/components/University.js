@@ -12,12 +12,11 @@ function University(props) {
 
     const navigate = useNavigate();
 
-    // DONT put a function inside useEffect, directly write statements that you want
-    // to invoke after rendering
     useEffect(() => {
          props.getUniversityById(props.university.id);
     }, []);
 
+    //go to a new application on clicking apply now button
     const navigateToApplicationForm = () => {
         props.clearApplication();
         navigate("/application");
@@ -31,6 +30,7 @@ function University(props) {
                     span: 10,
                     offset: 1
                 }}>
+                    {/* Using carousel to display multiple images */}
                     <Carousel >
                         <Carousel.Item >
                             <img
