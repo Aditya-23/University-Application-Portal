@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+//University admin is the head of a particular university
 const universityAdminSchema = new mongoose.Schema(
   {
     email: {
