@@ -1,3 +1,4 @@
+//action types to change the state of the reducer
 const LOADING_STARTED = "LOADING_STARTED";
 const LOADING_DONE = "LOADING_DONE";
 const REGISTER_SUCCESS = "REGISTER_SUCCESS";

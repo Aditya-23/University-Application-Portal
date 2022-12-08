@@ -4,6 +4,8 @@ import * as UniversityControllers from "../controllers/UniversityControllers.js"
 
 const UniversityRoutes = express.Router();
 
+//CRUD for university
+
 UniversityRoutes.post("/", authJwt, UniversityControllers.registerUniversity);
 
 UniversityRoutes.get("/", UniversityControllers.getAllUniversities);

@@ -13,6 +13,7 @@ import {
     getUniversityByNameService,
 } from "../services/UniversityServices.js";
 
+//register a particular university
 export const registerUniversity = async (req, res) => {
     try {
         const universityObj = req.body;
@@ -37,6 +38,7 @@ export const registerUniversity = async (req, res) => {
     }
 };
 
+//get all the universtieis
 export const getAllUniversities = async (req, res) => {
     var allUniversities = [];
     try {
@@ -90,6 +92,7 @@ export const getUniversityById = async (req, res) => {
     }
 };
 
+//update a university
 export const updateUniversityById = async (req, res) => {
     try {
         const currentUniversity = req.body;
@@ -120,6 +123,7 @@ export const updateUniversityById = async (req, res) => {
     }
 };
 
+//get a particular image of a university
 export const getUniversityImage = async (req, res) => {
     try {
         const universityObj = await getUniversityImageService(req.params.universityId);
@@ -140,6 +144,7 @@ export const getUniversityImage = async (req, res) => {
     }
 };
 
+//delete a university 
 export const deleteUniversityById = async (req, res) => {
     try {
         const isUniversityPresent = await University.findById(req.params.id).select(

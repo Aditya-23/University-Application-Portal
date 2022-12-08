@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAuthToken } from '../utils';
 import { IMG1_RECEIVED, IMG2_RECEIVED, IMG3_RECEIVED, UNIVERSITY_LOADED, UNIVERSITY_LOADED_FAILED, UNIVERSITY_LOAD_START } from "./types";
 
-
+//THis action gets the university and its three images 
 export const getUniversityById = (id) => async dispatch => {
     const token = localStorage.getItem('token');
     if(token){
@@ -42,6 +42,7 @@ export const getUniversityById = (id) => async dispatch => {
     }
 }
 
+//This action starts the load process
 export const startUniversityLoad = (id) => async dispatch => {
     dispatch({
         type: UNIVERSITY_LOAD_START,

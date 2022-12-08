@@ -33,8 +33,11 @@ function Dashboard(props) {
       <h3>Welcome, {props.auth.user.name}</h3>
       <p>Get started with your study aborad journey by editing your profile here : <Button variant="success" onClick={() => navigate("/edit-profile")}> Edit Profile </Button> </p>
       <ApplicationSection />
-      <UniversitySection />
+      <br></br>
       <ShortlistSection/>
+      <br></br>
+      <UniversitySection />
+  
       <button onClick={() => onClickHandler()}>Click here</button>{" "}
       <button onClick={() => onClickApplicationHandler()}>Click here 1</button>{" "}
     </Container>

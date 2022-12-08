@@ -65,7 +65,11 @@ function Application(props) {
         );
     };
 
-
+    const onwWithdrawApplication = async (e) => {
+        e.preventDefault();
+        await props.withdrawApplication(props.application._id);
+        navigate("/dashboard");
+    }
 
     const [specializations, setSpecializations] = useState([]);
 
@@ -384,6 +388,15 @@ function Application(props) {
                             onClick={e => onSubmitHandler(e, "submitted")}
                         >
                             Submit
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button
+                            variant="danger"
+                            type="submit"
+                            value="withdraw"
+                            onClick={e => onwWithdrawApplication(e)}>
+                            Withdraw Application
                         </Button>
                     </Col>
                     

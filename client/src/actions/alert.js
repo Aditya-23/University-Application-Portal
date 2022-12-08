@@ -1,5 +1,7 @@
 import { REMOVE_ALERT, SET_ALERT } from './types';
 
+//actions to set and remove alerts
+
 export const setAlert = (message, alertType) => async dispatch => {
     dispatch({
         type : SET_ALERT,
