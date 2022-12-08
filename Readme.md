@@ -13,6 +13,17 @@
 
 An University application portal that allows **Students** to plan, apply & track applications & **Universities** to look at students applications.
 
+**Installation Steps**
+1. Clone the repo
+2. Inside the repo, "cd backend" and "npm install"
+3. "cd client" and "npm install"
+4. "cd client-admin" and npm install
+
+**Start Steps**
+1. cd backend && npm run server
+2. cd client && npm start
+3. cd client-admin && npm start
+
 ## 📜 User Requirements/Features
 
 Note: Italicized requirements are not for MVP
@@ -61,6 +72,8 @@ Backend is implemented using MVC architecture. Models are created using mongoose
 
 Frontend (client and client-admin) : Redux has been used to handle global state management. Reducers and actions have been created for student auth, application, university.
 Multer package is used for handling file i/o and bcryptjs to store the hashed password in the db.
+
+
 
 ## 📦 Domain Model
 
