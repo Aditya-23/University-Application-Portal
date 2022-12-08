@@ -8,6 +8,14 @@ import {
 } from "../redux/api/applicationApi.js";
 
 function ApplicationCard({ Application }) {
+    const [updateAppn] = useUpdateApplicationMutation();
+    async function onAccept() {
+        updateAppn({ ...Application, applicationStatus: "Accepted" });
+    }
+
+    async function onReject() {
+        updateAppn({ ...Application, applicationStatus: "Rejected" });
+    }
     const AppCard = (
         <Card bg="Primary">
             <Card.Body className="ApplicationBody">
@@ -22,8 +30,12 @@ function ApplicationCard({ Application }) {
                 </Col>
                 <Col>
                     <div className="buttons">
-                        <Button variant="primary">Accept</Button>
-                        <Button variant="primary">Reject</Button>
+                        <Button variant="primary" onClick={onAccept}>
+                            Accept
+                        </Button>
+                        <Button variant="primary" onClick={onReject}>
+                            Reject
+                        </Button>
                     </div>
                 </Col>
             </Card.Body>
