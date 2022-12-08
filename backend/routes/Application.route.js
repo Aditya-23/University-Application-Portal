@@ -83,7 +83,7 @@ ApplicationRoutes.post(
 
 ApplicationRoutes.put(
     "/:id",
-    authJwt,
+    // authJwt,
     uploadUpdate.fields(fieldsArray),
     ApplicationControllers.updateApplication
 );
