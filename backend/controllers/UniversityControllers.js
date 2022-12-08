@@ -10,6 +10,7 @@ import {
     getUniversityImageService,
     saveUniversityService,
     updateUniversityByIdService,
+    getUniversityByNameService,
 } from "../services/UniversityServices.js";
 
 export const registerUniversity = async (req, res) => {
@@ -46,6 +47,11 @@ export const getAllUniversities = async (req, res) => {
                 return setRequestError({ msg: "Ids should be an array" });
             }
             allUniversities = await getUniversitiesByIdsService(ids);
+        }
+        // search university by name
+        else if (Object.keys(req.query).includes("name")) {
+            const name = req.query.name;
+            allUniversities = await getUniversityByNameService(name);
         } else if (Object.keys(req.query).length === 0) {
             allUniversities = await getAllUniversitiesService();
         }

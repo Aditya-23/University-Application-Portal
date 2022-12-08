@@ -43,6 +43,21 @@ const getUniversityByIdService = async id => {
     }
 };
 
+// search university by Name
+const getUniversityByNameService = async name => {
+    try {
+        console.log(name);
+        const university = University.find({
+            name: { $regex: name, $options: "i" },
+        }).limit(10);
+        console.log(university);
+        return university;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+
 const updateUniversityByIdService = async (id, updateUniversity) => {
     try {
         const updatedUniversity = University.findByIdAndUpdate(id, updateUniversity, {
@@ -79,6 +94,7 @@ export {
     saveUniversityService,
     getAllUniversitiesService,
     getUniversitiesByIdsService,
+    getUniversityByNameService,
     getUniversityByIdService,
     updateUniversityByIdService,
     deleteUniversityByIdService,
