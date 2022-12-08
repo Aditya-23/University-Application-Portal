@@ -6,13 +6,14 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-
+//
 const StudentRoutes = express.Router();
 
 StudentRoutes.post("/signup", StudentControllers.registerStudent);
 
 StudentRoutes.post("/login", StudentControllers.loginStudent);
 
+//using auth middleware to allow only authenticated users to pass through
 StudentRoutes.get("/", authJwt, StudentControllers.getStudent);
 
 StudentRoutes.put("/:id", authJwt, StudentControllers.updateStudent);

@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { v4 } from "uuid";
 
+//storage object for storing application files in the file system
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const __filename = fileURLToPath(import.meta.url);
@@ -24,6 +25,7 @@ const storage = multer.diskStorage({
     },
 });
 
+//storage object for updatig the application files in the file system
 const storageForUpdate = multer.diskStorage({
     destination: (req, file, cb) => {
         const randomUuid = v4();

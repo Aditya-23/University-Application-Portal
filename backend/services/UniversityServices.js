@@ -3,6 +3,7 @@ import config from "config";
 import path from "path";
 import { fileURLToPath } from "url";
 
+//CRUD for university
 const saveUniversityService = async universityObj => {
     try {
         const savedUniversityObj = University(universityObj);

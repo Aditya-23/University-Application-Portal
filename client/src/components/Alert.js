@@ -3,6 +3,7 @@ import { Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { removeAlert } from '../actions/alert';
 
+//Generic alert component
 function AlertComponent(props) {
 
     const closeAlert = () => {

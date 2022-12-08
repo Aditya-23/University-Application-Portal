@@ -89,7 +89,10 @@ const applicationFormSave = (applicationForm, files, status, id, universityId, s
                 }), 3000);
             }
         }
-        setTimeout(() => removeAlert(), 3000);
+        setTimeout(() => dispatch({
+            type: types.REMOVE_ALERT,
+            
+        }), 3000);
         
     } catch (error) {
         dispatch({
@@ -147,7 +150,11 @@ const withdrawApplication = (id) => async dispatch => {
                         msg: "Application withdrawn successfully.",
                         alertType: "warning"
                     }
-                })
+                });
+                setTimeout(() => dispatch({
+                    type: types.REMOVE_ALERT,
+                    
+                }), 3000);
             }
         }
         else{
@@ -167,6 +174,10 @@ const withdrawApplication = (id) => async dispatch => {
                 alertType: "warning"
             }
         })
+        setTimeout(() => dispatch({
+            type: types.REMOVE_ALERT,
+            
+        }), 3000);
     }
 }
 

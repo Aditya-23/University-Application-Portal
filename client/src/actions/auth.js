@@ -17,6 +17,7 @@ import {
 } from "./types";
 import * as types from "./types"
 
+//this function is called at each app component render
 const loadUser = () => async dispatch => {
     const token = localStorage.getItem('token');
     if(token){
@@ -94,6 +95,7 @@ const loginUser = (userObj) => async dispatch => {
     }
 }
 
+//Logs out the user
 const logoutUser = () => async dispatch => {
     dispatch({
         type: LOGOUT_USER
@@ -150,6 +152,7 @@ const registerUser = (userObj) => async dispatch => {
     }
 }
 
+//update the profile for the user action
 const updateProfile = (id, profile) => async dispatch => {
 
     const token = localStorage.getItem('token');

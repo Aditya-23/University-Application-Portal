@@ -3,7 +3,7 @@ import express from "express";
 import authJwt from "../middlewares/index.js";
 
 const ProgramRoutes = express.Router();
-
+//Routes for post
 ProgramRoutes.post("/", ProgramControllers.createProgram);
 
 ProgramRoutes.get("/", ProgramControllers.getPrograms);
