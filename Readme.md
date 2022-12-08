@@ -9,6 +9,9 @@
 3. Kashish
 4. Swapnil
 
+REST API service : "backend" directory
+Web apps: "client" and "client-admin"
+
 ## 🔊 Problem Statement
 
 An University application portal that allows **Students** to plan, apply & track applications & **Universities** to look at students applications.
