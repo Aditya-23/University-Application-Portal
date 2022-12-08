@@ -2,9 +2,7 @@ import Student from "../models/student.js";
 import { deleteStudentById, getStudentById, saveStudent, updateStudentById, loginService, addEducationService, addExperienceService } from "../services/StudentServices.js";
 import { setResponse, setRequestError, setServerError} from "./utils.js";
 
-
-
-
+//register a student
 const registerStudent = async (req, res) => {
     try {
         var studentObj = req.body;
@@ -20,6 +18,7 @@ const registerStudent = async (req, res) => {
     }
 }
 
+//get a student based on the id
 const getStudent = async (req, res) => {
     try {
         const studentObj = await getStudentById(req.userId);
@@ -33,6 +32,7 @@ const getStudent = async (req, res) => {
     }
 }
 
+//update a student -> edit profile in the frontend
 const updateStudent = async (req, res) => {
     try {
         const currentStudent = req.body;
@@ -71,6 +71,7 @@ const deleteStudent = async (req, res) => {
     }
 }
 
+// Logs in the student if correct email and password combination is used
 const loginStudent = async (req, res) => {
     try {
         const {email, password} = req.body;
@@ -86,6 +87,7 @@ const loginStudent = async (req, res) => {
     }
 }
 
+//Add education to the student array
 const addEducation = async (req, res) => {
     try {
         const newStudentObj = await addEducationService(req.params.id, req.body);

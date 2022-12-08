@@ -1,5 +1,6 @@
 import axios from "axios";
 import { setAuthToken } from "../utils";
+import { removeAlert } from "./alert";
 import * as types from "./types";
 
 //status can be "saved" or submitted
@@ -66,6 +67,10 @@ const applicationFormSave = (applicationForm, files, status, id, universityId, s
                         alertType: "success"
                     }
                 });
+                setTimeout(() => dispatch({
+                    type: types.REMOVE_ALERT,
+                    
+                }), 3000);
             }
         }
         //id != null means the application is already created and the use is updating it or submitting it
@@ -78,16 +83,13 @@ const applicationFormSave = (applicationForm, files, status, id, universityId, s
                         applicationObj: response.data
                     }
                 });
-                dispatch({
-                    type: types.SET_ALERT,
-                    payload: {
-                        msg: `Application ${status} successfully!`,
-                        alertType: "success"
-                    }
-                });
+                setTimeout(() => dispatch({
+                    type: types.REMOVE_ALERT,
+                    
+                }), 3000);
             }
         }
-        
+        setTimeout(() => removeAlert(), 3000);
         
     } catch (error) {
         dispatch({
@@ -96,6 +98,10 @@ const applicationFormSave = (applicationForm, files, status, id, universityId, s
                 applicationObj: null
             }
         })
+        setTimeout(() => dispatch({
+            type: types.REMOVE_ALERT,
+            
+        }), 3000);
     }
 }
 
