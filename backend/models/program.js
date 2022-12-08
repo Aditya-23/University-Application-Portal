@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+//Program schema has details related to a particular program
+
 const programSchema = new mongoose.Schema({
     courseName: {
       type: String,
