@@ -3,6 +3,7 @@ import React from 'react';
 export default function Landing() {
   return (
     <>
+   
       <div className="container4">
         <div className="showcase">
         <img src={require("../static/landing.webp")} className="img_style" />
