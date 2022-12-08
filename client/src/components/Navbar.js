@@ -19,7 +19,9 @@ function Navbar(props) {
             crossOrigin="anonymous"
           />
           {/* <link rel="stylesheet" href="./style.css" /> */}
-          <div className="topnav">
+         
+         {/* Topnav is thew parent div for this page */}
+         <div className="topnav">
             {" "}
             <div className="logo_styles">
               <a href="/">
@@ -30,6 +32,7 @@ function Navbar(props) {
               </a>
               <p className="name_style">ADMIT</p>
             </div>{" "}
+            {/* The form element includes just the search bar for users to search any university required */}
             <form className="search_bar_wrap">
               {" "}
               <input
@@ -43,6 +46,7 @@ function Navbar(props) {
               </a>{" "}
             </form>
             <a onClick={() => onLogout()} className="logout-style">
+              {/* Log oiut button with and onclick event which logs the uers iut and redirects him to the login page */}
               {" "}
               Log Out{" "}
             </a>
@@ -57,6 +61,7 @@ function Navbar(props) {
                 className="img_style"
               />
             </a>{" "}
+            {/* Mentions the application name on the left of the navbar */}
             <p className="name_style">ADMIT</p>
           </div>
           <div className="log_out_nav">
@@ -66,6 +71,7 @@ function Navbar(props) {
             <a href="/register" className="login_style">
               {" "}
               SignUp{" "}
+              {/* The sign up button which the new user can click to sign up */}
             </a>
           </div>
         </div>

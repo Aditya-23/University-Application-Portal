@@ -43,6 +43,8 @@ function Registration(props) {
     }
 
     return (
+
+        // Container 1 is the parent div for al the elements of this page
         <div className="container1" id="container1">
             <div class="form-container sign-in-container1">
             {props.alert.msg != null
@@ -51,6 +53,7 @@ function Registration(props) {
                         {props.alert.msg}
                     </div>
                     : null}
+                    {/* Gives and= alert if the required fields are empty */}
                   <h1>Welcome Back</h1>
                         <p>To keep connected with us please login with your personal information.</p>
                        <a href = '/login' className ="login_in_style"> <button class="ghost1" id="signUp1">Sign In</button> </a>
@@ -60,6 +63,8 @@ function Registration(props) {
                     <div class="overlay-panel overlay-right">
                     <form className="form1" onSubmit={e => onSubmit(e)}>
                     <h1>Create Account</h1>
+
+                    {/* Form element for the user to fill all required data `` */}
                 <input
                     type="text"
                     placeholder="Name"
