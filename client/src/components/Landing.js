@@ -8,10 +8,10 @@ export default function Landing() {
         <div className="showcase">
         <img src={require("../static/landing.webp")} className="img_style" />
           <div className="centered">
-            <h2>University Name - Experiential Learning</h2>
+            <h2>ADMIT - Experiential Learning</h2>
             <h4>The Real Meaning of ‘Working Knowledge’</h4>
             <h6>
-              University-name is the world leader in experiential learning.
+              ADMIT is the world leader in experiential learning.
               Here, graduate students—from the master's through the doctorate,
               and in professional and certificate programs—put knowledge to work
               at Fortune 500 and startup companies, universities, government
@@ -29,7 +29,7 @@ export default function Landing() {
             <h2>Research</h2>
             <h4>Using Knowledge To Change the World</h4>
             <h6>
-              As a tier-1 research university, University-Name puts a premium on
+              As a tier-1 research university, ADMIT puts a premium on
               high-impact discovery—research that’s “use-inspired.” Students and
               faculty tackle challenges while working across disciplines, in
               fields from health and security to sustainability. And in our
@@ -50,7 +50,7 @@ export default function Landing() {
             <h1>The World Is Our Campus</h1>
             <h6>
               With more than 3,300+ corporate partners in 90 countries, on every
-              continent, University-Name forges educational, experiential, and
+              continent, ADMIT forges educational, experiential, and
               research partnerships. Our worldwide network of professionals and
               engaged university citizens includes more than 255,000 alumni.
             </h6>
