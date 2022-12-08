@@ -2,8 +2,7 @@ import React from 'react';
 import {Modal, Button, Form, ListGroup} from "react-bootstrap";
 
 export default function ProgramDetails(props) {
-    const [modalShow,
-        setModalShow] = React.useState(false);
+
     return (
         <Modal
             {...props}
