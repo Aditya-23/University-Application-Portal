@@ -4,7 +4,8 @@ import * as UniversityControllers from "../controllers/UniversityControllers.js"
 
 const UniversityRoutes = express.Router();
 
-UniversityRoutes.post("/", authJwt, UniversityControllers.registerUniversity);
+// UniversityRoutes.post("/", authJwt, UniversityControllers.registerUniversity);
+UniversityRoutes.post("/", UniversityControllers.registerUniversity);
 
 UniversityRoutes.get("/", UniversityControllers.getAllUniversities);
 
@@ -15,14 +16,22 @@ UniversityRoutes.get("/", UniversityControllers.getAllUniversities);
 
 UniversityRoutes.get("/:id", authJwt, UniversityControllers.getUniversityById);
 
-UniversityRoutes.put("/:id", authJwt, UniversityControllers.updateUniversityById);
+UniversityRoutes.put(
+  "/:id",
+  authJwt,
+  UniversityControllers.updateUniversityById
+);
 
-UniversityRoutes.delete("/:id", authJwt, UniversityControllers.deleteUniversityById);
+UniversityRoutes.delete(
+  "/:id",
+  authJwt,
+  UniversityControllers.deleteUniversityById
+);
 
 UniversityRoutes.get(
-    "/university-images/:universityId/:num",
-    authJwt,
-    UniversityControllers.getUniversityImage
+  "/university-images/:universityId/:num",
+  authJwt,
+  UniversityControllers.getUniversityImage
 );
 
 export default UniversityRoutes;
