@@ -27,16 +27,15 @@ Note: Italicized requirements are not for MVP
 6. Apply to different universities on the portal
 7. _Add Application documents & progress for universities I'm applying outside the portal_
 8. View Dashboard to track progress
-9. Get reminders for applications
+
 
 **As a University:**
 
 1. Sign up to the portal from an admin
-2. Add various programs under the University and application requirements
-3. Ability to assign selected users to view & accept applications specific to various programs.
-4. View dashboard that gives an update on what's happening with applications across various programs.
-5. Program specific dashboard that gives an overview of program applications
-6. Able to move application through various stages Eg: In Review, Approved
+2. Ability to assign selected users to view & accept applications specific to various programs.
+3. View dashboard that gives an update on what's happening with applications across various programs.
+4. Program specific dashboard that gives an overview of program applications
+5. Able to move application through various stages Eg: In Review, Approved
 
 ## MVP
 
@@ -52,8 +51,7 @@ Note: Italicized requirements are not for MVP
 **University User**
 
 1. SignUp & Login
-2. Create, Update, Delete Program
-3. Review, Accept, Reject Applications
+2. Review, Accept, Reject Applications
 
 ## 📦 Domain Model
 
