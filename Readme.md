@@ -52,6 +52,16 @@ Note: Italicized requirements are not for MVP
 1. SignUp & Login
 2. Review, Accept, Reject Applications
 
+**Folders**
+1. Backend
+2. Client
+3. Client-admin
+
+Backend is implemented using MVC architecture. Models are created using mongoose library and connected with the cloud database (MongoDb atlas). CRUD operations for student, university, application have been created.
+
+Frontend (client and client-admin) : Redux has been used to handle global state management. Reducers and actions have been created for student auth, application, university.
+Multer package is used for handling file i/o and bcryptjs to store the hashed password in the db.
+
 ## 📦 Domain Model
 
 ![Domain Diagram](Domain.png)
