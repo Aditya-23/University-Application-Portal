@@ -3,10 +3,11 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "../../actions/auth";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { BookmarkHeart, BookmarkHeartFill } from "react-bootstrap-icons";
+import axios from "axios";
 
 function UniversityCard(props) {
     const navigate = useNavigate();
@@ -60,20 +61,32 @@ function UniversityCard(props) {
         : "Shortlist";
     // outline-primary
     // success
+    const [imageURL, setImageURL] = useState("")
+
+    useEffect(() => {
+        axios.get("/universities/university-images/" + props.id + "/0",
+         {responseType: "blob"})
+         .then(img => {
+            setImageURL(URL.createObjectURL(img.data));
+         });    
+    });
 
     var card = (
         <li className="cards__item">
-            <Card bg="Primary">
-                {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+            <Card bg="Primary" className="UniCard">
+                <Card.Img variant="top" className="card-img" src={imageURL} />
+                
                 <Card.Body>
                     <div onClick={() => navToUniHandler()}>
                         <Card.Title> {props.name} </Card.Title>
                         <Card.Text>{props.description}</Card.Text>
                     </div>
+                </Card.Body>
+                <Card.Footer>
                     <Button variant={ButtonVariant} onClick={shortlistHandler}>
                         {shortlistedIcon} {ButtonText}
                     </Button>
-                </Card.Body>
+                </Card.Footer>
             </Card>
         </li>
     );

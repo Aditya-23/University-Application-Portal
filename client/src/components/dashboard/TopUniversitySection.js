@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { startUniversityLoad } from "../../actions/universities";
 import UniversityCard from "./UniCard.js";
 import { useGetUniversitiesQuery } from "../../api/uniApi.js";
+import {CardGroup} from "react-bootstrap"
 
 function UniversitySection(props) {
   const {
@@ -34,7 +35,7 @@ function UniversitySection(props) {
     <div className="dashboardSection PopUniversity">
       <h2 className="title">Top Universities</h2>
       <div className="dashboardTile">
-        <ul className="cardsList">{items}</ul>
+        <ul className="cardsList"><CardGroup>{items}</CardGroup></ul>
         </div>
     </div>
   );

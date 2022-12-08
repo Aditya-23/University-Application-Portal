@@ -13,6 +13,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// Gets all the applications of a particular user
 export const getApplications = async (req, res) => {
     console.log(req.query);
     try {
@@ -46,6 +47,7 @@ export const getApplications = async (req, res) => {
     }
 };
 
+//Gets an application by id of a particular user
 export const getApplicationById = async (req, res) => {
     try {
         const applicationObj = await getApplicationByIdService(req.params.id);
@@ -106,6 +108,7 @@ export const registerApplication = async (req, res, next) => {
     }
 };
 
+//updates an application by id
 export const updateApplication = async (req, res) => {
     try {
         const isApplicationPresent = await Application.findById(req.params.id).select(
@@ -121,6 +124,7 @@ export const updateApplication = async (req, res) => {
         }
         const newApplicationObj = await updateApplicationService(req.params.id, req.body);
 
+        //Create folder if does not exist
         if (Object.keys(req.files).length > 0) {
             const __filename = fileURLToPath(import.meta.url);
             const __dirname = path.dirname(path.dirname(__filename));
@@ -159,6 +163,7 @@ export const updateApplication = async (req, res) => {
     }
 };
 
+// Used for withdrawing application and delete files if exists
 export const deleteApplication = async (req, res) => {
     try {
         console.log(req.params.id);
