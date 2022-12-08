@@ -71,7 +71,8 @@ const fieldsArray = [
 const ApplicationRoutes = express.Router();
 
 ApplicationRoutes.get("/:id", authJwt, ApplicationControllers.getApplicationById);
-ApplicationRoutes.get("/", authJwt, ApplicationControllers.getApplications);
+// ApplicationRoutes.get("/", authJwt, ApplicationControllers.getApplications);
+ApplicationRoutes.get("/", ApplicationControllers.getApplications);
 
 ApplicationRoutes.post(
     "/",
