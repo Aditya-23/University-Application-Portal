@@ -3,7 +3,7 @@ import "./App.css";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 import FaceRecognition from "./FaceRecognition";
-import UniversityAdmin from "./UniversityAdmin";
+import UniversityAdmin from "./components/UniversityAdmin";
 function App() {
 
     return (
