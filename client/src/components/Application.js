@@ -384,6 +384,15 @@ function Application(props) {
                             Submit
                         </Button>
                     </Col>
+                    <Col>
+                        <Button
+                            variant="danger"
+                            type="submit"
+                            value="withdraw"
+                        >
+                            Withdraw
+                        </Button>
+                    </Col>
                 </Row>
             </Form>
         </div>
