@@ -38,7 +38,7 @@ function Navbar(props) {
                 type="text"
                 placeholder="Search..."
               />
-              <a id="btnSearch" class="btn-search">
+              <a id="btnSearch" className="btn-search">
                 <i className="fa fa-search"></i>
               </a>{" "}
             </form>

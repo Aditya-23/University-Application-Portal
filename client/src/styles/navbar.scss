@@ -20,7 +20,7 @@
 .topnav {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between;       
     background-image: linear-gradient(to right, #40c9de, #7779ff);
     height:80px;
     
@@ -43,7 +43,7 @@
         cursor: pointer;
         &:hover {
             background-color: #ddd;
-            color: rgb(60, 60, 60);
+            // color: rgb(60, 60, 60);
         }
 }
 
@@ -63,7 +63,7 @@
         cursor: pointer;
         &:hover {
             background-color: #ddd;
-            color: rgb(60, 60, 60);
+            // color: rgb(60, 60, 60);
         }
     }
 
@@ -95,7 +95,7 @@
                 cursor: pointer;
                 &:hover {
                     background-color: #ddd;
-                    color: rgb(60, 60, 60);
+                    // color: rgb(60, 60, 60);
                 }
         }
           .searchbar {
@@ -151,7 +151,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    background-color: #333;
+    // background-color: #333;
 
     a {
         float: right;
