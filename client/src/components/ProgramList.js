@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { ListGroup } from 'react-bootstrap';
+import ProgramDetails from './ProgramDetails';
+
 
 export default function ProgramList(props) {
 
-    const [hidden, setHidden] = useState(true);
+    const [show, setShow] = useState(false);
     const [currentProgram, setCurrentProgram] = useState({
         courseName: "",
         credits: "",
@@ -13,15 +15,18 @@ export default function ProgramList(props) {
 
     const showDetails = (program) => {
         setCurrentProgram(program);
-        setHidden(false);
+        setShow(true);
     }
 
     return (
-        <ListGroup as="ol" numbered >
-            {props
-                .programs
-                .map(program => <ListGroup.Item onClick={() => showDetails(program)} as="li" >{program.courseName}</ListGroup.Item>)}
+        <>
+            <ProgramDetails currentProgram={currentProgram} show={show} onHide={() => setShow(false)}/>
+            <ListGroup as="ol" numbered >
+                {props
+                    .programs
+                    .map(program => <ListGroup.Item onClick={() => showDetails(program)} as="li" >{program.courseName}</ListGroup.Item>)}
 
-        </ListGroup>
+            </ListGroup>
+        </>
     );
 }

@@ -1,6 +1,8 @@
 import React from 'react';
+import {Modal, Button} from "react-bootstrap";
 
 export default function ProgramDetails(props) {
+    const [modalShow, setModalShow] = React.useState(false);
     return (
         <Modal
             {...props}
@@ -21,7 +23,7 @@ export default function ProgramDetails(props) {
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
+                <h1>Footer</h1>
             </Modal.Footer>
         </Modal>
     );
