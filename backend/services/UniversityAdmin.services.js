@@ -3,6 +3,7 @@ import bcryptjs from "bcryptjs";
 import jsonwebtoken from "jsonwebtoken";
 import config from "config";
 
+//CRUD services for university admin
 export const saveUniversityAdmin = async (universityAdminObjToCreate) => {
   try {
     const saltForHash = await bcryptjs.genSalt(10);

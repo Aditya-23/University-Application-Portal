@@ -98,6 +98,7 @@ const addEducation = async (req, res) => {
     }
 }
 
+//add experience to the student array
 const addExperience = async (req, res) => {
     try {
         const newStudentObj = await addExperienceService(req.params.id, req.body);
