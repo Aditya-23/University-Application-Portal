@@ -72,7 +72,7 @@ function Application(props) {
     }
 
     const [specializations, setSpecializations] = useState([]);
-
+//Load the state as soon as the component mounts
     useEffect(() => {
         setApplicationForm({
             createdBy: props.auth.user.name,
@@ -100,7 +100,7 @@ function Application(props) {
             };
         });
     };
-
+//selects the specialization list of a particular program
     const selectProgramHandler = e => {
         let specializationList = props.university.programs.find(
             element => element.courseName == e.target.value
@@ -114,6 +114,7 @@ function Application(props) {
         setSpecializations(specializationList);
     };
 
+    // add file to state
     const onFileChange = e => {
         var changedFile;
         if (e.target.files.length == 0) {

@@ -34,20 +34,17 @@ function Dashboard(props) {
           <img src={require("./searock.jpeg")} className="img_style2" />
       </div>
       <div className="bg-img-name" >
-      <h2>Welcome, {props.auth.user.name}</h2>
-      <h3>Get started with your study aborad journey by editing your profile here: <Button variant="success" onClick={() => navigate("/edit-profile")}> &nbsp;Edit Profile </Button> </h3>
-    </div>
+        <h2>Welcome, {props.auth.user.name}</h2>
+        <h3>Get started with your study abroad journey by editing your profile here - <Button variant="success" onClick={() => navigate("/edit-profile")}> &nbsp;Edit Profile </Button> </h3>
+      </div>
     <Container>
-      <h3>Welcome, {props.auth.user.name}</h3>
-      <p>Get started with your study aborad journey by editing your profile here : <Button variant="success" onClick={() => navigate("/edit-profile")}> Edit Profile </Button> </p>
+
       <ApplicationSection />
       <br></br>
       <ShortlistSection/>
       <br></br>
       <UniversitySection />
-  
-      <button onClick={() => onClickHandler()}>Click here</button>{" "}
-      <button onClick={() => onClickApplicationHandler()}>Click here 1</button>{" "}
+
     </Container>
     </>
   );
