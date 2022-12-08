@@ -11,8 +11,8 @@ export const applicationApiSlice = apiSlice.injectEndpoints({
                 result
                     ? // successful query
                       [
-                          ...result.map(({ id }) => ({ type: "Applications", id })),
-                          { type: "Applications", id: "LIST" },
+                          ...result.map(({ _id }) => ({ type: "Applications", _id })),
+                          { type: "Applications", _id: "LIST" },
                       ]
                     : // an error occurred, but we still want to refetch this query when `{ type: 'Applications', id: 'LIST' }` is invalidated
                       [{ type: "Applications", id: "LIST" }],
@@ -28,7 +28,7 @@ export const applicationApiSlice = apiSlice.injectEndpoints({
             },
             // Invalidates all queries that subscribe to this Post `id` only.
             // In this case, `getPost` will be re-run. `getPosts` *might*  rerun, if this id was under its results.
-            invalidatesTags: (result, error, { id }) => [{ type: "Applications", id }],
+            invalidatesTags: (result, error, { _id }) => [{ type: "Applications", _id }],
         }),
     }),
 });

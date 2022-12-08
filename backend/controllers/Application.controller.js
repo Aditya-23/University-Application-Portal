@@ -124,8 +124,9 @@ export const updateApplication = async (req, res) => {
         }
         const newApplicationObj = await updateApplicationService(req.params.id, req.body);
 
+        console.log(req.files);
         //Create folder if does not exist
-        if (Object.keys(req.files).length > 0) {
+        if (req.files != undefined && Object.keys(req.files).length > 0) {
             const __filename = fileURLToPath(import.meta.url);
             const __dirname = path.dirname(path.dirname(__filename));
             const UploadFolder =
@@ -145,11 +146,12 @@ export const updateApplication = async (req, res) => {
             }
         }
         if(req.body.status == "submitted"){
-            console.log("HERERER");
-            newApplicationObj.applicationStatus = "In Review";
+            if(newApplicationObj.applicationStatus == "Pending"){
+                newApplicationObj.applicationStatus = "In Review";
+            }
         }
         await newApplicationObj.save();
-        console.log()
+        console.log("Idhar")
 
         return setResponse(newApplicationObj, res);
     } catch (error) {

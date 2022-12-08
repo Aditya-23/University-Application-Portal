@@ -14,7 +14,7 @@ function ApplicationCard({ Application }) {
     }
 
     async function onReject() {
-        updateAppn({ ...Application, applicationStatus: "Rejected" });
+        var Appn =updateAppn({ ...Application, applicationStatus: "Rejected" });
     }
     const AppCard = (
         <Card bg="Primary">
