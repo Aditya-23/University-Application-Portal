@@ -13,7 +13,7 @@
 
 An University application portal that allows **Students** to plan, apply & track applications & **Universities** to look at students applications.
 
-## 📜 User Requirements
+## 📜 User Requirements/Features
 
 Note: Italicized requirements are not for MVP
 
@@ -21,21 +21,21 @@ Note: Italicized requirements are not for MVP
 
 1. Sign up to the portal
 2. Login to the Portal
-3. Reset password when I forget it
-4. Fill & Update in my basic details that could ease application process
-5. Shortlist Various Universities
-6. Apply to different universities on the portal
-7. _Add Application documents & progress for universities I'm applying outside the portal_
-8. View Dashboard to track progress
+3. Fill & Update in my basic details that could ease application process
+4. Shortlist Various Universities
+5. Autofill the already available information
+6. Apply to different universities on the portal, save(put) and submit(post)
+7. Withdraw application (Delete)
+8. View submitted applications
+9. _Add Application documents & progress for universities I'm applying outside the portal_
+10. View Dashboard to track progress
 
 
 **As a University:**
 
 1. Sign up to the portal from an admin
-2. Ability to assign selected users to view & accept applications specific to various programs.
-3. View dashboard that gives an update on what's happening with applications across various programs.
-4. Program specific dashboard that gives an overview of program applications
-5. Able to move application through various stages Eg: In Review, Approved
+2. View dashboard that gives an update on what's happening with applications across various programs.
+3. Able to move application through various stages i.e Pending, In Review, Accepted, Rejected
 
 ## MVP
 
@@ -46,7 +46,6 @@ Note: Italicized requirements are not for MVP
 3. View Programs
 4. Create, Update, Delete, Submit Application
 5. Application Dashboard
-6. Application Notifications
 
 **University User**
 
