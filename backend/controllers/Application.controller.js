@@ -161,9 +161,11 @@ export const updateApplication = async (req, res) => {
 
 export const deleteApplication = async (req, res) => {
     try {
+        console.log(req.params.id);
         const isApplicationPresent = await Application.findById(req.params.id).select(
-            "_id"
+            "id"
         );
+        console.log(isApplicationPresent);
         if (!isApplicationPresent) {
             return setRequestError(
                 {

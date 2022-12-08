@@ -16,9 +16,9 @@ function Navbar(props) {
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
             integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-            crossorigin="anonymous"
+            crossOrigin="anonymous"
           />
-          <link rel="stylesheet" href="./style.css" />
+          {/* <link rel="stylesheet" href="./style.css" /> */}
           <div className="topnav">
             {" "}
             <div className="logo_styles">
@@ -34,12 +34,12 @@ function Navbar(props) {
               {" "}
               <input
                 id="searchBar"
-                class="searchbar"
+                className="searchbar"
                 type="text"
                 placeholder="Search..."
               />
               <a id="btnSearch" class="btn-search">
-                <i class="fa fa-search"></i>
+                <i className="fa fa-search"></i>
               </a>{" "}
             </form>
             <a onClick={() => onLogout()} className="logout-style">

@@ -127,6 +127,43 @@ const getApplication = (id) => async dispatch => {
     }
 } 
 
+const withdrawApplication = (id) => async dispatch => {
+    try {
+        if(id != null){
+            const response = await axios.delete("/applications/" + id);
+            if(response.status == 200){
+                dispatch({
+                    type: types.WITHDRAW_APPLICATION_SUCCESS
+                });
+                dispatch({
+                    type: types.SET_ALERT,
+                    payload: {
+                        msg: "Application withdrawn successfully.",
+                        alertType: "warning"
+                    }
+                })
+            }
+        }
+        else{
+            dispatch({
+                type: types.SET_ALERT,
+                payload: {
+                    msg: "Application not withdrawn.",
+                    alertType: "warning"
+                }
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {
+                msg: "Application not withdrawn.",
+                alertType: "warning"
+            }
+        })
+    }
+}
+
 const clearApplication = () => async dispatch => {
     dispatch({
         type: types.CLEAR_APPLICATION
@@ -137,4 +174,5 @@ export {
     applicationFormSave,
     getApplication,
     clearApplication,
+    withdrawApplication,
 }

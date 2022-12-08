@@ -45,6 +45,7 @@ const applicationReducer = (state = initialState, action) => {
                 resume: null,
             }
             break;
+        case types.WITHDRAW_APPLICATION_SUCCESS:
         case types.APPLICATION_NEW:
         case types.CLEAR_APPLICATION:
             return initialState
