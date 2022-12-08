@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 export default function FaceRecognition(props) {
     var faceio;
     useEffect(() => {
-        faceio = new faceIO("fioacd1c");
+        faceio = new faceIO("fioade12");
     }, []);
 
     const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ export default function FaceRecognition(props) {
     const handleSignIn = async(e) => {
 
       console.log(email, pin);
-      var faceio = new faceIO("fioacd1c");
+      var faceio = new faceIO("fioade12");
       e.preventDefault();
         try {
             let response = await faceio.enroll({
@@ -39,7 +39,7 @@ export default function FaceRecognition(props) {
 
     const handleLogIn = async(e) => {
         e.preventDefault();
-        var faceio = new faceIO("fioacd1c");
+        var faceio = new faceIO("fioade12");
         try {
             let response = await faceio.authenticate({locale: "auto"});
 
@@ -53,6 +53,7 @@ export default function FaceRecognition(props) {
 
     return (
         <div>
+            <h1>University Admin</h1>
             <Form>
                 <Form.Group className="mb-3">
                     <Form.Label>User</Form.Label>
